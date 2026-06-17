@@ -26,7 +26,7 @@ export default function PastEventGallery() {
   };
 
   return (
-    <section className="py-16 md:py-24 border-b border-luxury-border max-w-5xl mx-auto px-6 overflow-hidden">
+    <section className="py-10 md:py-24 border-b border-luxury-border max-w-5xl mx-auto px-6 overflow-hidden">
       
       {/* Title */}
       <div className="text-center mb-8">

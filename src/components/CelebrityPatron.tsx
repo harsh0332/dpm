@@ -38,7 +38,7 @@ export default function CelebrityPatron() {
   ];
 
   return (
-    <section className="relative py-16 md:py-24 border-b border-luxury-border max-w-6xl mx-auto px-6 overflow-hidden">
+    <section className="relative py-10 md:py-24 border-b border-luxury-border max-w-6xl mx-auto px-6 overflow-hidden">
       
       {/* Deep Rose-Magenta Backdrop Glow */}
       <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_50%,rgba(136,13,60,0.1)_0%,transparent_60%)] pointer-events-none" />
@@ -65,13 +65,13 @@ export default function CelebrityPatron() {
         {/* Left Column: Premium Portrait Image */}
         <motion.div 
           variants={revealVariants}
-          className="md:col-span-6 relative flex items-center justify-center order-last md:order-first"
+          className="md:col-span-6 relative flex items-center justify-center order-last md:order-first mt-8 md:mt-0"
         >
           <div className="border border-luxury-gold/30 p-2 bg-luxury-onyx/50 w-full max-w-sm rounded-[2rem] overflow-hidden transition-all duration-500 hover:border-luxury-gold/70 shadow-lg">
             <img 
               src={patron.image} 
               alt="Urvashi Rautela Chief Guest Portrait" 
-              className="w-full h-auto object-cover filter grayscale-0 md:grayscale md:hover:grayscale-0 transition-all duration-500 rounded-[1.75rem]"
+              className="w-full h-auto object-contain filter grayscale-0 md:grayscale md:hover:grayscale-0 transition-all duration-500 rounded-[1.75rem]"
               loading="lazy"
             />
           </div>

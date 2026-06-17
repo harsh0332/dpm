@@ -25,7 +25,7 @@ import RecentApplicationsToast from "@/components/RecentApplicationsToast";
 
 export default function Home() {
   return (
-    <div className="max-w-6xl mx-auto px-6 pb-28 md:pb-12 relative overflow-x-hidden">
+    <div className="max-w-6xl mx-auto px-6 pb-24 md:pb-12 relative overflow-x-hidden">
       {/* Floating Live Activity Ticker Slot */}
       <LiveActivityTicker />
 

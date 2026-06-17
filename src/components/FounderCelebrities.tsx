@@ -32,7 +32,7 @@ export default function FounderCelebrities() {
   ];
 
   return (
-    <section className="py-12 md:py-16 my-12 bg-luxury-alabaster text-luxury-onyx rounded-[2rem] border border-luxury-border max-w-5xl mx-auto px-6 md:px-12 shadow-xl relative overflow-hidden">
+    <section className="py-8 md:py-16 my-6 md:my-12 bg-luxury-alabaster text-luxury-onyx rounded-[2rem] border border-luxury-border max-w-5xl mx-auto px-6 md:px-12 shadow-xl relative overflow-hidden">
       
       {/* Title & Founder Description */}
       <div className="grid md:grid-cols-12 gap-8 items-center mb-10">

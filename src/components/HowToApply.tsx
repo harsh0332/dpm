@@ -54,7 +54,7 @@ export default function HowToApply() {
   ];
 
   return (
-    <section className="py-12 md:py-16 my-12 bg-luxury-alabaster text-luxury-onyx rounded-[2rem] border border-luxury-border max-w-5xl mx-auto px-6 md:px-12 shadow-xl relative overflow-hidden">
+    <section className="py-8 md:py-16 my-6 md:my-12 bg-luxury-alabaster text-luxury-onyx rounded-[2rem] border border-luxury-border max-w-5xl mx-auto px-6 md:px-12 shadow-xl relative overflow-hidden">
       
       {/* Warm Gold Backdrop Glow */}
       <div className="absolute inset-0 bg-[radial-gradient(circle_at_30%_80%,rgba(201,162,75,0.03)_0%,transparent_50%)] pointer-events-none" />

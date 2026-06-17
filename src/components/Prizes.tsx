@@ -48,7 +48,7 @@ export default function Prizes() {
   };
 
   return (
-    <section className="relative py-16 md:py-24 border-b border-luxury-border max-w-5xl mx-auto px-6 overflow-hidden">
+    <section className="relative py-10 md:py-24 border-b border-luxury-border max-w-5xl mx-auto px-6 overflow-hidden">
       
       {/* Deep Emerald Backdrop Glow */}
       <div className="absolute inset-0 bg-[radial-gradient(circle_at_80%_30%,rgba(6,78,59,0.15)_0%,transparent_60%)] pointer-events-none" />

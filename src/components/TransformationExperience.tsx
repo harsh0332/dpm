@@ -43,7 +43,7 @@ export default function TransformationExperience() {
   };
 
   return (
-    <section className="py-12 md:py-16 my-12 bg-luxury-alabaster text-luxury-onyx rounded-[2rem] border border-luxury-border max-w-5xl mx-auto px-6 md:px-12 shadow-xl relative overflow-hidden">
+    <section className="py-8 md:py-16 my-6 md:my-12 bg-luxury-alabaster text-luxury-onyx rounded-[2rem] border border-luxury-border max-w-5xl mx-auto px-6 md:px-12 shadow-xl relative overflow-hidden">
       
       {/* Soft Rose Backdrop Glow */}
       <div className="absolute inset-0 bg-[radial-gradient(circle_at_10%_50%,rgba(136,13,60,0.03)_0%,transparent_55%)] pointer-events-none" />

@@ -37,7 +37,7 @@ export default function VideoShowcase() {
   };
 
   return (
-    <section className="relative py-12 md:py-16 my-12 bg-luxury-darkcard border border-luxury-border/30 max-w-5xl mx-auto px-6 overflow-hidden rounded-[2rem] shadow-xl">
+    <section className="relative py-8 md:py-16 my-6 md:my-12 bg-luxury-darkcard border border-luxury-border/30 max-w-5xl mx-auto px-6 overflow-hidden rounded-[2rem] shadow-xl">
       
       {/* Deep Royal Sapphire Backdrop Glow */}
       <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_50%,rgba(15,58,95,0.15)_0%,transparent_60%)] pointer-events-none" />

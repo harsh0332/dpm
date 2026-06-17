@@ -132,7 +132,7 @@ export default function FinalCTA() {
         whileInView="visible"
         viewport={{ once: true }}
         variants={revealVariants}
-        className="py-16 md:py-24 border-2 border-green-600 bg-green-950/20 max-w-3xl mx-auto my-12 px-6 md:px-12 relative overflow-hidden text-center"
+        className="py-10 md:py-24 border-2 border-green-600 bg-green-950/20 max-w-3xl mx-auto my-6 md:my-12 px-6 md:px-12 relative overflow-hidden text-center"
       >
         <div className="absolute top-0 left-0 w-full h-1 bg-green-600" />
         
@@ -194,7 +194,7 @@ export default function FinalCTA() {
       whileInView="visible"
       viewport={{ once: true, margin: "-100px" }}
       variants={revealVariants}
-      className="py-12 md:py-16 border border-emerald-600/40 bg-luxury-darkcard max-w-3xl mx-auto my-12 px-6 md:px-12 relative overflow-hidden emerald-glow-hover rounded-[2.5rem] shadow-xl"
+      className="py-8 md:py-16 border border-emerald-600/40 bg-luxury-darkcard max-w-3xl mx-auto my-6 md:my-12 px-6 md:px-12 relative overflow-hidden emerald-glow-hover rounded-[2.5rem] shadow-xl"
     >
       {/* Emerald & Warm Gold Backdrop Glow */}
       <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,rgba(6,78,59,0.08)_0%,rgba(201,162,75,0.03)_50%,transparent_100%)] pointer-events-none" />

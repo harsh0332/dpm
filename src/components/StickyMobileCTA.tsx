@@ -7,10 +7,10 @@ export default function StickyMobileCTA() {
   const { current, original } = siteData.registrationFee;
   return (
     <div 
-      className="md:hidden fixed bottom-0 left-0 right-0 bg-luxury-darkcard/95 backdrop-blur-md border-t border-luxury-gold/30 px-6 py-3.5 flex flex-col gap-2 z-50 shadow-[0_-4px_25px_rgba(0,0,0,0.6)]"
+      className="md:hidden fixed bottom-0 left-0 right-0 bg-luxury-darkcard border-t border-luxury-gold/30 px-4 py-2 flex flex-col gap-1 z-50 shadow-[0_-4px_25px_rgba(0,0,0,0.6)]"
     >
       {/* Scrollable highlights copy row */}
-      <div className="overflow-hidden whitespace-nowrap w-full border-b border-luxury-border/30 pb-1.5 flex justify-center">
+      <div className="overflow-hidden whitespace-nowrap w-full border-b border-luxury-border/30 pb-1 flex justify-center">
         <p className="font-sans text-[8px] uppercase tracking-wider text-luxury-gold m-0 animate-pulse">
           No Experience Needed • Grooming Support • Portfolio Shoot • Digital Exposure
         </p>

@@ -59,7 +59,7 @@ export default function CategorySelector() {
   };
 
   return (
-    <section className="relative py-16 md:py-24 border-b border-luxury-border max-w-5xl mx-auto px-6 overflow-hidden">
+    <section className="relative py-10 md:py-24 border-b border-luxury-border max-w-5xl mx-auto px-6 overflow-hidden">
       
       {/* Rose-Magenta Backdrop Glow */}
       <div className="absolute inset-0 bg-[radial-gradient(circle_at_30%_60%,rgba(136,13,60,0.08)_0%,transparent_55%)] pointer-events-none" />
