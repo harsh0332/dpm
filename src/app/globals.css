@@ -1,0 +1,150 @@
+@import "tailwindcss";
+
+@theme {
+  --font-serif: var(--font-serif);
+  --font-sans: var(--font-sans);
+  
+  /* 6 New Required Palette Tokens */
+  --color-base-night: #15101E;           /* Deep Plum-Night Base */
+  --color-ivory: #FBF7F0;                /* Light-Section Background */
+  --color-ink: #1A1320;                  /* Text on Ivory */
+  --color-sapphire: #3B5FCC;             /* Vibrant sapphire jewel accent */
+  --color-rose: #C7458A;                 /* Vibrant rose jewel accent */
+  --color-emerald: #1F8A70;              /* Vibrant emerald jewel accent */
+
+  /* Primary Metallic Gold Accent (Brightened) */
+  --color-luxury-gold: #D4AF55;          /* Brightened Metallic Gold */
+  --color-luxury-gold-light: #E6C782;    /* Highlight Metallic Gold */
+  --color-luxury-gold-dark: #8F6A25;     /* Contrast Shadow Gold */
+
+  /* Keep existing token names mapped to stay functional */
+  --color-luxury-onyx: #15101E;          /* Mapped to deep plum-night base */
+  --color-luxury-darkcard: #1E182A;      /* Mapped to warm dark card version of plum-night */
+  --color-luxury-alabaster: #FBF7F0;     /* Mapped to ivory light-section background */
+  --color-luxury-stone: #1A1320;         /* Mapped to ink text */
+  --color-luxury-border: rgba(212, 175, 85, 0.18); /* Polished Gold Border using new gold */
+
+  /* Jewel Accents Mapped to stay functional */
+  --color-jewel-sapphire: #3B5FCC;
+  --color-jewel-rose: #C7458A;
+  --color-jewel-emerald: #1F8A70;
+}
+
+body {
+  background-color: var(--color-base-night);
+  color: var(--color-luxury-alabaster);
+  font-family: var(--font-sans);
+  overflow-x: hidden;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+/* Custom Gold Gradient Helper classes */
+.gold-gradient-bg {
+  background: linear-gradient(135deg, #D4AF55 0%, #F3D78A 50%, #AA7C11 100%);
+}
+
+.gold-gradient-text {
+  background: linear-gradient(135deg, #D4AF55 0%, #F3D78A 50%, #AA7C11 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+/* Custom crown celebratory gradient helpers */
+.crown-gradient-text {
+  background: linear-gradient(135deg, #D4AF55 0%, #C7458A 50%, #3B5FCC 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.crown-gradient-bg {
+  background: linear-gradient(135deg, #D4AF55 0%, #C7458A 50%, #3B5FCC 100%);
+}
+
+/* Custom Jewel Gradient Helper classes */
+.sapphire-gradient-bg {
+  background: linear-gradient(135deg, #0F3A5F 0%, #1D4ED8 100%);
+}
+
+.rose-gradient-bg {
+  background: linear-gradient(135deg, #880D3C 0%, #BE185D 100%);
+}
+
+.emerald-gradient-bg {
+  background: linear-gradient(135deg, #064E3B 0%, #059669 100%);
+}
+
+/* Custom premium shimmer effect on buttons */
+.btn-shimmer {
+  position: relative;
+  overflow: hidden;
+}
+
+.btn-shimmer::after {
+  content: "";
+  position: absolute;
+  top: -50%;
+  left: -50%;
+  width: 200%;
+  height: 200%;
+  background: linear-gradient(
+    45deg,
+    transparent 40%,
+    rgba(255, 255, 255, 0.4) 50%,
+    transparent 60%
+  );
+  transform: rotate(45deg);
+  transition: none;
+  animation: btn-shimmer-animation 5s infinite linear;
+  pointer-events: none;
+}
+
+@keyframes btn-shimmer-animation {
+  0% {
+    transform: translate(-30%, -30%) rotate(45deg);
+  }
+  12% {
+    transform: translate(30%, 30%) rotate(45deg);
+  }
+  100% {
+    transform: translate(30%, 30%) rotate(45deg);
+  }
+}
+
+/* Luxury card hover glow shadow */
+.luxury-glow-hover {
+  transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.luxury-glow-hover:hover {
+  box-shadow: 0 0 30px rgba(201, 162, 75, 0.08);
+  border-color: rgba(201, 162, 75, 0.4) !important;
+}
+
+/* Jewel card hover glow shadow */
+.sapphire-glow-hover {
+  transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+}
+.sapphire-glow-hover:hover {
+  box-shadow: 0 0 30px rgba(15, 58, 95, 0.3);
+  border-color: rgba(29, 78, 216, 0.45) !important;
+}
+
+.rose-glow-hover {
+  transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+}
+.rose-glow-hover:hover {
+  box-shadow: 0 0 30px rgba(136, 13, 60, 0.3);
+  border-color: rgba(190, 24, 93, 0.45) !important;
+}
+
+.emerald-glow-hover {
+  transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+}
+.emerald-glow-hover:hover {
+  box-shadow: 0 0 30px rgba(6, 78, 59, 0.3);
+  border-color: rgba(5, 150, 105, 0.45) !important;
+}
+

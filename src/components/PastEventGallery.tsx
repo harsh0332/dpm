@@ -1,0 +1,116 @@
+"use client";
+
+import React, { useState } from "react";
+import { motion, AnimatePresence, useReducedMotion, Variants } from "framer-motion";
+import { siteData } from "@/content/site-data";
+
+export default function PastEventGallery() {
+  const [filter, setFilter] = useState<"all" | "ramp" | "glamour">("all");
+  const shouldReduceMotion = useReducedMotion();
+
+  const filteredImages = siteData.galleryImages.filter((img) =>
+    filter === "all" ? true : img.category === filter
+  );
+
+  const itemVariants: Variants = {
+    hidden: shouldReduceMotion ? { opacity: 1, scale: 1 } : { opacity: 0, scale: 0.95 },
+    visible: {
+      opacity: 1,
+      scale: 1,
+      transition: {
+        duration: 0.4,
+        ease: [0.16, 1, 0.3, 1] as const,
+      },
+    },
+    exit: shouldReduceMotion ? { opacity: 1 } : { opacity: 0, scale: 0.95, transition: { duration: 0.2 } }
+  };
+
+  return (
+    <section className="py-16 md:py-24 border-b border-luxury-border max-w-5xl mx-auto px-6 overflow-hidden">
+      
+      {/* Title */}
+      <div className="text-center mb-8">
+        <span className="text-[10px] font-sans tracking-[0.25em] text-[#C9A24B] uppercase block font-semibold">
+          Official Legacy
+        </span>
+        <h2 className="font-serif text-2xl md:text-4xl tracking-wide text-white font-light">
+          Past Event Gallery
+        </h2>
+        <p className="font-sans text-xs tracking-wider text-luxury-stone mt-2">
+          Verifiable highlights and crowning moments from previous seasons
+        </p>
+        <div className="w-16 h-[1px] bg-luxury-gold/50 mx-auto mt-4" />
+      </div>
+
+      {/* Filter Tabs */}
+      <div className="flex justify-center gap-3 mb-10">
+        {[
+          { id: "all", label: "All" },
+          { id: "ramp", label: "Ramp Walk" },
+          { id: "glamour", label: "Glamour Walk" },
+        ].map((tab) => (
+          <button
+            key={tab.id}
+            onClick={() => setFilter(tab.id as "all" | "ramp" | "glamour")}
+            className={`font-sans text-[10px] tracking-widest uppercase px-6 h-10 border transition-all duration-300 rounded-full cursor-pointer ${
+              filter === tab.id
+                ? "gold-gradient-bg text-luxury-onyx border-transparent font-bold shadow-md"
+                : "border-luxury-border/40 text-gray-400 hover:text-white hover:border-luxury-gold"
+            }`}
+          >
+            {tab.label}
+          </button>
+        ))}
+      </div>
+
+      {/* Gallery Grid (with smooth Framer Motion layout changes) */}
+      <motion.div 
+        layout={!shouldReduceMotion}
+        className="grid grid-cols-2 md:grid-cols-4 gap-4 md:gap-6"
+      >
+        <AnimatePresence mode="popLayout">
+          {filteredImages.map((img, i) => (
+            <motion.div
+              layout={!shouldReduceMotion}
+              key={img.src}
+              initial="hidden"
+              animate="visible"
+              exit="exit"
+              variants={itemVariants}
+              className="border border-luxury-border/30 p-1.5 bg-luxury-darkcard rounded-2xl luxury-glow-hover"
+            >
+              <div className="relative aspect-[4/5] bg-luxury-onyx overflow-hidden group rounded-xl">
+                <img
+                  src={img.src}
+                  alt={`DPM Past Event Highlights ${i + 1}`}
+                  className="w-full h-full object-cover filter grayscale-0 md:grayscale md:hover:grayscale-0 transition-all duration-500 transform group-hover:scale-105 rounded-xl"
+                  loading="lazy"
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-luxury-onyx/75 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end p-3 pointer-events-none">
+                  <span className="font-sans text-[9px] tracking-wider uppercase text-luxury-gold font-semibold">
+                    {img.category === "ramp" ? "Ramp Walk" : "Glamour Walk"}
+                  </span>
+                </div>
+              </div>
+            </motion.div>
+          ))}
+        </AnimatePresence>
+      </motion.div>
+
+      <div className="text-center mt-12">
+        <motion.div
+          whileHover={shouldReduceMotion ? {} : { scale: 1.03 }}
+          whileTap={shouldReduceMotion ? {} : { scale: 0.97 }}
+        >
+          <a
+            href="#register"
+            className="inline-flex items-center justify-center font-sans text-xs tracking-widest uppercase gold-gradient-bg text-luxury-onyx px-8 h-12 font-bold shadow-lg rounded-full hover:brightness-110 transition-all duration-300 btn-shimmer"
+          >
+            Apply for Auditions
+          </a>
+        </motion.div>
+      </div>
+
+    </section>
+  );
+}
