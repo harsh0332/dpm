@@ -1,5 +1,6 @@
 import React from "react";
 import Hero from "@/components/Hero";
+import TrustBar from "@/components/TrustBar";
 import LeadCapture from "@/components/LeadCapture";
 import AspirationProblem from "@/components/AspirationProblem";
 import Opportunity from "@/components/Opportunity";
@@ -36,6 +37,9 @@ export default function Home() {
 
       {/* 1. Hero */}
       <Hero />
+
+      {/* Trust Strip */}
+      <TrustBar />
 
       {/* Lead Capture Entry Point (Quiz) */}
       <LeadCapture />

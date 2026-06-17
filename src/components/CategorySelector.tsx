@@ -26,6 +26,38 @@ export default function CategorySelector() {
     }),
   };
 
+  const categoryAccents: Record<string, {
+    glowClass: string;
+    textColor: string;
+    borderClass: string;
+    btnClass: string;
+  }> = {
+    "mr-india": {
+      glowClass: "sapphire-glow-hover",
+      textColor: "text-blue-400",
+      borderClass: "border-blue-500/25",
+      btnClass: "border border-blue-500/40 text-blue-400 hover:bg-blue-500 hover:text-white"
+    },
+    "miss-india": {
+      glowClass: "rose-glow-hover",
+      textColor: "text-rose-400",
+      borderClass: "border-rose-500/25",
+      btnClass: "border border-rose-500/40 text-rose-400 hover:bg-rose-500/80 hover:text-white"
+    },
+    "miss-teen-india": {
+      glowClass: "emerald-glow-hover",
+      textColor: "text-emerald-400",
+      borderClass: "border-emerald-500/25",
+      btnClass: "border border-emerald-500/40 text-emerald-400 hover:bg-emerald-500 hover:text-white"
+    },
+    "mrs-india": {
+      glowClass: "luxury-glow-hover",
+      textColor: "text-luxury-gold",
+      borderClass: "border-luxury-gold/25",
+      btnClass: "border border-luxury-gold/40 text-luxury-gold hover:bg-luxury-gold hover:text-luxury-onyx"
+    }
+  };
+
   return (
     <section className="relative py-16 md:py-24 border-b border-luxury-border max-w-5xl mx-auto px-6 overflow-hidden">
       
@@ -34,11 +66,11 @@ export default function CategorySelector() {
       
       {/* Title */}
       <div className="text-center mb-12 relative z-10">
-        <span className="text-[10px] font-sans tracking-[0.25em] text-[#C9A24B] uppercase block font-semibold">
+        <span className="text-[10px] font-sans tracking-[0.25em] text-luxury-gold uppercase block font-semibold">
           Entry Categories
         </span>
         <h2 className="font-serif text-2xl md:text-4xl tracking-wide text-white font-light">
-          Find Your Crown
+          Find Your <span className="crown-gradient-text font-bold">Crown</span>
         </h2>
         <p className="font-sans text-xs tracking-wider text-luxury-stone mt-2 uppercase">
           Review age ranges & requirements. Click Select to auto-fill registration below.
@@ -49,6 +81,7 @@ export default function CategorySelector() {
       {/* Grid of Categories */}
       <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-6 relative z-10">
         {siteData.categories.map((cat, index) => {
+          const accent = categoryAccents[cat.id] || categoryAccents["miss-india"];
           return (
             <motion.div 
               key={cat.id} 
@@ -58,8 +91,8 @@ export default function CategorySelector() {
               viewport={{ once: true, margin: "-50px" }}
               variants={cardVariants}
               whileHover={shouldReduceMotion ? {} : { y: -4 }}
-              className={`p-5 border flex flex-col justify-between relative bg-luxury-darkcard/80 backdrop-blur-sm transition-all duration-300 rose-glow-hover rounded-2xl ${
-                cat.isPopular ? "border-luxury-gold" : "border-luxury-border/30"
+              className={`p-5 border flex flex-col justify-between relative bg-luxury-darkcard/80 backdrop-blur-sm transition-all duration-300 rounded-2xl ${accent.glowClass} ${
+                cat.isPopular ? "border-luxury-gold" : accent.borderClass
               }`}
             >
               {/* MOST POPULAR Badge for Miss India */}
@@ -92,7 +125,7 @@ export default function CategorySelector() {
                     <span className="text-[9px] font-sans tracking-widest text-luxury-stone uppercase block font-semibold">
                       Age Limit
                     </span>
-                    <span className="font-sans text-sm font-bold text-luxury-gold">
+                    <span className={`font-sans text-sm font-bold ${accent.textColor}`}>
                       {cat.ageRange} Years {cat.id === "mrs-india" ? "(Married)" : ""}
                     </span>
                   </div>
@@ -112,7 +145,7 @@ export default function CategorySelector() {
                   className={`flex items-center justify-center text-center font-sans text-xs tracking-widest uppercase h-11 font-bold transition-all duration-300 rounded-full ${
                     cat.isPopular 
                       ? "gold-gradient-bg text-luxury-onyx hover:brightness-110 btn-shimmer" 
-                      : "border border-luxury-gold text-luxury-gold hover:bg-luxury-gold hover:text-luxury-onyx"
+                      : accent.btnClass
                   }`}
                 >
                   Select & Apply

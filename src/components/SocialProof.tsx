@@ -11,7 +11,7 @@ export default function SocialProof() {
           Alumni Success
         </span>
         <h2 className="font-serif text-2xl md:text-4xl tracking-wide text-luxury-onyx font-light mt-1">
-          The Success Framework
+          The Success <span className="crown-gradient-text font-bold">Framework</span>
         </h2>
         <p className="font-sans text-xs tracking-wider text-luxury-stone mt-2">
           Verifiable Success Stories & Testimonials
@@ -24,7 +24,7 @@ export default function SocialProof() {
         {siteData.testimonials.map((t) => (
           <div key={t.id} className="p-6 border border-luxury-border bg-white rounded-2xl flex flex-col justify-between shadow-sm">
             <p className="font-serif italic text-base text-luxury-onyx leading-relaxed">
-              "{t.quote}"
+              &ldquo;{t.quote}&rdquo;
             </p>
             <div className="mt-6 pt-4 border-t border-luxury-border flex justify-between items-center">
               <div>

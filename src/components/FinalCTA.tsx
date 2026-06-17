@@ -98,7 +98,7 @@ export default function FinalCTA() {
       name: siteData.brandName,
       description: `Audition Registration: ${siteData.categories.find(c => c.id === selectedCategory)?.name || ""}`,
       image: siteData.logo,
-      handler: function (response: any) {
+      handler: function (response: { razorpay_payment_id: string }) {
         setIsProcessing(false);
         const generatedRef = `DPM-${Math.floor(100000 + Math.random() * 900000)}`;
         setRefNum(generatedRef);
@@ -120,7 +120,7 @@ export default function FinalCTA() {
     };
 
     // Instantiate Razorpay Overlay Checkout
-    const rzp = new (window as any).Razorpay(options);
+    const rzp = new (window as unknown as { Razorpay: new (options: unknown) => { open: () => void } }).Razorpay(options);
     rzp.open();
   };
 
@@ -207,7 +207,7 @@ export default function FinalCTA() {
           Secure Registration Gate
         </span>
         <h2 className="font-serif text-2xl md:text-3xl tracking-wide text-white font-light">
-          Apply for Auditions
+          Apply for <span className="crown-gradient-text font-bold">Auditions</span>
         </h2>
         <p className="font-sans text-xs text-gray-400 mt-2">
           Registration Fee: <strong className="text-luxury-gold text-sm">₹{current}</strong> (Inclusive of GST. No hidden fees) • Anchored against <del className="text-gray-500">₹{original}</del>
@@ -219,7 +219,7 @@ export default function FinalCTA() {
         {/* Full Name input - text-base prevents auto-zoom on mobile */}
         <div className="space-y-1">
           <label htmlFor="reg-name" className="font-sans text-[10px] tracking-wider uppercase text-gray-300 block font-semibold">
-            Candidate's Full Name
+            Candidate&apos;s Full Name
           </label>
           <input 
             id="reg-name"

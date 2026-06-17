@@ -55,11 +55,11 @@ export default function Prizes() {
       
       {/* Title */}
       <div className="text-center mb-12 relative z-10">
-        <span className="text-[10px] font-sans tracking-[0.25em] text-[#C9A24B] uppercase block font-semibold">
+        <span className="text-[10px] font-sans tracking-[0.25em] text-luxury-gold uppercase block font-semibold">
           Rewards
         </span>
         <h2 className="font-serif text-2xl md:text-4xl tracking-wide text-white font-light">
-          Prizes Worth ₹11L+ — and a Direct Ticket to Bollywood
+          Prizes Worth ₹11L+ — and a <span className="crown-gradient-text font-bold">Direct Ticket to Bollywood</span>
         </h2>
         <p className="font-sans text-xs tracking-wider text-luxury-stone mt-2">
           Quantified career opportunities for DPM finalists

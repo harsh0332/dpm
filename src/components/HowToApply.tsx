@@ -65,7 +65,7 @@ export default function HowToApply() {
           The Process
         </span>
         <h2 className="font-serif text-2xl md:text-4xl tracking-wide text-luxury-onyx font-light mt-1">
-          How to Apply
+          How to <span className="crown-gradient-text font-bold">Apply</span>
         </h2>
         <p className="font-sans text-xs tracking-wider text-luxury-stone mt-2">
           Your direct path from registration to the national spotlight

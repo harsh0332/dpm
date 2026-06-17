@@ -38,7 +38,7 @@ export default function YourMoment() {
         </span>
         
         <h2 className="font-serif text-3xl md:text-5xl tracking-wide font-light leading-tight max-w-3xl mx-auto text-luxury-onyx">
-          Your Moment Is Waiting. Don't Let It Pass.
+          Your Moment Is Waiting. Don&apos;t Let It Pass.
         </h2>
         
         <div className="w-16 h-[1.5px] bg-luxury-onyx/40 mx-auto" />

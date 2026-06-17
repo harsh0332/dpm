@@ -47,7 +47,7 @@ export default function FounderCelebrities() {
         </div>
         <div className="md:col-span-6 text-left">
           <p className="font-sans text-xs md:text-sm text-luxury-stone leading-relaxed">
-            Our founder and director, <strong>{siteData.founder}</strong>, maintains active collaborations and partnerships across Bollywood casting agencies and event circles. These real photos highlight DPM Entertainment's long-standing credibility and authority as a national beauty pageant launcher.
+            Our founder and director, <strong>{siteData.founder}</strong>, maintains active collaborations and partnerships across Bollywood casting agencies and event circles. These real photos highlight DPM Entertainment&apos;s long-standing credibility and authority as a national beauty pageant launcher.
           </p>
         </div>
       </div>

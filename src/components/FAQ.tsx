@@ -62,7 +62,7 @@ export default function FAQ() {
           Clarifications
         </span>
         <h2 className="font-serif text-2xl md:text-4xl tracking-wide text-luxury-onyx font-light mt-1">
-          Frequently Asked Questions
+          Frequently Asked <span className="crown-gradient-text font-bold">Questions</span>
         </h2>
         <p className="font-sans text-xs tracking-wider text-luxury-stone mt-2 uppercase">
           Resolve Your Doubts & Audition Policies

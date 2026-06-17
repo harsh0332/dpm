@@ -4,7 +4,7 @@ import { siteData } from "@/content/site-data";
 
 export default function Footer() {
   return (
-    <footer className="bg-luxury-darkcard text-[#F5F2EC] border-t border-luxury-border py-16 mt-16 font-sans relative">
+    <footer className="bg-luxury-darkcard text-[#F5F2EC] border-t border-luxury-border pt-16 pb-28 md:pb-16 mt-16 font-sans relative">
       {/* Subtle gold top-line glow */}
       <div className="absolute top-0 left-0 right-0 h-[1px] bg-gradient-to-r from-transparent via-luxury-gold/30 to-transparent" />
       
@@ -46,13 +46,16 @@ export default function Footer() {
               Funnel Home
             </Link>
             <Link href="/about" className="hover:text-luxury-gold transition-colors duration-200 text-decoration-none">
-              About Founder & Org
+              About DPM
             </Link>
             <Link href="/contact" className="hover:text-luxury-gold transition-colors duration-200 text-decoration-none">
               Contact Support
             </Link>
             <Link href="/privacy-refund" className="hover:text-luxury-gold transition-colors duration-200 text-decoration-none">
-              Privacy Policy & Refund Terms
+              Privacy Policy
+            </Link>
+            <Link href="/privacy-refund" className="hover:text-luxury-gold transition-colors duration-200 text-decoration-none">
+              Refund Policy
             </Link>
           </div>
         </div>

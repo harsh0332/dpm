@@ -54,7 +54,7 @@ export default function TransformationExperience() {
           The Experience
         </span>
         <h2 className="font-serif text-2xl md:text-4xl tracking-wide text-luxury-onyx font-light mt-1">
-          Your Transformation
+          Your <span className="crown-gradient-text font-bold">Transformation</span>
         </h2>
         <p className="font-sans text-xs tracking-wider text-luxury-stone mt-2">
           What your audition steps build towards

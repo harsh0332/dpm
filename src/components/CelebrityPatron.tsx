@@ -118,7 +118,7 @@ export default function CelebrityPatron() {
             variants={revealVariants}
             className="p-5 border-l-2 border-luxury-gold bg-luxury-onyx/80 italic text-gray-300 font-serif text-sm leading-relaxed rounded-r-2xl"
           >
-            "DPM Pageant is India's most credible, transparent, and direct runway launchpad for regional modeling talent."
+            &ldquo;DPM Pageant is India&apos;s most credible, transparent, and direct runway launchpad for regional modeling talent.&rdquo;
           </motion.div>
           
           <motion.p 

@@ -30,11 +30,11 @@ export default function PastEventGallery() {
       
       {/* Title */}
       <div className="text-center mb-8">
-        <span className="text-[10px] font-sans tracking-[0.25em] text-[#C9A24B] uppercase block font-semibold">
+        <span className="text-[10px] font-sans tracking-[0.25em] text-luxury-gold uppercase block font-semibold">
           Official Legacy
         </span>
         <h2 className="font-serif text-2xl md:text-4xl tracking-wide text-white font-light">
-          Past Event Gallery
+          Past Event <span className="crown-gradient-text font-bold">Gallery</span>
         </h2>
         <p className="font-sans text-xs tracking-wider text-luxury-stone mt-2">
           Verifiable highlights and crowning moments from previous seasons
@@ -77,7 +77,9 @@ export default function PastEventGallery() {
               animate="visible"
               exit="exit"
               variants={itemVariants}
-              className="border border-luxury-border/30 p-1.5 bg-luxury-darkcard rounded-2xl luxury-glow-hover"
+              className={`border border-luxury-border/30 p-1.5 bg-luxury-darkcard rounded-2xl transition-all duration-300 ${
+                img.category === "ramp" ? "sapphire-glow-hover" : "rose-glow-hover"
+              }`}
             >
               <div className="relative aspect-[4/5] bg-luxury-onyx overflow-hidden group rounded-xl">
                 <img

@@ -27,12 +27,17 @@ export default function Hero() {
   const [timeLeft, setTimeLeft] = useState({ days: 0, hours: 0, minutes: 0, seconds: 0 });
 
   useEffect(() => {
-    setMounted(true);
-    setTimeLeft(calculateTimeLeft());
+    const timerId = setTimeout(() => {
+      setMounted(true);
+      setTimeLeft(calculateTimeLeft());
+    }, 0);
     const timer = setInterval(() => {
       setTimeLeft(calculateTimeLeft());
     }, 1000);
-    return () => clearInterval(timer);
+    return () => {
+      clearTimeout(timerId);
+      clearInterval(timer);
+    };
   }, []);
 
   // Animation variants
@@ -72,7 +77,7 @@ export default function Hero() {
   const headlineWords = "The National Search for India's Next Pageant Titleholder".split(" ");
 
   return (
-    <section className="relative min-h-screen pt-28 pb-16 flex flex-col items-center justify-center px-6 overflow-hidden border-b border-luxury-border bg-luxury-onyx">
+    <section className="relative min-h-screen pt-28 pb-16 flex flex-col items-center justify-center px-6 overflow-hidden border-b border-luxury-border bg-base-night">
       
       {/* Drifting Gold Accent Glows */}
       <motion.div 
@@ -137,7 +142,7 @@ export default function Hero() {
                   className="inline-block mr-2 md:mr-3"
                 >
                   {word === "India's" || word === "Next" || word === "Titleholder" ? (
-                    <span className="gold-gradient-text font-semibold">{word}</span>
+                    <span className="crown-gradient-text font-semibold">{word}</span>
                   ) : (
                     word
                   )}
@@ -150,7 +155,7 @@ export default function Hero() {
               variants={itemVariants}
               className="font-sans text-xs md:text-sm text-gray-400 max-w-xl leading-relaxed lg:max-w-none"
             >
-              Step onto the national stage. DPM Mr, Miss, Mrs, & Miss Teen India 2026 is India's most transparent and direct runway path. Submit your basic audition details in under 2 minutes, get groomed by Bollywood's top casting coaches, and claim your share of the ₹11 Lakhs prize pool.
+              Step onto the national stage. DPM Mr, Miss, Mrs, &amp; Miss Teen India 2026 is India&apos;s most transparent and direct runway path. Submit your basic audition details in under 2 minutes, get groomed by Bollywood&apos;s top casting coaches, and claim your share of the ₹11 Lakhs prize pool.
             </motion.p>
 
             {/* Desktop Only: CTA + Trust Badge Stack */}
@@ -168,32 +173,38 @@ export default function Hero() {
                 </a>
               </motion.div>
 
-              {/* Trust Badges */}
+              {/* Trust Badges (Zero Emojis, Gold SVGs) */}
               <motion.div 
                 variants={itemVariants}
                 className="flex items-center gap-x-4 text-[9px] font-sans uppercase tracking-wider text-gray-400 pt-2 border-t border-luxury-border/30 w-full"
               >
-                <span className="flex items-center gap-1">
-                  <svg className="w-3 h-3 text-luxury-gold" fill="none" stroke="currentColor" strokeWidth="2.5" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"></path></svg>
+                <span className="flex items-center gap-1.5">
+                  <svg className="w-3.5 h-3.5 text-luxury-gold" fill="none" stroke="currentColor" strokeWidth="2.5" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                    <path strokeLinecap="round" strokeLinejoin="round" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" />
+                  </svg>
                   Secure Payments
                 </span>
                 <span>•</span>
-                <span className="flex items-center gap-1">
-                  <svg className="w-3 h-3 text-luxury-gold" fill="none" stroke="currentColor" strokeWidth="2.5" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+                <span className="flex items-center gap-1.5">
+                  <svg className="w-3.5 h-3.5 text-luxury-gold" fill="none" stroke="currentColor" strokeWidth="2.5" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                    <path strokeLinecap="round" strokeLinejoin="round" d="M9 12l2 2 4-4M7.835 4.697a3.42 3.42 0 001.946-.806 3.42 3.42 0 014.438 0 3.42 3.42 0 001.946.806 3.42 3.42 0 013.138 3.138 3.42 3.42 0 00.806 1.946 3.42 3.42 0 010 4.438 3.42 3.42 0 00-.806 1.946 3.42 3.42 0 01-3.138 3.138 3.42 3.42 0 00-1.946.806 3.42 3.42 0 01-4.438 0 3.42 3.42 0 00-1.946-.806 3.42 3.42 0 01-3.138-3.138z" />
+                  </svg>
                   Verified Winners
                 </span>
                 <span>•</span>
-                <span className="flex items-center gap-1">
-                  <svg className="w-3 h-3 text-luxury-gold" fill="none" stroke="currentColor" strokeWidth="2.5" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" d="M13 10V3L4 14h7v7l9-11h-7z"></path></svg>
+                <span className="flex items-center gap-1.5">
+                  <svg className="w-3.5 h-3.5 text-luxury-gold" fill="none" stroke="currentColor" strokeWidth="2.5" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                    <path strokeLinecap="round" strokeLinejoin="round" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 005.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z" />
+                  </svg>
                   430+ Applied This Week
                 </span>
               </motion.div>
             </div>
  
-            {/* Stats Row */}
+            {/* Stats Row with Jewel Dividers & Correct Hierarchy */}
             <motion.div 
               variants={itemVariants}
-              className="w-full max-w-lg lg:max-w-none grid grid-cols-2 sm:grid-cols-4 gap-4 py-4"
+              className="w-full max-w-lg lg:max-w-none grid grid-cols-2 sm:grid-cols-4 gap-6 py-6 border-t border-b border-luxury-border/30 my-4"
             >
               {[
                 { value: siteData.config.careersLaunched, label: "Careers Launched" },
@@ -201,22 +212,41 @@ export default function Hero() {
                 { value: siteData.config.categoriesCount, label: "Age Categories" },
                 { value: siteData.config.groomingSupport, label: "Grooming Support" },
               ].map((stat, i) => (
-                <div key={i} className="bg-luxury-darkcard/60 border border-luxury-gold/20 p-4 rounded-2xl text-center relative overflow-hidden luxury-glow-hover flex flex-col justify-center">
-                  <div className="absolute -right-4 -bottom-4 w-12 h-12 bg-luxury-gold/5 rounded-full blur-xl pointer-events-none" />
-                  <strong className="font-serif text-2xl text-white font-medium block">{stat.value}</strong>
-                  <p className="font-sans text-[9px] tracking-wider uppercase text-luxury-gold/80 mt-1 font-semibold">{stat.label}</p>
+                <div 
+                  key={i} 
+                  className={`flex flex-col items-center sm:items-start text-center sm:text-left relative ${
+                    i > 0 ? "sm:pl-6 sm:border-l sm:border-jewel-sapphire/30" : ""
+                  } ${
+                    i % 2 !== 0 ? "border-l border-jewel-rose/20 sm:border-none pl-4 sm:pl-0" : ""
+                  }`}
+                >
+                  <strong className="font-serif text-2xl md:text-3xl text-white font-medium tracking-tight">
+                    {stat.value}
+                  </strong>
+                  <span className="font-sans text-[8px] md:text-[9px] tracking-[0.15em] uppercase text-luxury-gold font-bold mt-1.5 block">
+                    {stat.label}
+                  </span>
                 </div>
               ))}
             </motion.div>
- 
+
           </div>
  
           {/* RIGHT COLUMN: CELEBRITY TRUST CENTERPIECE */}
-          <div className="lg:col-span-5 w-full flex flex-col justify-center items-center">
+          <div className="lg:col-span-5 w-full flex flex-col justify-center items-center relative">
+            {/* Ambient Sapphire & Rose glows (Low Opacity) */}
+            <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[110%] h-[110%] pointer-events-none z-0">
+              <div className="absolute top-1/4 left-1/4 w-[60%] h-[60%] rounded-full bg-jewel-sapphire/8 blur-[80px] md:blur-[100px]" />
+              <div className="absolute bottom-1/4 right-1/4 w-[60%] h-[60%] rounded-full bg-jewel-rose/8 blur-[80px] md:blur-[100px]" />
+            </div>
+
             <motion.div
               variants={itemVariants}
-              className="w-full max-w-md aspect-[3/4] bg-luxury-darkcard border border-luxury-gold/30 rounded-[2.5rem] shadow-2xl relative overflow-hidden group luxury-glow-hover flex flex-col justify-end"
+              className="w-full max-w-md aspect-[3/4] bg-luxury-darkcard border border-luxury-gold/30 rounded-[2.5rem] shadow-2xl relative overflow-hidden group luxury-glow-hover flex flex-col justify-end z-10"
             >
+              {/* Inner Gold Frame Border */}
+              <div className="absolute inset-4 border border-luxury-gold/15 rounded-[2rem] pointer-events-none z-20" />
+
               {/* Large Urvashi Portrait Background Image */}
               <img 
                 src={siteData.celebrityPatron.image} 
@@ -225,18 +255,21 @@ export default function Hero() {
               />
  
               {/* Luxury dark gradient overlay for text legibility */}
-              <div className="absolute inset-0 bg-gradient-to-t from-black via-black/40 to-transparent pointer-events-none" />
+              <div className="absolute inset-0 bg-gradient-to-t from-black via-black/40 to-transparent pointer-events-none z-10" />
  
               {/* VIP Mentor Badge */}
-              <div className="absolute top-4 right-4 bg-luxury-gold text-luxury-onyx font-sans text-[9px] uppercase tracking-[0.2em] px-4 py-1.5 font-bold rounded-full shadow-lg z-10">
-                VIP Patron & Chief Guest
+              <div className="absolute top-6 right-6 bg-[#15101E]/95 border border-luxury-gold/45 text-luxury-gold font-sans text-[8px] md:text-[9px] uppercase tracking-[0.2em] px-4 py-2 font-extrabold rounded-full shadow-2xl z-20 flex items-center gap-1.5">
+                <svg className="w-3.5 h-3.5 text-luxury-gold" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" />
+                </svg>
+                <span>{siteData.celebrityPatron.title}</span>
               </div>
  
               {/* Interactive Info Card overlay (positioned at the bottom) */}
-              <div className="relative z-10 p-5 md:p-6 space-y-4 text-left">
+              <div className="relative z-20 p-6 md:p-8 space-y-4 text-left">
                 
                 {/* Celebrity Name & Seal */}
-                <div className="space-y-0.5">
+                <div className="space-y-1.5">
                   <span className="font-sans text-[8px] md:text-[9px] tracking-widest text-luxury-gold uppercase font-bold block">
                     Meet & Get Crowned By
                   </span>
@@ -246,12 +279,24 @@ export default function Hero() {
                   <p className="font-sans text-[9px] md:text-[10px] text-gray-300">
                     Miss Diva Universe & Pageant Mentor
                   </p>
+
+                  {/* Verified credentials rendered as small pill chips */}
+                  <div className="flex flex-wrap gap-1.5 pt-1.5">
+                    {siteData.celebrityPatron.credentials.map((cred, idx) => (
+                      <span 
+                        key={idx} 
+                        className="font-sans text-[8px] md:text-[9px] uppercase tracking-[0.08em] bg-[#15101E]/85 text-luxury-gold-light border border-luxury-gold/30 px-2.5 py-0.5 rounded-full font-bold shadow-[0_2px_8px_rgba(20,20,20,0.3)]"
+                      >
+                        {cred}
+                      </span>
+                    ))}
+                  </div>
                 </div>
  
                 {/* Countdown Grid Overlay */}
                 {mounted && (
-                  <div className="bg-black/65 border border-white/10 backdrop-blur-md p-3 rounded-2xl space-y-3">
-                    <div className="flex justify-between items-center text-[8px] md:text-[9px] font-sans text-luxury-gold font-bold">
+                  <div className="bg-[#15101E]/85 border border-luxury-border/60 backdrop-blur-md p-3.5 rounded-2xl space-y-3 shadow-[0_8px_32px_rgba(0,0,0,0.5)]">
+                    <div className="flex justify-between items-center text-[8px] md:text-[9px] font-sans text-luxury-gold font-extrabold tracking-wider">
                       <span className="flex items-center gap-1.5">
                         <span className="relative flex h-1.5 w-1.5">
                           <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-red-400 opacity-75"></span>
@@ -262,31 +307,31 @@ export default function Hero() {
                       <span className="text-white">{siteData.config.slotsRemaining} SLOTS REMAINING</span>
                     </div>
  
-                    <div className="grid grid-cols-4 gap-1.5 text-center">
+                    <div className="grid grid-cols-4 gap-2 text-center">
                       {[
                         { label: "Days", value: timeLeft.days },
                         { label: "Hours", value: timeLeft.hours },
                         { label: "Mins", value: timeLeft.minutes },
                         { label: "Secs", value: timeLeft.seconds },
                       ].map((item, i) => (
-                        <div key={i} className="bg-black/40 border border-white/5 py-1.5 rounded-lg justify-center">
-                          <span className="font-serif text-xs md:text-sm text-white font-bold block leading-none">
+                        <div key={i} className="bg-[#1E182A]/80 border border-luxury-border/30 py-2 rounded-xl flex flex-col items-center justify-center">
+                          <span className="font-serif text-sm md:text-base text-white font-bold block leading-none">
                             {String(item.value).padStart(2, "0")}
                           </span>
-                          <span className="font-sans text-[7px] tracking-wider uppercase text-luxury-stone block mt-1 font-bold">
+                          <span className="font-sans text-[7px] tracking-widest uppercase text-luxury-stone block mt-1 font-bold">
                             {item.label}
                           </span>
                         </div>
                       ))}
                     </div>
  
-                    {/* Spots Remaining Indicator */}
-                    <div className="w-full h-1 bg-white/10 rounded-full overflow-hidden">
+                    {/* Spots Remaining Indicator (Jewel-tinted progress bar) */}
+                    <div className="w-full h-1.5 bg-[#1E182A] border border-white/5 rounded-full overflow-hidden">
                       <motion.div 
                         initial={{ width: "0%" }}
                         animate={{ width: `${(siteData.config.slotsRemaining / 150) * 100}%` }}
                         transition={{ delay: 0.8, duration: 1.5, ease: "easeOut" }}
-                        className="h-full gold-gradient-bg"
+                        className="h-full rose-gradient-bg"
                       />
                     </div>
                   </div>
@@ -308,25 +353,28 @@ export default function Hero() {
                   
                   {/* Mobile trust items */}
                   <div className="flex justify-center gap-3 text-[7px] font-sans uppercase tracking-wider text-gray-400 pt-2.5">
-                    <span className="flex items-center gap-0.5">
-                      <svg className="w-2.5 h-2.5 text-luxury-gold" fill="none" stroke="currentColor" strokeWidth="2.5" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"></path></svg>
+                    <span className="flex items-center gap-1">
+                      <svg className="w-2.5 h-2.5 text-luxury-gold" fill="none" stroke="currentColor" strokeWidth="2.5" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                        <path strokeLinecap="round" strokeLinejoin="round" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" />
+                      </svg>
                       Secure Checkout
                     </span>
                     <span>•</span>
-                    <span className="flex items-center gap-0.5">
-                      <svg className="w-2.5 h-2.5 text-luxury-gold" fill="none" stroke="currentColor" strokeWidth="2.5" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+                    <span className="flex items-center gap-1">
+                      <svg className="w-2.5 h-2.5 text-luxury-gold" fill="none" stroke="currentColor" strokeWidth="2.5" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                        <path strokeLinecap="round" strokeLinejoin="round" d="M9 12l2 2 4-4M7.835 4.697a3.42 3.42 0 001.946-.806 3.42 3.42 0 014.438 0 3.42 3.42 0 001.946.806 3.42 3.42 0 013.138 3.138 3.42 3.42 0 00.806 1.946 3.42 3.42 0 010 4.438 3.42 3.42 0 00-.806 1.946 3.42 3.42 0 01-3.138 3.138 3.42 3.42 0 00-1.946.806 3.42 3.42 0 01-4.438 0 3.42 3.42 0 00-1.946-.806 3.42 3.42 0 01-3.138-3.138z" />
+                      </svg>
                       Winner Endorsed
                     </span>
                   </div>
                 </div>
-
+ 
               </div>
             </motion.div>
           </div>
-
+ 
         </motion.div>
       </div>
-      
     </section>
   );
 }

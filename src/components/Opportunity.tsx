@@ -54,10 +54,10 @@ export default function Opportunity() {
           The Launchpad
         </span>
         <h2 className="font-serif text-2xl md:text-4xl tracking-wide text-luxury-onyx font-light mt-1">
-          The DPM Opportunity
+          The DPM <span className="crown-gradient-text font-bold">Opportunity</span>
         </h2>
         <p className="font-sans text-xs tracking-wider text-luxury-stone mt-2">
-          Dismantling barriers for India's regional talent
+          Dismantling barriers for India&apos;s regional talent
         </p>
         <div className="w-16 h-[1px] bg-luxury-gold/50 mx-auto mt-4" />
       </div>

@@ -11,7 +11,7 @@ export default function AspirationProblem() {
           Industry Transparency
         </span>
         <h2 className="font-serif text-2xl md:text-4xl tracking-wide text-luxury-onyx font-light mt-1">
-          Your Runway Journey Starts Here
+          Your Runway Journey <span className="crown-gradient-text font-bold">Starts Here</span>
         </h2>
         <div className="w-16 h-[1px] bg-luxury-gold/50 mx-auto mt-4" />
       </div>
@@ -66,7 +66,7 @@ export default function AspirationProblem() {
       {/* The Permission Statement */}
       <div className="mt-10 text-center p-6 border border-luxury-border bg-white rounded-2xl max-w-3xl mx-auto shadow-sm">
         <p className="font-serif text-base text-luxury-onyx italic">
-          "Whether you are a college student, working professional, or a homemaker—this platform belongs to you. Your age, city, or height is no longer a barrier."
+          &ldquo;Whether you are a college student, working professional, or a homemaker—this platform belongs to you. Your age, city, or height is no longer a barrier.&rdquo;
         </p>
       </div>
 
