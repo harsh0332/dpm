@@ -83,8 +83,8 @@ export default function Hero() {
 
             {/* Urvashi Verified Mini-Card (Mobile only) */}
             <div className="animate-fadeup flex lg:hidden gap-3 items-center p-2.5 rounded-[18px] bg-gradient-to-br from-[#5470D9]/20 to-[#C7458A]/15 border border-[#D4AF55]/32 w-full text-left" style={{ animationDelay: '0.2s' }}>
-              <div className="relative w-[78px] h-[92px] flex-none rounded-[14px] overflow-hidden bg-[radial-gradient(circle_at_50%_22%,#2B2142,#160F23)]">
-                <img src={siteData.celebrityPatron.image} alt={siteData.celebrityPatron.name} className="absolute left-1/2 bottom-[-2px] -translate-x-1/2 h-[128%] object-cover object-top" />
+              <div className="relative w-[84px] h-[115px] flex-none rounded-[14px] overflow-hidden bg-[radial-gradient(circle_at_50%_22%,#2B2142,#160F23)]">
+                <img src={siteData.celebrityPatron.image} alt={siteData.celebrityPatron.name} className="absolute left-1/2 bottom-0 -translate-x-1/2 h-[96%] object-contain object-bottom" />
               </div>
               <div className="flex flex-col gap-1.5 min-w-0">
                 <div className="inline-flex items-center gap-1.5 self-start px-2.5 py-1 rounded-full bg-[#0C0912]/45 border border-[#D4AF55]/45">
