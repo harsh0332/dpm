@@ -46,16 +46,6 @@ export default function FounderCelebrities() {
     }),
   };
 
-  // Asymmetrical grid column/row configurations for 6 images to create a premium editorial collage
-  const layoutClasses = [
-    "col-span-2 row-span-2", // Image 1 (Featured 2x2, top-left)
-    "col-span-1 row-span-1", // Image 2 (1x1, top-right)
-    "col-span-1 row-span-1", // Image 3 (1x1, top-far-right)
-    "col-span-2 row-span-1", // Image 4 (2x1, middle-right)
-    "col-span-2 row-span-1", // Image 5 (2x1, bottom-left)
-    "col-span-2 row-span-1", // Image 6 (2x1, bottom-right)
-  ];
-
   return (
     <section className="py-8 md:py-16 my-6 md:my-12 bg-luxury-alabaster text-luxury-onyx rounded-[2rem] border border-luxury-border max-w-5xl mx-auto px-6 md:px-12 shadow-xl relative overflow-hidden">
       
@@ -77,36 +67,33 @@ export default function FounderCelebrities() {
         </div>
       </div>
 
-      {/* Asymmetrical Collage Grid - Desktop only */}
-      <div className="hidden md:grid grid-cols-2 md:grid-cols-4 gap-4 auto-rows-[120px] md:auto-rows-[160px]">
-        {siteData.founderCelebsImages.map((img, i) => {
-          const layoutClass = layoutClasses[i] || "col-span-1 row-span-1";
-          return (
-            <motion.div
-              key={i}
-              custom={i}
-              initial="hidden"
-              whileInView="visible"
-              viewport={{ once: true, margin: "-50px" }}
-              variants={itemVariants}
-              className={`${layoutClass} border border-luxury-border/30 p-1 bg-white hover:border-luxury-gold transition-colors duration-300 rounded-2xl shadow-sm`}
-            >
-              <div className="relative w-full h-full bg-luxury-onyx overflow-hidden group rounded-xl">
-                <img
-                  src={img}
-                  alt={`Founder Shivanshu Mishra with Celebrities ${i + 1}`}
-                  className="w-full h-full object-cover filter grayscale-0 md:grayscale md:hover:grayscale-0 transition-all duration-500 transform group-hover:scale-[1.03]"
-                  loading="lazy"
-                />
-                <div className="absolute inset-0 bg-gradient-to-t from-luxury-onyx/75 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end p-3 pointer-events-none">
-                  <span className="font-sans text-[9px] tracking-wider uppercase text-luxury-gold font-semibold">
-                    DPM Network Presence
-                  </span>
-                </div>
+      {/* Editorial Grid - Desktop only */}
+      <div className="hidden md:grid grid-cols-1 md:grid-cols-3 gap-6">
+        {siteData.founderCelebsImages.map((img, i) => (
+          <motion.div
+            key={i}
+            custom={i}
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true, margin: "-50px" }}
+            variants={itemVariants}
+            className="border border-luxury-border/30 p-1.5 bg-white hover:border-luxury-gold transition-colors duration-300 rounded-2xl shadow-sm"
+          >
+            <div className="relative aspect-[3/4] bg-luxury-onyx overflow-hidden group rounded-xl">
+              <img
+                src={img}
+                alt={`Founder Shivanshu Mishra with Celebrities ${i + 1}`}
+                className="w-full h-full object-cover object-top filter grayscale-0 md:grayscale md:hover:grayscale-0 transition-all duration-500 transform group-hover:scale-[1.03]"
+                loading="lazy"
+              />
+              <div className="absolute inset-0 bg-gradient-to-t from-luxury-onyx/75 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end p-3 pointer-events-none">
+                <span className="font-sans text-[9px] tracking-wider uppercase text-luxury-gold font-semibold">
+                  DPM Network Presence
+                </span>
               </div>
-            </motion.div>
-          );
-        })}
+            </div>
+          </motion.div>
+        ))}
       </div>
 
       {/* Mobile Swipeable Carousel - Mobile only */}
@@ -131,11 +118,11 @@ export default function FounderCelebrities() {
               variants={itemVariants}
               className="w-[75vw] max-w-[280px] flex-shrink-0 snap-center border border-luxury-border/30 p-1 bg-white rounded-2xl shadow-sm"
             >
-              <div className="relative aspect-[4/3] bg-luxury-onyx overflow-hidden group rounded-xl">
+              <div className="relative aspect-[3/4] bg-luxury-onyx overflow-hidden group rounded-xl">
                 <img
                   src={img}
                   alt={`Founder Shivanshu Mishra with Celebrities ${i + 1}`}
-                  className="w-full h-full object-cover"
+                  className="w-full h-full object-cover object-top"
                   loading="lazy"
                 />
               </div>

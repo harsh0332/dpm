@@ -116,7 +116,7 @@ export default function PastEventGallery() {
                   img.category === "ramp" ? "sapphire-glow-hover" : "rose-glow-hover"
                 }`}
               >
-                <div className="relative aspect-[4/5] bg-luxury-onyx overflow-hidden group rounded-xl">
+                <div className="relative aspect-[3/2] bg-luxury-onyx overflow-hidden group rounded-xl">
                   <img
                     src={img.src}
                     alt={`DPM Past Event Highlights ${i + 1}`}
@@ -159,7 +159,7 @@ export default function PastEventGallery() {
                   img.category === "ramp" ? "sapphire-glow-hover" : "rose-glow-hover"
                 }`}
               >
-                <div className="relative aspect-[4/5] bg-luxury-onyx overflow-hidden group rounded-xl">
+                <div className="relative aspect-[3/2] bg-luxury-onyx overflow-hidden group rounded-xl">
                   <img
                     src={img.src}
                     alt={`DPM Past Event Highlights ${i + 1}`}
