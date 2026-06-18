@@ -327,7 +327,7 @@ export const siteData: SiteData = {
     maxSlotsPerState: 150,
     slotsRemaining: 27,
     grandFinaleDeadline: "2026-09-27",
-    countdownTarget: "2026-09-27T23:59:59",
+    countdownTarget: "2026-07-18T23:59:59",
     careersLaunched: "500+",
     prizesPool: "₹11L+",
     categoriesCount: "4",
