@@ -312,14 +312,14 @@ export const siteData: SiteData = {
     { src: "/new-images/gallery-5.jpg", category: "ramp" },
     { src: "/new-images/gallery-6.jpg", category: "glamour" },
     { src: "/new-images/gallery-7.jpg", category: "ramp" },
-    { src: "/new-images/gallery-8.jpg", category: "glamour" }
+    { src: "/new-images/gallery-8.jpg", category: "glamour" },
+    { src: "/new-images/founder-celebs-5.webp", category: "ramp" }
   ],
   founderCelebsImages: [
     "/new-images/founder-celebs-1.jpg",
     "/new-images/founder-celebs-2.webp",
     "/new-images/founder-celebs-3.webp",
     "/new-images/founder-celebs-4.webp",
-    "/new-images/founder-celebs-5.webp",
     "/new-images/founder-celebs-6.webp",
     "/new-images/founder-celebs-7.webp"
   ],

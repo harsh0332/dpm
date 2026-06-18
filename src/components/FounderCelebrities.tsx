@@ -46,15 +46,14 @@ export default function FounderCelebrities() {
     }),
   };
 
-  // Asymmetrical grid column/row configurations for 7 images to create a premium editorial collage
+  // Asymmetrical grid column/row configurations for 6 images to create a premium editorial collage
   const layoutClasses = [
-    "col-span-2 row-span-2", // Image 1 (Featured)
-    "col-span-1 row-span-1", // Image 2
-    "col-span-1 row-span-1", // Image 3
-    "col-span-1 row-span-2", // Image 4
-    "col-span-2 row-span-1", // Image 5
-    "col-span-1 row-span-1", // Image 6
-    "col-span-1 row-span-1", // Image 7
+    "col-span-2 row-span-2", // Image 1 (Featured 2x2, top-left)
+    "col-span-1 row-span-1", // Image 2 (1x1, top-right)
+    "col-span-1 row-span-1", // Image 3 (1x1, top-far-right)
+    "col-span-2 row-span-1", // Image 4 (2x1, middle-right)
+    "col-span-2 row-span-1", // Image 5 (2x1, bottom-left)
+    "col-span-2 row-span-1", // Image 6 (2x1, bottom-right)
   ];
 
   return (
