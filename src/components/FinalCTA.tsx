@@ -70,36 +70,21 @@ export default function FinalCTA() {
     setErrors({});
     setIsProcessing(true);
 
-    // POST lead data to Google Sheets webhook (fire-and-forget)
-    // Strategy: try sendBeacon first (most reliable on mobile iOS/Android),
-    // then fall back to fetch with keepalive for desktop browsers.
-    // sendBeacon is specifically designed to survive page navigation/unload.
+    // POST lead data via our own API route (server-side proxy to Google Sheets)
+    // This avoids all CORS / Safari / mobile browser restrictions.
+    // Works reliably on: Chrome, Safari, iOS, Android, all browsers.
     try {
-      const webhookUrl = process.env.NEXT_PUBLIC_SHEETS_WEBHOOK_URL;
-      if (webhookUrl) {
-        const payload = JSON.stringify({ name, email, whatsapp: phone, category: selectedCategory });
-
-        const beaconSent =
-          typeof navigator !== "undefined" &&
-          typeof navigator.sendBeacon === "function" &&
-          navigator.sendBeacon(webhookUrl, new Blob([payload], { type: "text/plain;charset=utf-8" }));
-
-        if (!beaconSent) {
-          // Fallback: fetch with keepalive for environments where sendBeacon isn't available
-          fetch(webhookUrl, {
-            method: "POST",
-            mode: "no-cors",
-            keepalive: true,
-            headers: { "Content-Type": "text/plain;charset=utf-8" },
-            body: payload,
-          }).catch((err) => console.warn("Lead capture fetch error:", err));
-        }
-      }
+      fetch("/api/capture-lead", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ name, email, whatsapp: phone, category: selectedCategory }),
+        keepalive: true,
+      }).catch((err) => console.warn("Lead capture error:", err));
     } catch (error) {
-      console.warn("Failed to capture lead to Google Sheets:", error);
+      console.warn("Lead capture failed:", error);
     }
 
-    // Small delay so sendBeacon/fetch can dispatch before navigation
+    // Small delay so fetch dispatches before page navigates
     await new Promise((resolve) => setTimeout(resolve, 200));
 
     // Redirect to Razorpay hosted Payment Page with pre-filled details
