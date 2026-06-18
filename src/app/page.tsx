@@ -50,14 +50,14 @@ export default function Home() {
       {/* 3. Opportunity */}
       <Opportunity />
 
+      {/* 5. Celebrity Patron */}
+      <CelebrityPatron />
+
       {/* 8. Reel Video Showcase ("The DPM Experience") */}
       <VideoShowcase />
 
       {/* 4. Grand Jury */}
       <Jury />
-
-      {/* 5. Celebrity Patron */}
-      <CelebrityPatron />
 
       {/* 6. Organization Authority & Credibility */}
       <Authority />

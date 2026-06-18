@@ -1,11 +1,9 @@
 "use client";
 
 import React, { useState, useEffect } from "react";
-import { motion, useReducedMotion, Variants } from "framer-motion";
 import { siteData } from "@/content/site-data";
 
 export default function Hero() {
-  const shouldReduceMotion = useReducedMotion();
   const [mounted, setMounted] = useState(false);
 
   // Countdown Calculation Logic
@@ -40,340 +38,282 @@ export default function Hero() {
     };
   }, []);
 
-  // Animation variants
-  const containerVariants: Variants = {
-    hidden: {},
-    visible: {
-      transition: {
-        staggerChildren: 0.06,
-      },
-    },
-  };
-
-  const itemVariants: Variants = {
-    hidden: shouldReduceMotion ? { opacity: 1, y: 0 } : { opacity: 0, y: 15 },
-    visible: {
-      opacity: 1,
-      y: 0,
-      transition: {
-        duration: 0.5,
-        ease: [0.16, 1, 0.3, 1] as const,
-      },
-    },
-  };
-
-  const wordVariants = {
-    hidden: shouldReduceMotion ? { opacity: 1, y: 0 } : { opacity: 0, y: 10 },
-    visible: {
-      opacity: 1,
-      y: 0,
-      transition: {
-        duration: 0.4,
-        ease: [0.16, 1, 0.3, 1] as const,
-      }
-    }
-  };
-
-  const headlineWords = "The National Search for India's Next Pageant Titleholder".split(" ");
-
   return (
-    <section className="relative min-h-screen pt-28 pb-16 flex flex-col items-center justify-center px-6 overflow-hidden border-b border-luxury-border bg-base-night">
+    <section className="hero-scope relative min-h-screen pt-28 pb-16 flex flex-col items-center justify-center px-4 overflow-hidden bg-[radial-gradient(120%_60%_at_50%_-5%,#251C3B_0%,#171127_50%,#100C1A_100%)] lg:bg-[radial-gradient(115%_90%_at_16%_-5%,#251C3B_0%,#171127_52%,#100C1A_100%)]">
       
-      {/* Drifting Gold Accent Glows */}
-      <motion.div 
-        className="absolute top-[-10%] left-[-10%] w-[350px] md:w-[500px] h-[350px] md:h-[500px] rounded-full bg-luxury-gold/6 blur-[100px] md:blur-[130px] pointer-events-none"
-        animate={shouldReduceMotion ? {} : {
-          x: [0, 40, -30, 0],
-          y: [0, -30, 40, 0],
-        }}
-        transition={{
-          duration: 20,
-          repeat: Infinity,
-          ease: "easeInOut"
-        }}
-      />
-      <motion.div 
-        className="absolute bottom-[-10%] right-[-10%] w-[350px] md:w-[600px] h-[350px] md:h-[600px] rounded-full bg-luxury-gold/5 blur-[100px] md:blur-[150px] pointer-events-none"
-        animate={shouldReduceMotion ? {} : {
-          x: [0, -40, 20, 0],
-          y: [0, 40, -30, 0],
-        }}
-        transition={{
-          duration: 24,
-          repeat: Infinity,
-          ease: "easeInOut"
-        }}
-      />
-
-      {/* Static Luxury Gold-Vignette Backdrop */}
-      <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,rgba(201,162,75,0.06)_0%,transparent_70%)] pointer-events-none" />
+      {/* Ambient Jewel Glows */}
+      <div className="absolute top-[-120px] right-[-90px] lg:top-[-160px] lg:left-[34%] w-[340px] h-[340px] lg:w-[560px] lg:h-[560px] rounded-full bg-[radial-gradient(circle,rgba(59,95,204,0.22),transparent_70%)] filter blur-[20px] animate-drift-a pointer-events-none z-0" />
+      <div className="absolute bottom-[60px] left-[-120px] lg:bottom-[-200px] lg:right-[-60px] w-[320px] h-[320px] lg:w-[620px] lg:h-[620px] rounded-full bg-[radial-gradient(circle,rgba(199,69,138,0.18),transparent_70%)] filter blur-[20px] animate-drift-b pointer-events-none z-0" />
+      
+      {/* Top shadow overlay */}
+      <div className="absolute inset-0 bg-gradient-to-b from-black/18 to-transparent pointer-events-none z-0" />
 
       {/* Main Grid Container */}
-      <div className="w-full max-w-6xl mx-auto z-10 relative">
-        <motion.div 
-          variants={containerVariants}
-          initial="hidden"
-          animate="visible"
-          className="grid lg:grid-cols-12 gap-10 lg:gap-16 items-center"
-        >
+      <div className="w-full max-w-[1200px] mx-auto px-1.5 lg:px-[70px] z-10 relative">
+        <div className="grid lg:grid-cols-12 gap-10 lg:gap-16 items-center">
           
           {/* LEFT COLUMN: TEXT CONTENT & ACTIONS */}
-          <div className="lg:col-span-7 text-center lg:text-left space-y-8 flex flex-col lg:items-start items-center">
+          <div className="lg:col-span-7 flex flex-col items-center lg:items-start text-center lg:text-left gap-6 w-full">
             
-            {/* Tag / Badge */}
-            <motion.div variants={itemVariants} className="space-y-3">
-              <span className="text-[9px] uppercase tracking-[0.3em] font-sans text-luxury-gold font-bold bg-luxury-gold/5 px-4 py-1.5 border border-luxury-gold/25 rounded-full inline-block">
-                Official 2026 National Auditions
+            {/* Tag / Kicker Badge */}
+            <div className="animate-fadeup inline-flex items-center gap-2 px-4 py-2 border border-[#D4AF55]/42 rounded-full bg-[#D4AF55]/6" style={{ animationDelay: '0.04s' }}>
+              <span className="w-1.5 h-1.5 rounded-full bg-[#D4AF55] shadow-[0_0_8px_#D4AF55] animate-pulse-dot" />
+              <span className="font-bold text-[8.5px] lg:text-[10.5px] tracking-[0.18em] lg:tracking-[0.22em] uppercase text-[#E7C877]">
+                Official 2026 <span className="hidden md:inline">National </span>Auditions
               </span>
-              <p className="font-sans text-[11px] md:text-xs tracking-widest uppercase text-gray-300 font-semibold pt-1">
-                {siteData.eventName}
-              </p>
-            </motion.div>
-
-            {/* Title (Staggered Words Reveal) */}
-            <motion.h1 
-              variants={itemVariants}
-              className="font-serif text-3xl md:text-5xl lg:text-[3.25rem] tracking-wide text-white leading-tight font-light max-w-2xl"
-            >
-              {headlineWords.map((word, index) => (
-                <motion.span
-                  key={index}
-                  variants={wordVariants}
-                  className="inline-block mr-2 md:mr-3"
-                >
-                  {word === "India's" || word === "Next" || word === "Titleholder" ? (
-                    <span className="crown-gradient-text font-semibold">{word}</span>
-                  ) : (
-                    word
-                  )}
-                </motion.span>
-              ))}
-            </motion.h1>
-
-            {/* Subtext */}
-            <motion.p 
-              variants={itemVariants}
-              className="font-sans text-xs md:text-sm text-gray-400 max-w-xl leading-relaxed lg:max-w-none"
-            >
-              Step onto the national stage. DPM Mr, Miss, Mrs, &amp; Miss Teen India 2026 is India&apos;s most transparent and direct runway path. Submit your basic audition details in under 2 minutes, get groomed by Bollywood&apos;s top casting coaches, and claim your share of the ₹11 Lakhs prize pool.
-            </motion.p>
-
-            {/* Desktop Only: CTA + Trust Badge Stack */}
-            <div className="hidden lg:flex flex-col items-start space-y-4 pt-2 w-full">
-              <motion.div 
-                variants={itemVariants}
-                whileHover={shouldReduceMotion ? {} : { scale: 1.02 }}
-                whileTap={shouldReduceMotion ? {} : { scale: 0.98 }}
-              >
-                <a 
-                  href="#register" 
-                  className="inline-flex items-center justify-center font-sans text-xs tracking-widest uppercase gold-gradient-bg text-luxury-onyx px-10 h-12 font-bold shadow-lg rounded-full hover:brightness-110 transition-all duration-300 btn-shimmer"
-                >
-                  Apply for Auditions Now
-                </a>
-              </motion.div>
-
-              {/* Trust Badges (Zero Emojis, Gold SVGs) */}
-              <motion.div 
-                variants={itemVariants}
-                className="flex items-center gap-x-4 text-[9px] font-sans uppercase tracking-wider text-gray-400 pt-2 border-t border-luxury-border/30 w-full"
-              >
-                <span className="flex items-center gap-1.5">
-                  <svg className="w-3.5 h-3.5 text-luxury-gold" fill="none" stroke="currentColor" strokeWidth="2.5" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                    <path strokeLinecap="round" strokeLinejoin="round" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" />
-                  </svg>
-                  Secure Payments
-                </span>
-                <span>•</span>
-                <span className="flex items-center gap-1.5">
-                  <svg className="w-3.5 h-3.5 text-luxury-gold" fill="none" stroke="currentColor" strokeWidth="2.5" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                    <path strokeLinecap="round" strokeLinejoin="round" d="M9 12l2 2 4-4M7.835 4.697a3.42 3.42 0 001.946-.806 3.42 3.42 0 014.438 0 3.42 3.42 0 001.946.806 3.42 3.42 0 013.138 3.138 3.42 3.42 0 00.806 1.946 3.42 3.42 0 010 4.438 3.42 3.42 0 00-.806 1.946 3.42 3.42 0 01-3.138 3.138 3.42 3.42 0 00-1.946.806 3.42 3.42 0 01-4.438 0 3.42 3.42 0 00-1.946-.806 3.42 3.42 0 01-3.138-3.138z" />
-                  </svg>
-                  Verified Winners
-                </span>
-                <span>•</span>
-                <span className="flex items-center gap-1.5">
-                  <svg className="w-3.5 h-3.5 text-luxury-gold" fill="none" stroke="currentColor" strokeWidth="2.5" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                    <path strokeLinecap="round" strokeLinejoin="round" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 005.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z" />
-                  </svg>
-                  430+ Applied This Week
-                </span>
-              </motion.div>
             </div>
- 
-            {/* Stats Row with Jewel Dividers & Correct Hierarchy */}
-            <motion.div 
-              variants={itemVariants}
-              className="w-full max-w-lg lg:max-w-none grid grid-cols-2 sm:grid-cols-4 gap-6 py-6 border-t border-b border-luxury-border/30 my-4"
-            >
-              {[
-                { value: siteData.config.careersLaunched, label: "Careers Launched" },
-                { value: siteData.config.prizesPool, label: "Prizes Pool" },
-                { value: siteData.config.categoriesCount, label: "Age Categories" },
-                { value: siteData.config.groomingSupport, label: "Grooming Support" },
-              ].map((stat, i) => (
-                <div 
-                  key={i} 
-                  className={`flex flex-col items-center sm:items-start text-center sm:text-left relative ${
-                    i > 0 ? "sm:pl-6 sm:border-l sm:border-jewel-sapphire/30" : ""
-                  } ${
-                    i % 2 !== 0 ? "border-l border-jewel-rose/20 sm:border-none pl-4 sm:pl-0" : ""
-                  }`}
-                >
-                  <strong className="font-serif text-2xl md:text-3xl text-white font-medium tracking-tight">
-                    {stat.value}
-                  </strong>
-                  <span className="font-sans text-[8px] md:text-[9px] tracking-[0.15em] uppercase text-luxury-gold font-bold mt-1.5 block">
-                    {stat.label}
-                  </span>
+
+            {/* Event Name (Desktop only) */}
+            <div className="animate-fadeup font-semibold text-xs tracking-[0.16em] uppercase text-[#8A8597] hidden lg:block" style={{ animationDelay: '0.1s' }}>
+              {siteData.eventName}
+            </div>
+
+            {/* Title (Staggered Words Reveal on Desktop) */}
+            <div className="animate-fadeup lg:animate-none w-full" style={{ animationDelay: '0.12s' }}>
+              <h1 className="margin-0 font-serif font-semibold text-[35px] lg:text-[64px] leading-[1.08] lg:leading-[1.06] tracking-[-0.01em] text-[#F6F3EE]">
+                <span className="lg:animate-fadeup inline-block mr-2 lg:mr-3" style={{ animationDelay: '0.16s' }}>The</span>
+                <span className="lg:animate-fadeup inline-block mr-2 lg:mr-3" style={{ animationDelay: '0.2s' }}>Stage</span>
+                <span className="lg:animate-fadeup inline-block mr-2 lg:mr-3" style={{ animationDelay: '0.24s' }}>for</span>
+                <span className="lg:animate-fadeup inline-block mr-2 lg:mr-3" style={{ animationDelay: '0.28s' }}>India&rsquo;s</span>
+                <span className="lg:animate-fadeup inline-block mr-2 lg:mr-3" style={{ animationDelay: '0.32s' }}>Next</span>
+                <br className="hidden lg:inline" />
+                <span className="lg:animate-fadeup inline-block font-bold italic bg-gradient-to-r from-[#F3D78A] via-[#E0B65A] via-[#C7458A] to-[#5470D9] bg-clip-text text-transparent" style={{ animationDelay: '0.44s' }}>Crowned Icon</span>
+              </h1>
+            </div>
+
+            {/* Urvashi Verified Mini-Card (Mobile only) */}
+            <div className="animate-fadeup flex lg:hidden gap-3 items-center p-2.5 rounded-[18px] bg-gradient-to-br from-[#5470D9]/20 to-[#C7458A]/15 border border-[#D4AF55]/32 w-full text-left" style={{ animationDelay: '0.2s' }}>
+              <div className="relative w-[78px] h-[92px] flex-none rounded-[14px] overflow-hidden bg-[radial-gradient(circle_at_50%_22%,#2B2142,#160F23)]">
+                <img src={siteData.celebrityPatron.image} alt={siteData.celebrityPatron.name} className="absolute left-1/2 bottom-[-2px] -translate-x-1/2 h-[128%] object-cover object-top" />
+              </div>
+              <div className="flex flex-col gap-1.5 min-w-0">
+                <div className="inline-flex items-center gap-1.5 self-start px-2.5 py-1 rounded-full bg-[#0C0912]/45 border border-[#D4AF55]/45">
+                  <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="#F3D78A" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="m8.4 12 2.3 2.3L15.7 9.6"/></svg>
+                  <span className="font-bold text-[7.5px] tracking-[0.1em] uppercase text-[#F3D78A]">{siteData.celebrityPatron.title}</span>
                 </div>
-              ))}
-            </motion.div>
+                <div className="font-serif font-bold text-[19px] leading-none text-white">{siteData.celebrityPatron.name}</div>
+                <div className="flex flex-wrap gap-1.5">
+                  {siteData.celebrityPatron.credentials.map((cred, idx) => (
+                    <span key={idx} className="font-semibold text-[8px] text-[#1A1206] bg-gradient-to-br from-[#F7DD93] to-[#D4AF55] px-2 py-1 rounded-full">{cred}</span>
+                  ))}
+                </div>
+              </div>
+            </div>
+
+            {/* Paragraph / Subtext (Desktop only) */}
+            <p className="animate-fadeup font-sans text-base text-[#B9B3C7] max-w-[486px] leading-relaxed hidden lg:block" style={{ animationDelay: '0.5s' }}>
+              DPM Mr, Miss, Mrs &amp; Miss Teen India 2026 &mdash; a transparent, mentor-led runway from audition to the national grand finale.
+            </p>
+
+            {/* Desktop CTA & Checkout Info (Desktop only) */}
+            <div className="animate-fadeup hidden lg:flex items-center gap-5 flex-wrap mt-1.5" style={{ animationDelay: '0.62s' }}>
+              <a href="#register" className="btn-shimmer-sweep relative inline-flex items-center gap-2.5 h-[54px] px-[30px] rounded-full text-[#1A1206] font-bold text-[12.5px] tracking-[0.16em] uppercase shadow-[0_14px_34px_rgba(212,175,85,0.28)] hover:brightness-105 transition-all duration-300">
+                Apply for Auditions Now
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h13"/><path d="m12 6 6 6-6 6"/></svg>
+              </a>
+              <div className="flex items-center gap-2">
+                <svg className="w-[15px] h-[15px] text-[#9C97A6]" fill="none" stroke="currentColor" strokeWidth="1.7" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><rect x="5" y="11" width="14" height="9.5" rx="2"/><path d="M8 11V8a4 4 0 0 1 8 0v3"/></svg>
+                <div className="text-left leading-[1.3]">
+                  <div className="font-semibold text-[11px] text-[#C9C4D2]">Razorpay secured checkout</div>
+                  <div className="font-medium text-[10px] text-[#7A7682] mt-0.5">Registration &#8377;{siteData.registrationFee.current} &middot; all-inclusive</div>
+                </div>
+              </div>
+            </div>
+
+            {/* Mobile CTA (Mobile only) */}
+            <a href="#register" className="animate-fadeup btn-shimmer-sweep flex lg:hidden items-center justify-center gap-2.5 h-[54px] w-full rounded-[15px] bg-gradient-to-br from-[#F7DD93] via-[#D4AF55] to-[#AA7C11] text-[#1A1206] font-bold text-[13px] tracking-[0.14em] uppercase shadow-[0_12px_30px_rgba(212,175,85,0.28)]" style={{ animationDelay: '0.28s' }}>
+              Apply for Auditions Now
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h13"/><path d="m12 6 6 6-6 6"/></svg>
+            </a>
+
+            {/* Mobile Trust Chips (Mobile only) */}
+            <div className="animate-fadeup flex lg:hidden gap-1.5 w-full mt-0.5" style={{ animationDelay: '0.34s' }}>
+              <div className="flex-1 flex items-center justify-center gap-1.5 py-2 px-1 rounded-[11px] bg-white/4 border border-white/7">
+                <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="#D4AF55" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="5" y="11" width="14" height="9.5" rx="2"/><path d="M8 11V8a4 4 0 0 1 8 0v3"/></svg>
+                <span className="font-bold text-[8px] tracking-[0.04em] uppercase text-[#C9C4D2]">Razorpay Secured</span>
+              </div>
+              <div className="flex-1 flex items-center justify-center gap-1.5 py-2 px-1 rounded-[11px] bg-white/4 border border-white/7">
+                <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="#D4AF55" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="m8.4 12 2.3 2.3L15.7 9.6"/></svg>
+                <span className="font-bold text-[8px] tracking-[0.04em] uppercase text-[#C9C4D2]">Verified Patron</span>
+              </div>
+              <div className="flex-1 flex items-center justify-center gap-1.5 py-2 px-1 rounded-[11px] bg-white/4 border border-white/7">
+                <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="#D4AF55" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2 4 5v6c0 5 3.5 8.4 8 9.9 4.5-1.5 8-4.9 8-9.9V5l-8-3Z"/><path d="m8.8 12 2.1 2.1 4.3-4.3"/></svg>
+                <span className="font-bold text-[8px] tracking-[0.04em] uppercase text-[#C9C4D2]">Secure Payment</span>
+              </div>
+            </div>
+
+            {/* Desktop Trust Badges (Desktop only) */}
+            <div className="animate-fadeup hidden lg:flex flex-wrap gap-x-6 gap-y-3.5 items-center mt-0.5 text-[#C9C4D2] text-[11px] font-semibold tracking-[0.08em] uppercase" style={{ animationDelay: '0.56s' }}>
+              <div className="flex items-center gap-2">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#D4AF55" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2 4 5v6c0 5 3.5 8.4 8 9.9 4.5-1.5 8-4.9 8-9.9V5l-8-3Z"/><path d="m8.8 12 2.1 2.1 4.3-4.3"/></svg>
+                <span>Secure Payments</span>
+              </div>
+              <div className="flex items-center gap-2">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#D4AF55" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="m8.4 12 2.3 2.3L15.7 9.6"/></svg>
+                <span>Verified Winners</span>
+              </div>
+              <div className="flex items-center gap-2">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#D4AF55" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><rect x="5" y="11" width="14" height="9.5" rx="2"/><path d="M8 11V8a4 4 0 0 1 8 0v3"/></svg>
+                <span>Razorpay Secured</span>
+              </div>
+              <div className="flex items-center gap-2">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#D4AF55" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="8" r="3.2"/><path d="M3.6 19c0-3 2.4-5 5.4-5s5.4 2 5.4 5"/><path d="M16.2 5.4a3 3 0 0 1 0 5.6"/><path d="M18.4 19c0-2.3-1-4-2.6-4.8"/></svg>
+                <span>{siteData.config.careersLaunched} Careers Launched</span>
+              </div>
+            </div>
+
+            {/* Desktop Stat Band (Desktop only) */}
+            <div className="animate-fadeup hidden lg:flex items-center w-full max-w-[580px] border-t border-b border-[#D4AF55]/18 py-[22px] mt-2" style={{ animationDelay: '0.68s' }}>
+              <div className="flex-1 flex flex-col gap-1.5">
+                <strong className="font-serif font-bold text-[34px] leading-none text-white">{siteData.config.careersLaunched}</strong>
+                <span className="font-semibold text-[9.5px] leading-[1.2] tracking-[0.13em] uppercase text-[#8A8597]">Careers Launched</span>
+              </div>
+              <span className="w-[1px] h-[42px] bg-gradient-to-b from-transparent via-[#C7458A]/55 via-[#5470D9]/55 to-transparent"></span>
+              <div className="flex-1 flex flex-col gap-1.5 pl-6">
+                <strong className="font-serif font-bold text-[34px] leading-none text-white">{siteData.config.prizesPool}</strong>
+                <span className="font-semibold text-[9.5px] leading-[1.2] tracking-[0.13em] uppercase text-[#8A8597]">Prize Pool</span>
+              </div>
+              <span className="w-[1px] h-[42px] bg-gradient-to-b from-transparent via-[#C7458A]/55 via-[#5470D9]/55 to-transparent"></span>
+              <div className="flex-1 flex flex-col gap-1.5 pl-6">
+                <strong className="font-serif font-bold text-[34px] leading-none text-white">{siteData.config.categoriesCount}</strong>
+                <span className="font-semibold text-[9.5px] leading-[1.2] tracking-[0.13em] uppercase text-[#8A8597]">Categories</span>
+              </div>
+              <span className="w-[1px] h-[42px] bg-gradient-to-b from-transparent via-[#C7458A]/55 via-[#5470D9]/55 to-transparent"></span>
+              <div className="flex-1 flex flex-col gap-1.5 pl-6">
+                <strong className="font-serif font-bold text-[34px] leading-none text-white">{siteData.config.groomingSupport}</strong>
+                <span className="font-semibold text-[9.5px] leading-[1.2] tracking-[0.13em] uppercase text-[#8A8597]">Grooming Support</span>
+              </div>
+            </div>
+
+            {/* Mobile Stats Grid 2x2 (Mobile only) */}
+            <div className="animate-fadeup grid grid-cols-2 gap-[1px] bg-[#D4AF55]/16 border border-[#D4AF55]/16 rounded-[15px] overflow-hidden lg:hidden w-full" style={{ animationDelay: '0.4s' }}>
+              <div className="bg-[#160F23] p-[14px_16px] flex flex-col gap-1 text-left">
+                <strong className="font-serif font-bold text-[27px] leading-none text-white">{siteData.config.careersLaunched}</strong>
+                <span className="font-semibold text-[8.5px] leading-[1.2] tracking-[0.15em] uppercase text-[#8A8597]">Careers Launched</span>
+              </div>
+              <div className="bg-[#160F23] p-[14px_16px] flex flex-col gap-1 text-left">
+                <strong className="font-serif font-bold text-[27px] leading-none text-white">{siteData.config.prizesPool}</strong>
+                <span className="font-semibold text-[8.5px] leading-[1.2] tracking-[0.15em] uppercase text-[#8A8597]">Prize Pool</span>
+              </div>
+              <div className="bg-[#160F23] p-[14px_16px] flex flex-col gap-1 text-left">
+                <strong className="font-serif font-bold text-[27px] leading-none text-white">{siteData.config.categoriesCount}</strong>
+                <span className="font-semibold text-[8.5px] leading-[1.2] tracking-[0.15em] uppercase text-[#8A8597]">Categories</span>
+              </div>
+              <div className="bg-[#160F23] p-[14px_16px] flex flex-col gap-1 text-left">
+                <strong className="font-serif font-bold text-[27px] leading-none text-white">{siteData.config.groomingSupport}</strong>
+                <span className="font-semibold text-[8.5px] leading-[1.2] tracking-[0.15em] uppercase text-[#8A8597]">Grooming Support</span>
+              </div>
+            </div>
+
+            {/* Mobile Countdown Box (Mobile only) */}
+            {mounted && (
+              <div className="animate-fadeup bg-[#0D0915]/55 backdrop-blur-[12px] border border-white/10 rounded-[16px] p-[13px_14px] flex flex-col gap-[10px] lg:hidden w-full text-left" style={{ animationDelay: '0.46s' }}>
+                <div className="flex justify-between items-center">
+                  <span className="flex items-center gap-1.5 font-bold text-[8.5px] tracking-[0.12em] uppercase text-[#E7C877]">
+                    <span className="relative flex h-1.5 w-1.5">
+                      <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-[#E0567E] opacity-75"></span>
+                      <span className="relative inline-flex rounded-full h-1.5 w-1.5 bg-[#E0567E]"></span>
+                    </span>
+                    Auditions deadline
+                  </span>
+                  <span className="font-bold text-[8.5px] tracking-[0.08em] uppercase text-white">{siteData.config.slotsRemaining} slots left</span>
+                </div>
+                <div className="flex gap-1.5">
+                  {[
+                    { label: "Days", value: timeLeft.days },
+                    { label: "Hours", value: timeLeft.hours },
+                    { label: "Mins", value: timeLeft.minutes },
+                    { label: "Secs", value: timeLeft.seconds },
+                  ].map((item, i) => (
+                    <div key={i} className="flex-1 text-center bg-white/5 border border-white/7 rounded-[9px] py-2">
+                      <div className="font-serif font-bold text-[20px] leading-none text-white">{String(item.value).padStart(2, "0")}</div>
+                      <div className="font-semibold text-[7.5px] tracking-[0.1em] uppercase text-[#8A8597] mt-1">{item.label}</div>
+                    </div>
+                  ))}
+                </div>
+                <div className="h-1 bg-white/10 rounded-full overflow-hidden">
+                  <div className="h-full rounded-full bg-gradient-to-r from-[#5470D9] via-[#C7458A] to-[#F3D78A]" style={{ width: `${(siteData.config.slotsRemaining / siteData.config.maxSlotsPerState) * 100}%` }} />
+                </div>
+              </div>
+            )}
 
           </div>
- 
-          {/* RIGHT COLUMN: CELEBRITY TRUST CENTERPIECE */}
-          <div className="lg:col-span-5 w-full flex flex-col justify-center items-center relative">
-            {/* Ambient Sapphire & Rose glows (Low Opacity) */}
-            <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[110%] h-[110%] pointer-events-none z-0">
-              <div className="absolute top-1/4 left-1/4 w-[60%] h-[60%] rounded-full bg-jewel-sapphire/8 blur-[80px] md:blur-[100px]" />
-              <div className="absolute bottom-1/4 right-1/4 w-[60%] h-[60%] rounded-full bg-jewel-rose/8 blur-[80px] md:blur-[100px]" />
-            </div>
 
-            <motion.div
-              variants={itemVariants}
-              className="w-full max-w-md aspect-[3/4] bg-luxury-darkcard border border-luxury-gold/30 rounded-[2.5rem] shadow-2xl relative overflow-hidden group luxury-glow-hover flex flex-col justify-end z-10"
-            >
-              {/* Inner Gold Frame Border */}
-              <div className="absolute inset-4 border border-luxury-gold/15 rounded-[2rem] pointer-events-none z-20" />
-
-              {/* Large Urvashi Portrait Background Image */}
-              <img 
-                src={siteData.celebrityPatron.image} 
-                alt="Urvashi Rautela Chief Guest Portrait" 
-                className="absolute inset-0 w-full h-full object-cover filter grayscale-0 md:grayscale md:group-hover:grayscale-0 transition-all duration-700 transform group-hover:scale-105 pointer-events-none"
-              />
- 
-              {/* Luxury dark gradient overlay for text legibility */}
-              <div className="absolute inset-0 bg-gradient-to-t from-black via-black/40 to-transparent pointer-events-none z-10" />
- 
-              {/* VIP Mentor Badge */}
-              <div className="absolute top-6 right-6 bg-[#15101E]/95 border border-luxury-gold/45 text-luxury-gold font-sans text-[8px] md:text-[9px] uppercase tracking-[0.2em] px-4 py-2 font-extrabold rounded-full shadow-2xl z-20 flex items-center gap-1.5">
-                <svg className="w-3.5 h-3.5 text-luxury-gold" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" />
-                </svg>
-                <span>{siteData.celebrityPatron.title}</span>
-              </div>
- 
-              {/* Interactive Info Card overlay (positioned at the bottom) */}
-              <div className="relative z-20 p-6 md:p-8 space-y-4 text-left">
+          {/* RIGHT COLUMN: CELEBRITY CENTERPIECE & COUNTDOWN (Desktop only) */}
+          <div className="animate-fadeup lg:col-span-5 hidden lg:block w-full relative" style={{ animationDelay: '0.34s' }}>
+            <div className="relative p-[1.5px] rounded-[30px] bg-gradient-to-br from-[#5470D9]/75 via-[#C7458A]/55 to-[#D4AF55]/45 shadow-[0_30px_70px_rgba(0,0,0,0.45)]">
+              <div className="relative h-[606px] rounded-[29px] overflow-hidden bg-[radial-gradient(120%_80%_at_50%_8%,#2B2142_0%,#160F23_72%)]">
                 
-                {/* Celebrity Name & Seal */}
-                <div className="space-y-1.5">
-                  <span className="font-sans text-[8px] md:text-[9px] tracking-widest text-luxury-gold uppercase font-bold block">
-                    Meet & Get Crowned By
-                  </span>
-                  <h3 className="font-serif text-xl md:text-2xl text-white font-bold leading-tight drop-shadow-md">
-                    {siteData.celebrityPatron.name}
-                  </h3>
-                  <p className="font-sans text-[9px] md:text-[10px] text-gray-300">
-                    Miss Diva Universe & Pageant Mentor
-                  </p>
-
-                  {/* Verified credentials rendered as small pill chips */}
-                  <div className="flex flex-wrap gap-1.5 pt-1.5">
+                {/* Inner ambient glows */}
+                <div className="absolute top-10 left-1/2 -translate-x-1/2 w-[340px] h-[340px] rounded-full bg-[radial-gradient(circle,rgba(84,112,217,0.32),transparent_68%)] filter blur-[14px] animate-drift-a pointer-events-none" />
+                <div className="absolute bottom-[60px] left-[30px] w-[300px] h-[300px] rounded-full bg-[radial-gradient(circle,rgba(199,69,138,0.28),transparent_68%)] filter blur-[14px] animate-drift-b pointer-events-none" />
+                
+                {/* Chief Guest Image */}
+                <img 
+                  src={siteData.celebrityPatron.image} 
+                  alt={siteData.celebrityPatron.name} 
+                  className="absolute left-1/2 bottom-[-8px] -translate-x-1/2 h-[104%] object-contain object-bottom filter grayscale contrast-[1.02] hover:grayscale-0 hover:scale-[1.03] transition-all duration-700 pointer-events-none z-10" 
+                />
+                
+                {/* Gradients */}
+                <div className="absolute inset-0 bg-gradient-to-t from-[#0B0811]/94 via-[#0B0811]/40 to-transparent pointer-events-none z-15" />
+                <div className="absolute inset-0 bg-gradient-to-b from-[#0B0811]/5 to-transparent pointer-events-none z-15" />
+                
+                {/* Verified Badge */}
+                <div className="absolute top-[18px] left-[18px] inline-flex items-center gap-2 px-[14px] py-2 rounded-full bg-[#0C0912]/62 backdrop-blur-[10px] border border-[#D4AF55]/50 z-20">
+                  <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#F3D78A" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="m8.4 12 2.3 2.3L15.7 9.6"/></svg>
+                  <span className="font-bold text-[9.5px] tracking-[0.16em] uppercase text-[#F3D78A]">{siteData.celebrityPatron.title}</span>
+                </div>
+                
+                {/* Bottom text & countdown overlay */}
+                <div className="absolute left-[18px] right-[18px] bottom-[18px] flex flex-col gap-3 z-20 text-left">
+                  <div>
+                    <div className="font-bold text-[9px] tracking-[0.2em] uppercase text-[#E7C877] mb-1">Meet &amp; get crowned by</div>
+                    <div className="font-serif font-bold text-[28px] leading-none text-white">{siteData.celebrityPatron.name}</div>
+                  </div>
+                  <div className="flex flex-wrap gap-[7px]">
                     {siteData.celebrityPatron.credentials.map((cred, idx) => (
-                      <span 
-                        key={idx} 
-                        className="font-sans text-[8px] md:text-[9px] uppercase tracking-[0.08em] bg-[#15101E]/85 text-luxury-gold-light border border-luxury-gold/30 px-2.5 py-0.5 rounded-full font-bold shadow-[0_2px_8px_rgba(20,20,20,0.3)]"
-                      >
-                        {cred}
-                      </span>
-                    ))}
+                      <span key={idx} className="font-semibold text-[10px] leading-none text-[#1A1206] bg-gradient-to-br from-[#F7DD93] to-[#D4AF55] px-3 py-1.5 rounded-full">{cred}</span>
+                  ))}
                   </div>
-                </div>
- 
-                {/* Countdown Grid Overlay */}
-                {mounted && (
-                  <div className="bg-[#15101E]/85 border border-luxury-border/60 backdrop-blur-md p-3.5 rounded-2xl space-y-3 shadow-[0_8px_32px_rgba(0,0,0,0.5)]">
-                    <div className="flex justify-between items-center text-[8px] md:text-[9px] font-sans text-luxury-gold font-extrabold tracking-wider">
-                      <span className="flex items-center gap-1.5">
-                        <span className="relative flex h-1.5 w-1.5">
-                          <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-red-400 opacity-75"></span>
-                          <span className="relative inline-flex rounded-full h-1.5 w-1.5 bg-red-500"></span>
-                        </span>
-                        AUDITIONS DEADLINE
-                      </span>
-                      <span className="text-white">{siteData.config.slotsRemaining} SLOTS REMAINING</span>
-                    </div>
- 
-                    <div className="grid grid-cols-4 gap-2 text-center">
-                      {[
-                        { label: "Days", value: timeLeft.days },
-                        { label: "Hours", value: timeLeft.hours },
-                        { label: "Mins", value: timeLeft.minutes },
-                        { label: "Secs", value: timeLeft.seconds },
-                      ].map((item, i) => (
-                        <div key={i} className="bg-[#1E182A]/80 border border-luxury-border/30 py-2 rounded-xl flex flex-col items-center justify-center">
-                          <span className="font-serif text-sm md:text-base text-white font-bold block leading-none">
-                            {String(item.value).padStart(2, "0")}
-                          </span>
-                          <span className="font-sans text-[7px] tracking-widest uppercase text-luxury-stone block mt-1 font-bold">
-                            {item.label}
-                          </span>
-                        </div>
-                      ))}
-                    </div>
- 
-                    {/* Spots Remaining Indicator (Jewel-tinted progress bar) */}
-                    <div className="w-full h-1.5 bg-[#1E182A] border border-white/5 rounded-full overflow-hidden">
-                      <motion.div 
-                        initial={{ width: "0%" }}
-                        animate={{ width: `${(siteData.config.slotsRemaining / 150) * 100}%` }}
-                        transition={{ delay: 0.8, duration: 1.5, ease: "easeOut" }}
-                        className="h-full rose-gradient-bg"
-                      />
-                    </div>
-                  </div>
-                )}
- 
-                {/* Mobile Only: CTA Button inside the card to keep conversion high */}
-                <div className="block lg:hidden w-full pt-1">
-                  <motion.div 
-                    whileHover={shouldReduceMotion ? {} : { scale: 1.02 }}
-                    whileTap={shouldReduceMotion ? {} : { scale: 0.98 }}
-                  >
-                    <a 
-                      href="#register" 
-                      className="w-full inline-flex items-center justify-center font-sans text-[10px] tracking-widest uppercase gold-gradient-bg text-luxury-onyx h-10 font-bold shadow-lg rounded-full hover:brightness-110 transition-all duration-300 btn-shimmer"
-                    >
-                      Apply for Auditions Now
-                    </a>
-                  </motion.div>
                   
-                  {/* Mobile trust items */}
-                  <div className="flex justify-center gap-3 text-[7px] font-sans uppercase tracking-wider text-gray-400 pt-2.5">
-                    <span className="flex items-center gap-1">
-                      <svg className="w-2.5 h-2.5 text-luxury-gold" fill="none" stroke="currentColor" strokeWidth="2.5" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                        <path strokeLinecap="round" strokeLinejoin="round" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" />
-                      </svg>
-                      Secure Checkout
-                    </span>
-                    <span>•</span>
-                    <span className="flex items-center gap-1">
-                      <svg className="w-2.5 h-2.5 text-luxury-gold" fill="none" stroke="currentColor" strokeWidth="2.5" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                        <path strokeLinecap="round" strokeLinejoin="round" d="M9 12l2 2 4-4M7.835 4.697a3.42 3.42 0 001.946-.806 3.42 3.42 0 014.438 0 3.42 3.42 0 001.946.806 3.42 3.42 0 013.138 3.138 3.42 3.42 0 00.806 1.946 3.42 3.42 0 010 4.438 3.42 3.42 0 00-.806 1.946 3.42 3.42 0 01-3.138 3.138 3.42 3.42 0 00-1.946.806 3.42 3.42 0 01-4.438 0 3.42 3.42 0 00-1.946-.806 3.42 3.42 0 01-3.138-3.138z" />
-                      </svg>
-                      Winner Endorsed
-                    </span>
-                  </div>
+                  {/* Desktop Countdown */}
+                  {mounted && (
+                    <div className="bg-[#0D0915]/58 backdrop-blur-[14px] border border-white/10 rounded-[18px] p-[14px_15px] flex flex-col gap-[11px] w-full text-left">
+                      <div className="flex justify-between items-center">
+                        <span className="flex items-center gap-1.5 font-bold text-[9px] tracking-[0.14em] uppercase text-[#E7C877]">
+                          <span className="relative flex h-1.5 w-1.5">
+                            <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-[#E0567E] opacity-75"></span>
+                            <span className="relative inline-flex rounded-full h-1.5 w-1.5 bg-[#E0567E]"></span>
+                          </span>
+                          Auditions deadline
+                        </span>
+                        <span className="font-bold text-[9px] tracking-[0.1em] uppercase text-white">{siteData.config.slotsRemaining} slots remaining</span>
+                      </div>
+                      <div className="flex gap-[7px]">
+                        {[
+                          { label: "Days", value: timeLeft.days },
+                          { label: "Hours", value: timeLeft.hours },
+                          { label: "Mins", value: timeLeft.minutes },
+                          { label: "Secs", value: timeLeft.seconds },
+                        ].map((item, i) => (
+                          <div key={i} className="flex-1 text-center bg-white/5 border border-white/7 rounded-[10px] py-[9px]">
+                            <div className="font-serif font-bold text-[22px] leading-none text-white">{String(item.value).padStart(2, "0")}</div>
+                            <div className="font-semibold text-[8px] tracking-[0.12em] uppercase text-[#8A8597] mt-1">{item.label}</div>
+                          </div>
+                        ))}
+                      </div>
+                      <div className="h-1 bg-white/10 rounded-full overflow-hidden">
+                        <div className="h-full rounded-full bg-gradient-to-r from-[#5470D9] via-[#C7458A] to-[#F3D78A]" style={{ width: `${(siteData.config.slotsRemaining / siteData.config.maxSlotsPerState) * 100}%` }} />
+                      </div>
+                    </div>
+                  )}
                 </div>
- 
               </div>
-            </motion.div>
+            </div>
           </div>
- 
-        </motion.div>
+
+        </div>
       </div>
     </section>
   );

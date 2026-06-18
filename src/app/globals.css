@@ -3,6 +3,12 @@
 @theme {
   --font-serif: var(--font-serif);
   --font-sans: var(--font-sans);
+  --font-playfair: var(--font-playfair);
+  --font-hanken: var(--font-hanken);
+  
+  /* Hero — warm midnight-plum base (not flat black) + jewel accents */
+  --color-plum: #251C3B;
+  --color-plum-light: #1E1730;
   
   /* 6 New Required Palette Tokens */
   --color-base-night: #15101E;           /* Deep Plum-Night Base */
@@ -146,6 +152,77 @@ html {
 .emerald-glow-hover:hover {
   box-shadow: 0 0 30px rgba(6, 78, 59, 0.3);
   border-color: rgba(5, 150, 105, 0.45) !important;
+}
+
+/* Scoped Hero Fonts */
+.hero-scope {
+  --font-serif: var(--font-playfair), serif;
+  --font-sans: var(--font-hanken), sans-serif;
+  font-family: var(--font-sans);
+}
+
+/* Scoped Hero animations */
+.animate-fadeup {
+  animation: fadeup 0.7s cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+.animate-drift-a {
+  animation: driftA 22s ease-in-out infinite;
+}
+.animate-drift-b {
+  animation: driftB 26s ease-in-out infinite;
+}
+.animate-grow-underline {
+  animation: grow 1.5s cubic-bezier(0.16, 1, 0.3, 1) both;
+  transform-origin: left;
+}
+.animate-pulse-dot {
+  animation: pulse 1.8s ease-in-out infinite;
+}
+
+.btn-shimmer-sweep {
+  position: relative;
+  overflow: hidden;
+}
+
+.btn-shimmer-sweep::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -60%;
+  width: 45%;
+  height: 100%;
+  background: linear-gradient(100deg, transparent, rgba(255, 255, 255, 0.6), transparent);
+  transform: skewX(-20deg);
+  animation: sweep 4.6s infinite;
+  pointer-events: none;
+}
+
+@keyframes fadeup {
+  from { opacity: 0; transform: translateY(16px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+@keyframes driftA {
+  0% { transform: translate(0, 0); }
+  50% { transform: translate(46px, -34px); }
+  100% { transform: translate(0, 0); }
+}
+@keyframes driftB {
+  0% { transform: translate(0, 0); }
+  50% { transform: translate(-40px, 34px); }
+  100% { transform: translate(0, 0); }
+}
+@keyframes sweep {
+  0% { left: -60%; }
+  32% { left: 150%; }
+  100% { left: 150%; }
+}
+@keyframes grow {
+  from { transform: scaleX(0); }
+  to { transform: scaleX(1); }
+}
+@keyframes pulse {
+  0%, 100% { opacity: 1; transform: scale(1); }
+  50% { opacity: 0.35; transform: scale(1.7); }
 }
 
 /* Accessibility: Respect user preference for reduced motion */
