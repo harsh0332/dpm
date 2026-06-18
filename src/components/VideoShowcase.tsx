@@ -93,7 +93,7 @@ export default function VideoShowcase() {
                   Tap to Unmute
                 </span>
                 <span className="font-sans text-[8px] text-gray-400 mt-1">
-                  Watch Auditions Reel (16s)
+                  Watch Urvashi&apos;s Message (16s)
                 </span>
               </div>
             )}
@@ -103,13 +103,24 @@ export default function VideoShowcase() {
         {/* Right: Description & CTA */}
         <div className="md:col-span-6 space-y-6 text-center md:text-left">
           <span className="font-sans text-[10px] tracking-widest text-[#60A5FA] uppercase font-bold block">
-            Inside Look
+            From Our Judge
           </span>
           <h3 className="font-serif text-2xl md:text-3xl text-white font-light leading-tight">
-            See the Auditions in Action
+            Hear It Directly From Urvashi Rautela
           </h3>
-          <p className="font-sans text-sm text-gray-300 leading-relaxed">
-            Get an inside look at the DPM beauty pageant. Watch the virtual Zoom audition panel evaluation rounds, professional portfolio photoshoots, and the crowning ceremonies of previous national winners.
+          
+          {/* Premium Pull-Quote Block */}
+          <div className="border-l-2 border-luxury-gold pl-4 py-1 text-left my-4">
+            <p className="font-serif italic text-sm md:text-base text-luxury-gold/90 leading-relaxed">
+              &ldquo;We are not just looking for contestants, we are searching for India&apos;s next supermodel.&rdquo;
+            </p>
+            <span className="block font-sans text-[9px] tracking-wider uppercase text-gray-400 mt-1">
+              &mdash; Urvashi Rautela &middot; Judge, Ms Teen India 2026
+            </span>
+          </div>
+
+          <p className="font-sans text-sm text-gray-300 leading-relaxed text-left md:text-left">
+            Urvashi Rautela has joined DPM Entertainment as a judge for Ms Teen India 2026, with the grand finale in Lucknow on 27th September. In her own words, this search isn&apos;t for just another contestant &mdash; it&apos;s for India&apos;s next supermodel.
           </p>
 
           <div className="p-4 border border-luxury-border/30 rounded-xl bg-luxury-onyx/80 backdrop-blur-sm space-y-1 text-left sapphire-glow-hover">

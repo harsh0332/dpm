@@ -50,6 +50,9 @@ export default function Home() {
       {/* 3. Opportunity */}
       <Opportunity />
 
+      {/* 8. Reel Video Showcase ("The DPM Experience") */}
+      <VideoShowcase />
+
       {/* 4. Grand Jury */}
       <Jury />
 
@@ -61,9 +64,6 @@ export default function Home() {
 
       {/* 7. Transformation Journey */}
       <TransformationExperience />
-
-      {/* 8. Reel Video Showcase ("The DPM Experience") */}
-      <VideoShowcase />
 
       {/* 9. Prizes */}
       <Prizes />
