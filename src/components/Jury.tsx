@@ -88,11 +88,11 @@ export default function Jury() {
             className="bg-luxury-darkcard/80 backdrop-blur-sm border border-luxury-border/30 p-4 flex items-start gap-4 transition-all duration-300 relative sapphire-glow-hover rounded-2xl"
           >
             {/* Circular Portrait Image */}
-            <div className="w-16 h-16 sm:w-20 sm:h-20 rounded-full border-2 border-jewel-sapphire/50 overflow-hidden relative flex-shrink-0 bg-luxury-onyx shadow-lg">
+            <div className="w-20 h-20 sm:w-24 sm:h-24 rounded-full border-2 border-jewel-sapphire/50 overflow-hidden relative flex-shrink-0 bg-luxury-onyx shadow-lg">
               <img 
                 src={member.image} 
                 alt={`Jury Member ${member.name}`} 
-                className="w-full h-full object-cover filter grayscale-0 md:grayscale md:hover:grayscale-0 transition-all duration-500"
+                className="w-full h-full object-cover object-top filter grayscale-0 md:grayscale md:hover:grayscale-0 transition-all duration-500"
                 loading="lazy"
               />
             </div>
@@ -170,11 +170,11 @@ export default function Jury() {
               className="w-[85vw] max-w-[340px] flex-shrink-0 snap-center bg-luxury-darkcard/80 backdrop-blur-sm border border-luxury-border/30 p-4 flex items-start gap-4 relative rounded-2xl select-none"
             >
               {/* Circular Portrait Image */}
-              <div className="w-16 h-16 rounded-full border-2 border-jewel-sapphire/50 overflow-hidden relative flex-shrink-0 bg-luxury-onyx shadow-lg">
+              <div className="w-20 h-20 rounded-full border-2 border-jewel-sapphire/50 overflow-hidden relative flex-shrink-0 bg-luxury-onyx shadow-lg">
                 <img 
                   src={member.image} 
                   alt={`Jury Member ${member.name}`} 
-                  className="w-full h-full object-cover"
+                  className="w-full h-full object-cover object-top"
                   loading="lazy"
                 />
               </div>

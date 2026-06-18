@@ -122,11 +122,11 @@ export default function CategorySelector() {
 
               <div className="space-y-3">
                 {/* Real Photo Slot */}
-                <div className="aspect-[4/3] bg-luxury-onyx border border-luxury-border/30 flex items-center justify-center relative overflow-hidden rounded-xl">
+                <div className="aspect-[3/4] bg-luxury-onyx border border-luxury-border/30 flex items-center justify-center relative overflow-hidden rounded-xl">
                   <img 
                     src={cat.image} 
                     alt={`${cat.name} Category Cover`} 
-                    className="w-full h-full object-cover filter grayscale-0 md:grayscale md:hover:grayscale-0 transition-all duration-500 rounded-lg"
+                    className="w-full h-full object-cover object-top filter grayscale-0 md:grayscale md:hover:grayscale-0 transition-all duration-500 rounded-lg"
                     loading="lazy"
                   />
                 </div>
@@ -197,11 +197,11 @@ export default function CategorySelector() {
 
                 <div className="space-y-3">
                   {/* Real Photo Slot */}
-                  <div className="aspect-[4/3] bg-luxury-onyx border border-luxury-border/30 flex items-center justify-center relative overflow-hidden rounded-xl">
+                  <div className="aspect-[3/4] bg-luxury-onyx border border-luxury-border/30 flex items-center justify-center relative overflow-hidden rounded-xl">
                     <img 
                       src={cat.image} 
                       alt={`${cat.name} Category Cover`} 
-                      className="w-full h-full object-cover rounded-lg"
+                      className="w-full h-full object-cover object-top rounded-lg"
                       loading="lazy"
                     />
                   </div>
