@@ -41,14 +41,11 @@ export default function Home() {
       {/* Trust Strip */}
       <TrustBar />
 
-      {/* Lead Capture Entry Point (Quiz) */}
-      <LeadCapture />
+      {/* 3. Opportunity */}
+      <Opportunity />
 
       {/* 2. Aspiration & Scam Prevention Barriers */}
       <AspirationProblem />
-
-      {/* 3. Opportunity */}
-      <Opportunity />
 
       {/* 5. Celebrity Patron */}
       <CelebrityPatron />
@@ -71,17 +68,20 @@ export default function Home() {
       {/* 10. Success Stories & Testimonials */}
       <SocialProof />
 
-      {/* 11. How to Apply Timeline */}
-      <HowToApply />
-
-      {/* 12. Entry Categories Selector */}
-      <CategorySelector />
-
       {/* 13. Past Event Gallery */}
       <PastEventGallery />
 
       {/* 14. Founder with Celebrities Grid */}
       <FounderCelebrities />
+
+      {/* 12. Entry Categories Selector */}
+      <CategorySelector />
+
+      {/* 11. How to Apply Timeline */}
+      <HowToApply />
+
+      {/* Lead Capture Entry Point (Quiz) */}
+      <LeadCapture />
 
       {/* 15. Your Moment Transitional Hook */}
       <YourMoment />
