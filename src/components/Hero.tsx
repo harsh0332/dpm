@@ -81,21 +81,40 @@ export default function Hero() {
               </h1>
             </div>
 
-            {/* Urvashi Verified Mini-Card (Mobile only) */}
-            <div className="animate-fadeup flex lg:hidden gap-3 items-center p-2.5 rounded-[18px] bg-gradient-to-br from-[#5470D9]/20 to-[#C7458A]/15 border border-[#D4AF55]/32 w-full text-left" style={{ animationDelay: '0.2s' }}>
-              <div className="relative w-[84px] h-[115px] flex-none rounded-[14px] overflow-hidden bg-[radial-gradient(circle_at_50%_22%,#2B2142,#160F23)]">
-                <img src={siteData.celebrityPatron.image} alt={siteData.celebrityPatron.name} className="absolute left-1/2 bottom-0 -translate-x-1/2 h-[96%] object-contain object-bottom" />
-              </div>
-              <div className="flex flex-col gap-1.5 min-w-0">
-                <div className="inline-flex items-center gap-1.5 self-start px-2.5 py-1 rounded-full bg-[#0C0912]/45 border border-[#D4AF55]/45">
-                  <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="#F3D78A" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="m8.4 12 2.3 2.3L15.7 9.6"/></svg>
-                  <span className="font-bold text-[7.5px] tracking-[0.1em] uppercase text-[#F3D78A]">{siteData.celebrityPatron.title}</span>
-                </div>
-                <div className="font-serif font-bold text-[19px] leading-none text-white">{siteData.celebrityPatron.name}</div>
-                <div className="flex flex-wrap gap-1.5">
-                  {siteData.celebrityPatron.credentials.map((cred, idx) => (
-                    <span key={idx} className="font-semibold text-[8px] text-[#1A1206] bg-gradient-to-br from-[#F7DD93] to-[#D4AF55] px-2 py-1 rounded-full">{cred}</span>
-                  ))}
+            {/* Urvashi Verified Card (Mobile only) */}
+            <div className="animate-fadeup block lg:hidden w-full relative" style={{ animationDelay: '0.2s' }}>
+              <div className="relative p-[1.5px] rounded-[24px] bg-gradient-to-br from-[#5470D9]/75 via-[#C7458A]/55 to-[#D4AF55]/45 shadow-[0_20px_50px_rgba(0,0,0,0.45)]">
+                <div className="relative w-full aspect-[3/4] rounded-[23px] overflow-hidden bg-[radial-gradient(120%_80%_at_50%_8%,#2B2142_0%,#160F23_72%)]">
+                  
+                  {/* Inner ambient glows */}
+                  <div className="absolute top-10 left-1/2 -translate-x-1/2 w-[220px] h-[220px] rounded-full bg-[radial-gradient(circle,rgba(84,112,217,0.32),transparent_68%)] filter blur-[10px] animate-drift-a pointer-events-none" />
+                  <div className="absolute bottom-[40px] left-[20px] w-[200px] h-[200px] rounded-full bg-[radial-gradient(circle,rgba(199,69,138,0.28),transparent_68%)] filter blur-[10px] animate-drift-b pointer-events-none" />
+                  
+                  {/* Image */}
+                  <img src={siteData.celebrityPatron.image} alt={siteData.celebrityPatron.name} className="absolute left-1/2 bottom-0 -translate-x-1/2 h-[96%] object-contain object-bottom pointer-events-none z-10" />
+                  
+                  {/* Overlays */}
+                  <div className="absolute inset-0 bg-gradient-to-t from-[#0B0811]/94 via-[#0B0811]/40 to-transparent pointer-events-none z-15" />
+                  
+                  {/* Verified Badge top-left */}
+                  <div className="absolute top-[12px] left-[12px] inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-[#0C0912]/62 backdrop-blur-[10px] border border-[#D4AF55]/50 z-20">
+                    <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#F3D78A" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="m8.4 12 2.3 2.3L15.7 9.6"/></svg>
+                    <span className="font-bold text-[7.5px] tracking-[0.1em] uppercase text-[#F3D78A]">{siteData.celebrityPatron.title}</span>
+                  </div>
+
+                  {/* Bottom text overlays */}
+                  <div className="absolute left-[16px] right-[16px] bottom-[16px] flex flex-col gap-2 z-20 text-left">
+                    <div>
+                      <div className="font-bold text-[8px] tracking-[0.2em] uppercase text-[#E7C877] mb-0.5">Meet &amp; get crowned by</div>
+                      <div className="font-serif font-bold text-[22px] leading-none text-white">{siteData.celebrityPatron.name}</div>
+                    </div>
+                    <div className="flex flex-wrap gap-1.5">
+                      {siteData.celebrityPatron.credentials.map((cred, idx) => (
+                        <span key={idx} className="font-semibold text-[8px] leading-none text-[#1A1206] bg-gradient-to-br from-[#F7DD93] to-[#D4AF55] px-2.5 py-1 rounded-full">{cred}</span>
+                      ))}
+                    </div>
+                  </div>
+
                 </div>
               </div>
             </div>
