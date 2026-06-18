@@ -105,7 +105,7 @@ export default function FinalCTA() {
     // Redirect to Razorpay hosted Payment Page with pre-filled details
     // rzp.io/l/CPCsJWQc4 is the correct DPM payment page short URL
     // Field names match the UDF schema: name, phone, email
-    const paymentUrl = `https://rzp.io/l/CPCsJWQc4?name=${encodeURIComponent(
+    const paymentUrl = `https://rzp.io/rzp/xCYuOCph?name=${encodeURIComponent(
       name
     )}&email=${encodeURIComponent(email)}&phone=${encodeURIComponent(phone)}`;
 
