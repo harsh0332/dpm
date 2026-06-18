@@ -103,9 +103,10 @@ export default function FinalCTA() {
     await new Promise((resolve) => setTimeout(resolve, 200));
 
     // Redirect to Razorpay hosted Payment Page with pre-filled details
-    // rzp.io/l/CPCsJWQc4 is the correct DPM payment page short URL
-    // Field names match the UDF schema: name, phone, email
-    const paymentUrl = `https://rzp.io/rzp/xCYuOCph?name=${encodeURIComponent(
+    // Using direct pages.razorpay.com URL (not short rzp.io link) so
+    // query params are NOT dropped during redirect
+    // Field names match the UDF schema: name, email, phone
+    const paymentUrl = `https://pages.razorpay.com/pl_Stw67RqFlyqASX?name=${encodeURIComponent(
       name
     )}&email=${encodeURIComponent(email)}&phone=${encodeURIComponent(phone)}`;
 
