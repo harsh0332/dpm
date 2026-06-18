@@ -70,32 +70,33 @@ export default function FinalCTA() {
     setErrors({});
     setIsProcessing(true);
 
-    // POST lead data to Google Sheets webhook
+    // POST lead data to Google Sheets webhook (fire-and-forget)
+    // Uses no-cors + keepalive so the request continues even after redirect.
+    // Google Apps Script endpoints do a 302 redirect; no-cors avoids CORS preflight failure.
     try {
       const webhookUrl = process.env.NEXT_PUBLIC_SHEETS_WEBHOOK_URL;
       if (webhookUrl) {
-        const controller = new AbortController();
-        const timeoutId = setTimeout(() => controller.abort(), 1200);
-
-        await fetch(webhookUrl, {
+        fetch(webhookUrl, {
           method: "POST",
+          mode: "no-cors",
+          keepalive: true,
           headers: { "Content-Type": "text/plain;charset=utf-8" },
           body: JSON.stringify({ name, email, whatsapp: phone, category: selectedCategory }),
-          signal: controller.signal,
-        }).catch((err) => console.warn("Fetch failed, continuing redirect:", err));
-
-        clearTimeout(timeoutId);
+        }).catch((err) => console.warn("Lead capture fetch error:", err));
       }
     } catch (error) {
-      console.error("Failed to capture lead to Google Sheets:", error);
+      console.warn("Failed to capture lead to Google Sheets:", error);
     }
 
-    // Direct redirect to Razorpay hosted Payment Page with pre-filled details
-    const paymentUrl = `https://pages.razorpay.com/pl_T31OG3R1jueUAB?name=${encodeURIComponent(
+    // Small delay so the fetch can be dispatched before the page unloads
+    await new Promise((resolve) => setTimeout(resolve, 300));
+
+    // Redirect to Razorpay hosted Payment Page with pre-filled details
+    // rzp.io/l/CPCsJWQc4 is the correct DPM payment page short URL
+    // Field names match the UDF schema: name, phone, email
+    const paymentUrl = `https://rzp.io/l/CPCsJWQc4?name=${encodeURIComponent(
       name
-    )}&email=${encodeURIComponent(email)}&contact=${encodeURIComponent(
-      phone
-    )}&phone=${encodeURIComponent(phone)}`;
+    )}&email=${encodeURIComponent(email)}&phone=${encodeURIComponent(phone)}`;
 
     window.location.href = paymentUrl;
   };
