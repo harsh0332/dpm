@@ -126,7 +126,7 @@ export default function Hero() {
 
             {/* Desktop CTA & Checkout Info (Desktop only) */}
             <div className="animate-fadeup hidden lg:flex items-center gap-5 flex-wrap mt-1.5" style={{ animationDelay: '0.62s' }}>
-              <a href="#register" className="btn-shimmer-sweep relative inline-flex items-center gap-2.5 h-[54px] px-[30px] rounded-full text-[#1A1206] font-bold text-[12.5px] tracking-[0.16em] uppercase shadow-[0_14px_34px_rgba(212,175,85,0.28)] hover:brightness-105 transition-all duration-300">
+              <a href="#register" className="btn-shimmer-sweep relative inline-flex items-center gap-2.5 h-[54px] px-[30px] rounded-full bg-gradient-to-br from-[#F7DD93] via-[#D4AF55] to-[#AA7C11] text-[#1A1206] font-bold text-[12.5px] tracking-[0.16em] uppercase shadow-[0_14px_34px_rgba(212,175,85,0.28)] hover:brightness-105 transition-all duration-300">
                 Apply for Auditions Now
                 <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h13"/><path d="m12 6 6 6-6 6"/></svg>
               </a>
