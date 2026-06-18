@@ -71,25 +71,36 @@ export default function FinalCTA() {
     setIsProcessing(true);
 
     // POST lead data to Google Sheets webhook (fire-and-forget)
-    // Uses no-cors + keepalive so the request continues even after redirect.
-    // Google Apps Script endpoints do a 302 redirect; no-cors avoids CORS preflight failure.
+    // Strategy: try sendBeacon first (most reliable on mobile iOS/Android),
+    // then fall back to fetch with keepalive for desktop browsers.
+    // sendBeacon is specifically designed to survive page navigation/unload.
     try {
       const webhookUrl = process.env.NEXT_PUBLIC_SHEETS_WEBHOOK_URL;
       if (webhookUrl) {
-        fetch(webhookUrl, {
-          method: "POST",
-          mode: "no-cors",
-          keepalive: true,
-          headers: { "Content-Type": "text/plain;charset=utf-8" },
-          body: JSON.stringify({ name, email, whatsapp: phone, category: selectedCategory }),
-        }).catch((err) => console.warn("Lead capture fetch error:", err));
+        const payload = JSON.stringify({ name, email, whatsapp: phone, category: selectedCategory });
+
+        const beaconSent =
+          typeof navigator !== "undefined" &&
+          typeof navigator.sendBeacon === "function" &&
+          navigator.sendBeacon(webhookUrl, new Blob([payload], { type: "text/plain;charset=utf-8" }));
+
+        if (!beaconSent) {
+          // Fallback: fetch with keepalive for environments where sendBeacon isn't available
+          fetch(webhookUrl, {
+            method: "POST",
+            mode: "no-cors",
+            keepalive: true,
+            headers: { "Content-Type": "text/plain;charset=utf-8" },
+            body: payload,
+          }).catch((err) => console.warn("Lead capture fetch error:", err));
+        }
       }
     } catch (error) {
       console.warn("Failed to capture lead to Google Sheets:", error);
     }
 
-    // Small delay so the fetch can be dispatched before the page unloads
-    await new Promise((resolve) => setTimeout(resolve, 300));
+    // Small delay so sendBeacon/fetch can dispatch before navigation
+    await new Promise((resolve) => setTimeout(resolve, 200));
 
     // Redirect to Razorpay hosted Payment Page with pre-filled details
     // rzp.io/l/CPCsJWQc4 is the correct DPM payment page short URL
