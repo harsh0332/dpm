@@ -59,7 +59,7 @@ export default function Hero() {
             <div className="animate-fadeup inline-flex items-center gap-2 px-4 py-2 border border-[#D4AF55]/42 rounded-full bg-[#D4AF55]/6" style={{ animationDelay: '0.04s' }}>
               <span className="w-1.5 h-1.5 rounded-full bg-[#D4AF55] shadow-[0_0_8px_#D4AF55] animate-pulse-dot" />
               <span className="font-bold text-[8.5px] lg:text-[10.5px] tracking-[0.18em] lg:tracking-[0.22em] uppercase text-[#E7C877]">
-                Official 2026 <span className="hidden md:inline">National </span>Auditions
+                Auditions Going Live
               </span>
             </div>
 

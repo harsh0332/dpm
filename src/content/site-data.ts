@@ -100,7 +100,7 @@ export const siteData: SiteData = {
   brandName: "DPM Entertainment",
   eventName: "DPM Mr / Miss / Mrs / Miss Teen India 2026",
   founder: "Shivanshu Mishra",
-  organization: "DPM Entertainment, Allahabad, Uttar Pradesh",
+  organization: "DPM Entertainment",
   contactEmail: "dpmentertainment@gmail.com",
   logo: "/new-images/dpm-logo.png",
   opportunityImage: "/new-images/about-dpm.png",
@@ -115,10 +115,10 @@ export const siteData: SiteData = {
     title: "Celebrity Patron & Chief Guest",
     credentials: [
       "Miss Diva Universe 2015",
-      "Femina Miss India 2015"
+      "Femina Miss India 2018" // DPM to confirm exact 2018 title
     ],
-    image: "/new-images/urvashi-rautela.png",
-    aboutImage: "/new-images/urvashi-about.png"
+    image: "/new-images/urvashi-new.gif",
+    aboutImage: "/new-images/urvashi-new.gif"
   },
   categories: [
     {
@@ -126,7 +126,7 @@ export const siteData: SiteData = {
       name: "Mr. India",
       ageRange: "16–32", // TODO: DPM to confirm final age
       subtitle: "For aspiring male models and actors",
-      image: "/new-images/category-mr-india.jpg"
+      image: "/new-images/mrindia.jpg"
     },
     {
       id: "miss-india",
@@ -134,21 +134,21 @@ export const siteData: SiteData = {
       ageRange: "16–28", // TODO: DPM to confirm final age
       subtitle: "For aspiring female models and actors",
       isPopular: true,
-      image: "/new-images/category-miss.png"
+      image: "/new-images/missindia.webp"
     },
     {
       id: "miss-teen-india",
       name: "Miss Teen India",
       ageRange: "12–18", // TODO: DPM to confirm final age
       subtitle: "For teen aspirants (parent consent required)",
-      image: "/new-images/category-miss-teen.jpg"
+      image: "/new-images/missteen.png"
     },
     {
       id: "mrs-india",
       name: "Mrs. India",
       ageRange: "23–60", // TODO: DPM to confirm final age
       subtitle: "For married, widowed, or divorced women",
-      image: "/new-images/category-mrs-india.png"
+      image: "/new-images/mrsteen.png"
     }
   ],
   jury: [
@@ -324,10 +324,10 @@ export const siteData: SiteData = {
     "/new-images/founder-celebs-7.webp"
   ],
   config: {
-    maxSlotsPerState: 150,
-    slotsRemaining: 27,
+    maxSlotsPerState: 500,
+    slotsRemaining: 97,
     grandFinaleDeadline: "2026-09-27",
-    countdownTarget: "2026-07-18T23:59:59",
+    countdownTarget: "2026-08-15T23:59:59",
     careersLaunched: "500+",
     prizesPool: "₹11L+",
     categoriesCount: "4",

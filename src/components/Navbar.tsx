@@ -37,7 +37,7 @@ export default function Navbar() {
             className="w-10 h-10 object-contain border border-luxury-gold/30 rounded-full bg-white/5 p-0.5 transition-transform duration-500 group-hover:rotate-[360deg]"
           />
           <span className="font-serif tracking-[0.2em] text-lg font-bold text-white group-hover:text-luxury-gold transition-colors duration-300">
-            DPM
+            DPM Entertainment
           </span>
         </Link>
 

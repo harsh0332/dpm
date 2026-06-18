@@ -29,13 +29,6 @@ export default function CelebrityPatron() {
     },
   };
 
-  const credentialsList = [
-    "Bollywood Star",
-    "Winner Universe",
-    "Miss Diva Universe 2015",
-    "Femina Miss India 2015",
-    "International Film Star"
-  ];
 
   return (
     <section className="relative py-10 md:py-24 border-b border-luxury-border max-w-6xl mx-auto px-6 overflow-hidden">
@@ -103,7 +96,7 @@ export default function CelebrityPatron() {
             variants={revealVariants}
             className="flex flex-wrap gap-2 pt-2"
           >
-            {credentialsList.map((cred, i) => (
+            {patron.credentials.map((cred, i) => (
               <span 
                 key={i} 
                 className="bg-jewel-rose/20 text-[#F472B6] border border-jewel-rose/40 font-sans text-[9px] uppercase tracking-wider px-3 py-1 font-bold rounded"

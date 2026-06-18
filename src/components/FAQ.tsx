@@ -12,7 +12,7 @@ export default function FAQ() {
   const faqs = [
     {
       q: "Is DPM Entertainment a registered, legitimate organization?",
-      a: `Yes, ${siteData.brandName} is a legally registered organization based out of Allahabad, Uttar Pradesh, founded by ${siteData.founder}. We maintain a transparent process with verifiable jury members, public profiles, and a clear refund policy.`
+      a: `Yes, ${siteData.brandName} is a legally registered organization founded by ${siteData.founder}. We maintain a transparent process with verifiable jury members, public profiles, and a clear refund policy.`
     },
     {
       q: "Is the ₹999 registration fee refundable?",

@@ -44,12 +44,6 @@ export default function Authority() {
           </h4>
           <div className="space-y-3 font-sans text-xs text-luxury-stone">
             <p>
-              <strong>Corporate Entity:</strong> {siteData.organization}
-            </p>
-            <p>
-              <strong>Headquarters:</strong> Allahabad, Uttar Pradesh, India
-            </p>
-            <p>
               <strong>Inquiries:</strong> {siteData.contactEmail}
             </p>
           </div>
