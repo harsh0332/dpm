@@ -1,16 +1,42 @@
 "use client";
 
-import React from "react";
+import React, { useState, useRef } from "react";
 import { motion, useReducedMotion, Variants } from "framer-motion";
 import { siteData } from "@/content/site-data";
 
 export default function CategorySelector() {
   const shouldReduceMotion = useReducedMotion();
+  const carouselRef = useRef<HTMLDivElement>(null);
+  const [activeIndex, setActiveIndex] = useState(0);
 
   const handleSelect = (categoryId: string) => {
     // Dispatch custom event to let FinalCTA know which category was selected
     const event = new CustomEvent("select-category", { detail: categoryId });
     window.dispatchEvent(event);
+  };
+
+  const scrollToCard = (index: number) => {
+    if (carouselRef.current) {
+      const container = carouselRef.current;
+      const card = container.children[index] as HTMLElement;
+      if (card) {
+        container.scrollTo({
+          left: card.offsetLeft - (container.clientWidth - card.clientWidth) / 2,
+          behavior: "smooth"
+        });
+        setActiveIndex(index);
+      }
+    }
+  };
+
+  const handleScroll = (e: React.UIEvent<HTMLDivElement>) => {
+    const container = e.currentTarget;
+    const scrollLeft = container.scrollLeft;
+    const scrollWidth = container.scrollWidth - container.clientWidth;
+    if (scrollWidth <= 0) return;
+    const percentage = scrollLeft / scrollWidth;
+    const index = Math.round(percentage * (siteData.categories.length - 1));
+    setActiveIndex(index);
   };
 
   const cardVariants: Variants = {
@@ -78,8 +104,8 @@ export default function CategorySelector() {
         <div className="w-16 h-[1px] bg-luxury-gold/50 mx-auto mt-4" />
       </div>
 
-      {/* Grid of Categories */}
-      <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-6 relative z-10">
+      {/* Grid of Categories - Desktop only */}
+      <div className="hidden md:grid grid-cols-2 lg:grid-cols-4 gap-6 relative z-10">
         {siteData.categories.map((cat, index) => {
           const accent = categoryAccents[cat.id] || categoryAccents["miss-india"];
           return (
@@ -154,6 +180,110 @@ export default function CategorySelector() {
             </motion.div>
           );
         })}
+      </div>
+
+      {/* Mobile Swipeable Carousel - Mobile only */}
+      <div className="md:hidden relative z-10">
+        <div
+          ref={carouselRef}
+          onScroll={handleScroll}
+          className="relative flex overflow-x-auto snap-x snap-mandatory scrollbar-none gap-4 pb-6 px-6 -mx-6"
+          style={{
+            scrollbarWidth: "none",
+            msOverflowStyle: "none",
+            WebkitOverflowScrolling: "touch"
+          }}
+        >
+          {siteData.categories.map((cat, index) => {
+            const accent = categoryAccents[cat.id] || categoryAccents["miss-india"];
+            return (
+              <motion.div 
+                key={cat.id} 
+                custom={index}
+                initial="hidden"
+                whileInView="visible"
+                viewport={{ once: true, margin: "-50px" }}
+                variants={cardVariants}
+                className={`p-5 border flex flex-col justify-between relative bg-luxury-darkcard/80 backdrop-blur-sm transition-all duration-300 w-[85vw] max-w-[300px] flex-shrink-0 snap-center rounded-2xl ${accent.glowClass} ${
+                  cat.isPopular ? "border-luxury-gold" : accent.borderClass
+                }`}
+              >
+                {/* MOST POPULAR Badge for Miss India */}
+                {cat.isPopular && (
+                  <span className="absolute -top-3 left-1/2 -translate-x-1/2 bg-luxury-gold text-luxury-onyx font-sans text-[9px] uppercase tracking-widest px-3 py-1 font-bold shadow-md rounded-full">
+                    Most Popular
+                  </span>
+                )}
+
+                <div className="space-y-4">
+                  {/* Real Photo Slot */}
+                  <div className="aspect-[4/5] bg-luxury-onyx border border-luxury-border/30 flex items-center justify-center relative overflow-hidden rounded-xl">
+                    <img 
+                      src={cat.image} 
+                      alt={`${cat.name} Category Cover`} 
+                      className="w-full h-full object-cover rounded-lg"
+                      loading="lazy"
+                    />
+                  </div>
+
+                  <div className="space-y-2 text-center">
+                    {/* Crown styling indicator */}
+                    <span className="text-luxury-gold text-base block">👑</span>
+                    
+                    <h3 className="font-serif text-xl text-white font-semibold">
+                      {cat.name}
+                    </h3>
+                    
+                    <div>
+                      <span className="text-[9px] font-sans tracking-widest text-luxury-stone uppercase block font-semibold">
+                        Age Limit
+                      </span>
+                      <span className={`font-sans text-sm font-bold ${accent.textColor}`}>
+                        {cat.ageRange} Years {cat.id === "mrs-india" ? "(Married)" : ""}
+                      </span>
+                    </div>
+
+                    {cat.subtitle && (
+                      <p className="font-sans text-xs text-gray-400 leading-relaxed pt-1">
+                        {cat.subtitle}
+                      </p>
+                    )}
+                  </div>
+                </div>
+
+                <div className="mt-6 pt-4 border-t border-luxury-border/20">
+                  <a 
+                    href="#register" 
+                    onClick={() => handleSelect(cat.id)}
+                    className={`flex items-center justify-center text-center font-sans text-xs tracking-widest uppercase h-11 font-bold transition-all duration-300 rounded-full ${
+                      cat.isPopular 
+                        ? "gold-gradient-bg text-luxury-onyx hover:brightness-110 btn-shimmer" 
+                        : accent.btnClass
+                    }`}
+                  >
+                    Select & Apply
+                  </a>
+                </div>
+              </motion.div>
+            );
+          })}
+        </div>
+
+        {/* Pagination Dots */}
+        <div className="flex justify-center gap-1.5 mt-2">
+          {siteData.categories.map((_, i) => (
+            <button
+              key={i}
+              onClick={() => scrollToCard(i)}
+              className={`h-1.5 rounded-full transition-all duration-300 ${
+                i === activeIndex 
+                  ? "w-4 bg-luxury-gold" 
+                  : "w-1.5 bg-luxury-gold/30"
+              }`}
+              aria-label={`Go to slide ${i + 1}`}
+            />
+          ))}
+        </div>
       </div>
 
     </section>

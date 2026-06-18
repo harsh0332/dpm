@@ -247,3 +247,22 @@ html {
   scrollbar-width: none;  /* Firefox */
 }
 
+/* Global mobile compaction overrides (excluding Hero section) */
+@media (max-w: 767px) {
+  section:not(.hero-scope) {
+    padding-top: 1.5rem !important; /* py-6 */
+    padding-bottom: 1.5rem !important; /* py-6 */
+    margin-top: 1rem !important; /* my-4 */
+    margin-bottom: 1rem !important; /* my-4 */
+  }
+  section:not(.hero-scope) .mb-12,
+  section:not(.hero-scope) .mb-10,
+  section:not(.hero-scope) .mb-8 {
+    margin-bottom: 1.25rem !important;
+  }
+  section:not(.hero-scope) .mt-12,
+  section:not(.hero-scope) .mt-10 {
+    margin-top: 1.25rem !important;
+  }
+}
+

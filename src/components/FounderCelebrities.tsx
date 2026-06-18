@@ -1,11 +1,37 @@
 "use client";
 
-import React from "react";
+import React, { useState, useRef } from "react";
 import { motion, useReducedMotion, Variants } from "framer-motion";
 import { siteData } from "@/content/site-data";
 
 export default function FounderCelebrities() {
   const shouldReduceMotion = useReducedMotion();
+  const carouselRef = useRef<HTMLDivElement>(null);
+  const [activeIndex, setActiveIndex] = useState(0);
+
+  const scrollToCard = (index: number) => {
+    if (carouselRef.current) {
+      const container = carouselRef.current;
+      const card = container.children[index] as HTMLElement;
+      if (card) {
+        container.scrollTo({
+          left: card.offsetLeft - (container.clientWidth - card.clientWidth) / 2,
+          behavior: "smooth"
+        });
+        setActiveIndex(index);
+      }
+    }
+  };
+
+  const handleScroll = (e: React.UIEvent<HTMLDivElement>) => {
+    const container = e.currentTarget;
+    const scrollLeft = container.scrollLeft;
+    const scrollWidth = container.scrollWidth - container.clientWidth;
+    if (scrollWidth <= 0) return;
+    const percentage = scrollLeft / scrollWidth;
+    const index = Math.round(percentage * (siteData.founderCelebsImages.length - 1));
+    setActiveIndex(index);
+  };
 
   const itemVariants: Variants = {
     hidden: shouldReduceMotion ? { opacity: 1, y: 0 } : { opacity: 0, y: 15 },
@@ -52,8 +78,8 @@ export default function FounderCelebrities() {
         </div>
       </div>
 
-      {/* Asymmetrical Collage Grid */}
-      <div className="grid grid-cols-2 md:grid-cols-4 gap-4 auto-rows-[120px] md:auto-rows-[160px]">
+      {/* Asymmetrical Collage Grid - Desktop only */}
+      <div className="hidden md:grid grid-cols-2 md:grid-cols-4 gap-4 auto-rows-[120px] md:auto-rows-[160px]">
         {siteData.founderCelebsImages.map((img, i) => {
           const layoutClass = layoutClasses[i] || "col-span-1 row-span-1";
           return (
@@ -82,6 +108,57 @@ export default function FounderCelebrities() {
             </motion.div>
           );
         })}
+      </div>
+
+      {/* Mobile Swipeable Carousel - Mobile only */}
+      <div className="md:hidden relative z-10">
+        <div
+          ref={carouselRef}
+          onScroll={handleScroll}
+          className="relative flex overflow-x-auto snap-x snap-mandatory scrollbar-none gap-4 pb-6 px-6 -mx-6"
+          style={{
+            scrollbarWidth: "none",
+            msOverflowStyle: "none",
+            WebkitOverflowScrolling: "touch"
+          }}
+        >
+          {siteData.founderCelebsImages.map((img, i) => (
+            <motion.div
+              key={i}
+              custom={i}
+              initial="hidden"
+              whileInView="visible"
+              viewport={{ once: true, margin: "-50px" }}
+              variants={itemVariants}
+              className="w-[75vw] max-w-[280px] flex-shrink-0 snap-center border border-luxury-border/30 p-1 bg-white rounded-2xl shadow-sm"
+            >
+              <div className="relative aspect-[4/3] bg-luxury-onyx overflow-hidden group rounded-xl">
+                <img
+                  src={img}
+                  alt={`Founder Shivanshu Mishra with Celebrities ${i + 1}`}
+                  className="w-full h-full object-cover"
+                  loading="lazy"
+                />
+              </div>
+            </motion.div>
+          ))}
+        </div>
+
+        {/* Pagination Dots */}
+        <div className="flex justify-center gap-1.5 mt-2">
+          {siteData.founderCelebsImages.map((_, i) => (
+            <button
+              key={i}
+              onClick={() => scrollToCard(i)}
+              className={`h-1.5 rounded-full transition-all duration-300 ${
+                i === activeIndex 
+                  ? "w-4 bg-luxury-gold-dark" 
+                  : "w-1.5 bg-luxury-gold-dark/30"
+              }`}
+              aria-label={`Go to slide ${i + 1}`}
+            />
+          ))}
+        </div>
       </div>
 
       {/* CTA Button */}
