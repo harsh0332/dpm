@@ -71,21 +71,23 @@ export default function FinalCTA() {
     setIsProcessing(true);
 
     // POST lead data via our own API route (server-side proxy to Google Sheets)
-    // This avoids all CORS / Safari / mobile browser restrictions.
-    // Works reliably on: Chrome, Safari, iOS, Android, all browsers.
+    // We AWAIT this so the request fully completes before page navigates away.
+    // Without await, mobile browsers cancel the in-flight request on redirect.
+    // 2s timeout ensures user is never stuck if our API is slow.
     try {
-      fetch("/api/capture-lead", {
+      const controller = new AbortController();
+      const timeoutId = setTimeout(() => controller.abort(), 2000);
+      await fetch("/api/capture-lead", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ name, email, whatsapp: phone, category: selectedCategory }),
-        keepalive: true,
-      }).catch((err) => console.warn("Lead capture error:", err));
+        signal: controller.signal,
+      });
+      clearTimeout(timeoutId);
     } catch (error) {
-      console.warn("Lead capture failed:", error);
+      // Timeout or network error — still continue to payment
+      console.warn("Lead capture failed, continuing to payment:", error);
     }
-
-    // Small delay so fetch dispatches before page navigates
-    await new Promise((resolve) => setTimeout(resolve, 200));
 
     // Redirect to Razorpay hosted Payment Page with pre-filled details
     // Using direct pages.razorpay.com URL (not short rzp.io link) so
