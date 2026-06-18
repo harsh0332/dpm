@@ -31,36 +31,25 @@ export default function CelebrityPatron() {
 
 
   return (
-    <section className="relative py-10 md:py-24 border-b border-luxury-border max-w-6xl mx-auto px-6 overflow-hidden">
+    <section className="relative py-10 md:py-24 border-b border-luxury-border max-w-5xl mx-auto px-6 overflow-hidden">
       
       {/* Deep Rose-Magenta Backdrop Glow */}
       <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_50%,rgba(136,13,60,0.1)_0%,transparent_60%)] pointer-events-none" />
       
-      {/* Title */}
-      <div className="text-center mb-12 relative z-10">
-        <span className="text-[10px] font-sans tracking-[0.25em] text-[#C9A24B] uppercase block font-semibold">
-          Celebrity Guest
-        </span>
-        <h2 className="font-serif text-2xl md:text-4xl tracking-wide text-white font-light">
-          Meet Our Celebrity Patron
-        </h2>
-        <div className="w-16 h-[1px] bg-luxury-gold/50 mx-auto mt-4" />
-      </div>
-
       <motion.div 
         initial="hidden"
         whileInView="visible"
         viewport={{ once: true, margin: "-100px" }}
         variants={containerVariants}
-        className="grid md:grid-cols-12 gap-8 items-center bg-luxury-darkcard/80 backdrop-blur-sm border border-luxury-border/30 p-8 md:p-12 relative z-10 rose-glow-hover rounded-[2rem]"
+        className="flex flex-col items-center text-center bg-luxury-darkcard/80 backdrop-blur-sm border border-luxury-border/30 p-8 md:p-12 relative z-10 rose-glow-hover rounded-[2rem] max-w-3xl mx-auto"
       >
         
-        {/* Left Column: Premium Portrait Image */}
+        {/* Left Column: Premium Portrait Image (Now Top Centered) */}
         <motion.div 
           variants={revealVariants}
-          className="md:col-span-6 relative flex items-center justify-center order-last md:order-first mt-8 md:mt-0"
+          className="relative flex items-center justify-center w-full mb-8"
         >
-          <div className="border border-luxury-gold/30 p-2 bg-luxury-onyx/50 w-full max-w-sm rounded-[2rem] overflow-hidden transition-all duration-500 hover:border-luxury-gold/70 shadow-lg">
+          <div className="border border-luxury-gold/30 p-2 bg-luxury-onyx/50 w-full max-w-xs md:max-w-sm rounded-[2rem] overflow-hidden transition-all duration-500 hover:border-luxury-gold/70 shadow-lg">
             <img 
               src={patron.image} 
               alt="Urvashi Rautela Chief Guest Portrait" 
@@ -70,8 +59,19 @@ export default function CelebrityPatron() {
           </div>
         </motion.div>
 
-        {/* Right Column: Title, Credentials, Pull-Quote, CTA */}
-        <div className="md:col-span-6 space-y-6">
+        {/* Celebrity Guest Label / Title (Moved directly below image) */}
+        <motion.div variants={revealVariants} className="mb-6 space-y-2">
+          <span className="text-[10px] font-sans tracking-[0.25em] text-[#C9A24B] uppercase block font-semibold">
+            Celebrity Guest
+          </span>
+          <h2 className="font-serif text-2xl md:text-4xl tracking-wide text-white font-light">
+            Meet Our Celebrity Patron
+          </h2>
+          <div className="w-16 h-[1px] bg-luxury-gold/50 mx-auto mt-3" />
+        </motion.div>
+
+        {/* Right Column: Title, Credentials, Pull-Quote, CTA (Now stacked below title block) */}
+        <div className="space-y-6 max-w-xl mx-auto flex flex-col items-center">
           <motion.span 
             variants={revealVariants}
             className="font-sans text-[10px] tracking-widest text-[#BE185D] uppercase font-bold block"
@@ -80,7 +80,7 @@ export default function CelebrityPatron() {
           </motion.span>
           <motion.h3 
             variants={revealVariants}
-            className="font-serif text-3xl md:text-4xl text-white font-light leading-tight"
+            className="font-serif text-2xl md:text-3xl text-white font-light leading-tight"
           >
             Get Crowned by Miss Universe Urvashi Rautela
           </motion.h3>
@@ -94,7 +94,7 @@ export default function CelebrityPatron() {
           {/* Rose-Magenta Credentials List */}
           <motion.div 
             variants={revealVariants}
-            className="flex flex-wrap gap-2 pt-2"
+            className="flex flex-wrap justify-center gap-2 pt-2"
           >
             {patron.credentials.map((cred, i) => (
               <span 
@@ -109,7 +109,7 @@ export default function CelebrityPatron() {
           {/* Pull-Quote Block */}
           <motion.div 
             variants={revealVariants}
-            className="p-5 border-l-2 border-luxury-gold bg-luxury-onyx/80 italic text-gray-300 font-serif text-sm leading-relaxed rounded-r-2xl"
+            className="p-5 border-l-2 border-luxury-gold bg-luxury-onyx/80 italic text-gray-300 font-serif text-sm leading-relaxed rounded-r-2xl text-left w-full"
           >
             &ldquo;DPM Pageant is India&apos;s most credible, transparent, and direct runway launchpad for regional modeling talent.&rdquo;
           </motion.div>

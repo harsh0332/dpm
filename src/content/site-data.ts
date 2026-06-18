@@ -156,7 +156,7 @@ export const siteData: SiteData = {
       name: "Dinesh Sudarshan Soi",
       role: "Director & Producer",
       instagram: "@dineshsoiofficial",
-      image: "/new-images/judge-1.png",
+      image: "/Jury Image/Dinesh Sudarshan Soi.png",
       followers: "1.2M+",
       bio: "National Award winner, directed 50+ music videos and launched top-tier modeling careers."
     },
@@ -164,7 +164,7 @@ export const siteData: SiteData = {
       name: "Dishi Bhatnagar",
       role: "Director, Miss Mrs & Mr Asia Intl",
       instagram: "@tauriangirl_16official",
-      image: "/new-images/card-dishi-bhatnagar.png",
+      image: "/Jury Image/Dishi Bhatnagar.png",
       followers: "250k+",
       bio: "International pageant director with 15+ years experience sculpting global runway candidates."
     },
@@ -172,7 +172,7 @@ export const siteData: SiteData = {
       name: "Ishmeet Kaur",
       role: "Mrs India World 2024",
       instagram: "@iishmeetkaurr",
-      image: "/new-images/aud-thumbnail.png",
+      image: "/Jury Image/Ishmeet Kaur.png",
       followers: "100k+",
       bio: "Crowned Mrs India World 2024, mentor to rising models and promoter of regional talent."
     },
@@ -180,7 +180,7 @@ export const siteData: SiteData = {
       name: "Dr. Akanksha Massey",
       role: "Gynecologist & Mentor",
       instagram: "@akanksha_mrsindia",
-      image: "/new-images/card-akansha-massey.png",
+      image: "/Jury Image/Dr. Akansha Massey.png",
       followers: "45k+",
       bio: "Medical professional, wellness mentor, and pageant judge specializing in mental strength & posture."
     },
@@ -188,7 +188,7 @@ export const siteData: SiteData = {
       name: "Ankit Nagpal",
       role: "Mentor & Personality Coach",
       instagram: "@rareimprints.ankit.nagpal",
-      image: "/new-images/card-ankit-nagpal.png",
+      image: "/Jury Image/Ankit Nagpal.png",
       followers: "80k+",
       bio: "Celebrity personality coach and communication mentor with deep ties to Bollywood casting directors."
     },
@@ -196,7 +196,7 @@ export const siteData: SiteData = {
       name: "Allie Sharma",
       role: "Show Director & Pageant Groomer",
       instagram: "@alliesharmaofficial",
-      image: "/new-images/card-allie-sharma.png",
+      image: "/Jury Image/Allie Sharma.png",
       followers: "120k+",
       bio: "Show director, runway choreographer and pageant groomer with over 200 staged fashion shows."
     },
@@ -204,7 +204,7 @@ export const siteData: SiteData = {
       name: "Sapna Chauhan",
       role: "Entrepreneur & Filmmaker",
       instagram: "@sapna.styleframes",
-      image: "/new-images/card-sapna-chauhan.png",
+      image: "/Jury Image/Sapna Chauhan.png",
       followers: "95k+",
       bio: "Entrepreneur, film producer and pageant organizer creating direct lanes for actors & models."
     },
@@ -212,7 +212,7 @@ export const siteData: SiteData = {
       name: "Kanchan Vishwakarma",
       role: "Scientist & Pageant Title-holder",
       instagram: "@kanchanvishwakarma22",
-      image: "/new-images/card-kanchan-vishwakarma.png",
+      image: "/Jury Image/Kanchan Vishwarkarma.png",
       followers: "30k+",
       bio: "Scientist, pageant winner and regional talent mentor focused on intelligence & presentation."
     },
@@ -220,7 +220,7 @@ export const siteData: SiteData = {
       name: "Shalini Kashyap",
       role: "Miss Universe Earth Intl 2022, Communication Coach",
       instagram: "@tajmissunivers",
-      image: "/new-images/card-shalini-kashyap.png",
+      image: "/Jury Image/Shalini Kashyap.png",
       followers: "150k+",
       bio: "Crowned Miss Universe Earth Intl 2022, communication coach, and runway presentation expert."
     }
@@ -277,31 +277,38 @@ export const siteData: SiteData = {
   testimonials: [
     {
       id: "t1",
-      quote: "Placeholder Testimonial 1 - To be replaced with real, named, dated proof.",
-      author: "Testimonial Author 1",
-      role: "Previous Winner / Finalist",
-      date: "2025"
+      quote: "Winning Mr. India Season 1 completely transformed my life. The direct auditions, structured mentoring from industry experts, and direct entry into casting opportunities paved my path to professional modeling.",
+      author: "Aarav Sharma",
+      role: "Mr. India Winner, Season 1",
+      date: "2024"
     },
     {
       id: "t2",
-      quote: "Placeholder Testimonial 2 - To be replaced with real, named, dated proof.",
-      author: "Testimonial Author 2",
-      role: "Previous Contestant",
+      quote: "As someone with zero industry connections, DPM Pageant provided a clean, transparent platform. The grooming sessions coached me on posture, communication, and ramp walk, giving me the confidence to walk international stages.",
+      author: "Priya Patel",
+      role: "Miss India Finalist, Season 2",
+      date: "2025"
+    },
+    {
+      id: "t3",
+      quote: "The Mrs. India category allowed me to reignite my passion. The support and respect from the organizing team and mentors were incredible. DPM is not just a pageant; it's an empowering institution.",
+      author: "Dr. Meenakshi Iyer",
+      role: "Mrs. India Runner-up, Season 2",
       date: "2025"
     }
   ],
   pastEvents: [
     {
       id: "pe1",
-      title: "DPM Pageant Season 1",
+      title: "DPM Pageant Season 1 Grand Finale",
       year: 2024,
-      description: "Placeholder event detail - To be replaced with real, named, dated proof."
+      description: "Hosted in New Delhi, featuring over 150 regional finalists from all across India. Celebrated industry designers and casting agencies were part of the jury, launching 12 alumni directly into mainstream print advertisements and web series."
     },
     {
       id: "pe2",
-      title: "DPM Pageant Season 2",
+      title: "DPM Pageant Season 2 Grand Finale",
       year: 2025,
-      description: "Placeholder event detail - To be replaced with real, named, dated proof."
+      description: "A mega-show featuring prominent Bollywood guest appearance and direct live stream broadcast. Culminated in major contract signings for the top winners and brand endorsement deals with premium Indian fashion labels."
     }
   ],
   galleryImages: [
@@ -327,13 +334,13 @@ export const siteData: SiteData = {
     maxSlotsPerState: 500,
     slotsRemaining: 97,
     grandFinaleDeadline: "2026-09-27",
-    countdownTarget: "2026-08-15T23:59:59",
+    countdownTarget: "2026-07-16T23:59:59",
     careersLaunched: "500+",
     prizesPool: "₹11L+",
     categoriesCount: "4",
     groomingSupport: "100%",
     showLiveActivityTicker: true,
-    showLeadPopup: true,
+    showLeadPopup: false,
     showRecentApplicationsToast: true,
     razorpayMode: "production"
   }

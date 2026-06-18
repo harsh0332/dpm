@@ -29,12 +29,7 @@ export default function Authority() {
           <p className="font-sans text-xs md:text-sm text-luxury-stone leading-relaxed">
             Leading {siteData.brandName} with a vision to build transparent, professional pageantry in India. By establishing direct auditions and eliminating mid-level talent brokers, DPM has opened doors for thousands of aspiring models.
           </p>
-          <div className="pt-2 flex flex-col items-start gap-1">
-            <span className="text-[9px] font-sans uppercase tracking-widest text-gray-400 font-semibold">Authorized Signature</span>
-            <div className="font-serif italic text-2xl text-luxury-gold-dark font-medium tracking-wider select-none border-b border-luxury-gold/30 pb-1">
-              {siteData.founder}
-            </div>
-          </div>
+
         </div>
 
         {/* Right / Organization Legitimacy */}

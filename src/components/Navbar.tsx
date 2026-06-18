@@ -60,7 +60,7 @@ export default function Navbar() {
 
           <a 
             href="#register" 
-            className="font-sans text-[9px] sm:text-[10px] tracking-[0.15em] uppercase gold-gradient-bg text-luxury-onyx px-5 h-11 flex items-center justify-center font-extrabold hover:scale-[1.03] active:scale-[0.97] transition-all duration-300 rounded-full shadow-[0_4px_15px_rgba(201,162,75,0.25)] btn-shimmer gap-2 text-decoration-none"
+            className="hidden md:flex font-sans text-[9px] sm:text-[10px] tracking-[0.15em] uppercase gold-gradient-bg text-luxury-onyx px-5 h-11 items-center justify-center font-extrabold hover:scale-[1.03] active:scale-[0.97] transition-all duration-300 rounded-full shadow-[0_4px_15px_rgba(201,162,75,0.25)] btn-shimmer gap-2 text-decoration-none"
           >
             <svg className="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z" />

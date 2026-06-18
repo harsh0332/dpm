@@ -2,7 +2,6 @@ import type { Metadata } from "next";
 import { Cormorant_Garamond, Inter, Playfair_Display, Hanken_Grotesk } from "next/font/google";
 import "./globals.css";
 import Navbar from "@/components/Navbar";
-import Footer from "@/components/Footer";
 import { siteData } from "@/content/site-data";
 
 const cormorantGaramond = Cormorant_Garamond({
@@ -69,7 +68,6 @@ export default function RootLayout({
       <body className="bg-luxury-onyx text-luxury-alabaster font-sans antialiased min-h-screen flex flex-col overflow-x-hidden">
         <Navbar />
         <main className="flex-grow">{children}</main>
-        <Footer />
       </body>
     </html>
   );

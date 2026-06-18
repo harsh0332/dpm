@@ -117,20 +117,12 @@ export default function CategorySelector() {
               viewport={{ once: true, margin: "-50px" }}
               variants={cardVariants}
               whileHover={shouldReduceMotion ? {} : { y: -4 }}
-              className={`p-5 border flex flex-col justify-between relative bg-luxury-darkcard/80 backdrop-blur-sm transition-all duration-300 rounded-2xl ${accent.glowClass} ${
-                cat.isPopular ? "border-luxury-gold" : accent.borderClass
-              }`}
+              className={`p-4 border flex flex-col justify-between relative bg-luxury-darkcard/80 backdrop-blur-sm transition-all duration-300 rounded-2xl ${accent.glowClass} ${accent.borderClass}`}
             >
-              {/* MOST POPULAR Badge for Miss India */}
-              {cat.isPopular && (
-                <span className="absolute -top-3 left-1/2 -translate-x-1/2 bg-luxury-gold text-luxury-onyx font-sans text-[9px] uppercase tracking-widest px-3 py-1 font-bold shadow-md rounded-full">
-                  Most Popular
-                </span>
-              )}
 
-              <div className="space-y-4">
+              <div className="space-y-3">
                 {/* Real Photo Slot */}
-                <div className="aspect-[4/5] bg-luxury-onyx border border-luxury-border/30 flex items-center justify-center relative overflow-hidden rounded-xl">
+                <div className="aspect-[4/3] bg-luxury-onyx border border-luxury-border/30 flex items-center justify-center relative overflow-hidden rounded-xl">
                   <img 
                     src={cat.image} 
                     alt={`${cat.name} Category Cover`} 
@@ -164,15 +156,11 @@ export default function CategorySelector() {
                 </div>
               </div>
 
-              <div className="mt-6 pt-4 border-t border-luxury-border/20">
+              <div className="mt-4 pt-3 border-t border-luxury-border/20">
                 <a 
                   href="#register" 
                   onClick={() => handleSelect(cat.id)}
-                  className={`flex items-center justify-center text-center font-sans text-xs tracking-widest uppercase h-11 font-bold transition-all duration-300 rounded-full ${
-                    cat.isPopular 
-                      ? "gold-gradient-bg text-luxury-onyx hover:brightness-110 btn-shimmer" 
-                      : accent.btnClass
-                  }`}
+                  className={`flex items-center justify-center text-center font-sans text-xs tracking-widest uppercase h-11 font-bold transition-all duration-300 rounded-full ${accent.btnClass}`}
                 >
                   Select & Apply
                 </a>
@@ -204,20 +192,12 @@ export default function CategorySelector() {
                 whileInView="visible"
                 viewport={{ once: true, margin: "-50px" }}
                 variants={cardVariants}
-                className={`p-5 border flex flex-col justify-between relative bg-luxury-darkcard/80 backdrop-blur-sm transition-all duration-300 w-[85vw] max-w-[300px] flex-shrink-0 snap-center rounded-2xl ${accent.glowClass} ${
-                  cat.isPopular ? "border-luxury-gold" : accent.borderClass
-                }`}
+                className={`p-4 border flex flex-col justify-between relative bg-luxury-darkcard/80 backdrop-blur-sm transition-all duration-300 w-[85vw] max-w-[300px] flex-shrink-0 snap-center rounded-2xl ${accent.glowClass} ${accent.borderClass}`}
               >
-                {/* MOST POPULAR Badge for Miss India */}
-                {cat.isPopular && (
-                  <span className="absolute -top-3 left-1/2 -translate-x-1/2 bg-luxury-gold text-luxury-onyx font-sans text-[9px] uppercase tracking-widest px-3 py-1 font-bold shadow-md rounded-full">
-                    Most Popular
-                  </span>
-                )}
 
-                <div className="space-y-4">
+                <div className="space-y-3">
                   {/* Real Photo Slot */}
-                  <div className="aspect-[4/5] bg-luxury-onyx border border-luxury-border/30 flex items-center justify-center relative overflow-hidden rounded-xl">
+                  <div className="aspect-[4/3] bg-luxury-onyx border border-luxury-border/30 flex items-center justify-center relative overflow-hidden rounded-xl">
                     <img 
                       src={cat.image} 
                       alt={`${cat.name} Category Cover`} 
@@ -251,15 +231,11 @@ export default function CategorySelector() {
                   </div>
                 </div>
 
-                <div className="mt-6 pt-4 border-t border-luxury-border/20">
+                <div className="mt-4 pt-3 border-t border-luxury-border/20">
                   <a 
                     href="#register" 
                     onClick={() => handleSelect(cat.id)}
-                    className={`flex items-center justify-center text-center font-sans text-xs tracking-widest uppercase h-11 font-bold transition-all duration-300 rounded-full ${
-                      cat.isPopular 
-                        ? "gold-gradient-bg text-luxury-onyx hover:brightness-110 btn-shimmer" 
-                        : accent.btnClass
-                    }`}
+                    className={`flex items-center justify-center text-center font-sans text-xs tracking-widest uppercase h-11 font-bold transition-all duration-300 rounded-full ${accent.btnClass}`}
                   >
                     Select & Apply
                   </a>

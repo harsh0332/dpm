@@ -77,7 +77,7 @@ export default function PastEventGallery() {
       </div>
 
       {/* Filter Tabs */}
-      <div className="flex justify-center gap-3 mb-10">
+      <div className="flex flex-wrap justify-center gap-3 mb-10">
         {[
           { id: "all", label: "All" },
           { id: "ramp", label: "Ramp Walk" },
@@ -97,11 +97,10 @@ export default function PastEventGallery() {
         ))}
       </div>
 
-      {/* Gallery Grid (with smooth Framer Motion layout changes) - Desktop only */}
       <div className="hidden md:block">
         <motion.div 
           layout={!shouldReduceMotion}
-          className="grid grid-cols-2 md:grid-cols-4 gap-4 md:gap-6"
+          className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6"
         >
           <AnimatePresence mode="popLayout">
             {filteredImages.map((img, i) => (
@@ -112,15 +111,15 @@ export default function PastEventGallery() {
                 animate="visible"
                 exit="exit"
                 variants={itemVariants}
-                className={`border border-luxury-border/30 p-1.5 bg-luxury-darkcard rounded-2xl transition-all duration-300 ${
+                className={`border border-luxury-border/30 bg-luxury-darkcard transition-all duration-300 p-2.5 rounded-3xl ${
                   img.category === "ramp" ? "sapphire-glow-hover" : "rose-glow-hover"
                 }`}
               >
-                <div className="relative aspect-[3/2] bg-luxury-onyx overflow-hidden group rounded-xl">
+                <div className="relative aspect-[3/2] bg-luxury-onyx overflow-hidden group rounded-2xl">
                   <img
                     src={img.src}
                     alt={`DPM Past Event Highlights ${i + 1}`}
-                    className="w-full h-full object-cover filter grayscale-0 md:grayscale md:hover:grayscale-0 transition-all duration-500 transform group-hover:scale-105 rounded-xl"
+                    className="w-full h-full object-cover object-center filter grayscale-0 md:grayscale md:hover:grayscale-0 transition-all duration-500 transform group-hover:scale-105 rounded-2xl"
                     loading="lazy"
                   />
                   <div className="absolute inset-0 bg-gradient-to-t from-luxury-onyx/75 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end p-3 pointer-events-none">
@@ -155,15 +154,15 @@ export default function PastEventGallery() {
                 animate="visible"
                 exit="exit"
                 variants={itemVariants}
-                className={`border border-luxury-border/30 p-1.5 bg-luxury-darkcard rounded-2xl transition-all duration-300 w-[60vw] max-w-[240px] flex-shrink-0 snap-center ${
+                className={`border border-luxury-border/30 bg-luxury-darkcard transition-all duration-300 flex-shrink-0 snap-center p-2.5 rounded-3xl w-[75vw] max-w-[300px] ${
                   img.category === "ramp" ? "sapphire-glow-hover" : "rose-glow-hover"
                 }`}
               >
-                <div className="relative aspect-[3/2] bg-luxury-onyx overflow-hidden group rounded-xl">
+                <div className="relative aspect-[3/2] bg-luxury-onyx overflow-hidden group rounded-2xl">
                   <img
                     src={img.src}
                     alt={`DPM Past Event Highlights ${i + 1}`}
-                    className="w-full h-full object-cover rounded-xl"
+                    className="w-full h-full object-cover object-center rounded-2xl"
                     loading="lazy"
                   />
                   <div className="absolute inset-0 bg-gradient-to-t from-luxury-onyx/75 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end p-3 pointer-events-none">

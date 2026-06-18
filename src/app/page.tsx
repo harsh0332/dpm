@@ -1,7 +1,5 @@
 import React from "react";
 import Hero from "@/components/Hero";
-import TrustBar from "@/components/TrustBar";
-import LeadCapture from "@/components/LeadCapture";
 import AspirationProblem from "@/components/AspirationProblem";
 import Opportunity from "@/components/Opportunity";
 import Jury from "@/components/Jury";
@@ -10,17 +8,16 @@ import Authority from "@/components/Authority";
 import TransformationExperience from "@/components/TransformationExperience";
 import VideoShowcase from "@/components/VideoShowcase";
 import Prizes from "@/components/Prizes";
+import PromoterGallery from "@/components/PromoterGallery";
 import SocialProof from "@/components/SocialProof";
 import HowToApply from "@/components/HowToApply";
 import CategorySelector from "@/components/CategorySelector";
 import PastEventGallery from "@/components/PastEventGallery";
-import FounderCelebrities from "@/components/FounderCelebrities";
 import YourMoment from "@/components/YourMoment";
 import FinalCTA from "@/components/FinalCTA";
 import FAQ from "@/components/FAQ";
 import StickyMobileCTA from "@/components/StickyMobileCTA";
 import LiveActivityTicker from "@/components/LiveActivityTicker";
-import LeadPopup from "@/components/LeadPopup";
 import RecentApplicationsToast from "@/components/RecentApplicationsToast";
 
 export default function Home() {
@@ -29,8 +26,7 @@ export default function Home() {
       {/* Floating Live Activity Ticker Slot */}
       <LiveActivityTicker />
 
-      {/* Auto-Triggering Lead Capture Modal */}
-      <LeadPopup />
+
 
       {/* Floating Recent Applications Social Proof Toast */}
       <RecentApplicationsToast />
@@ -38,14 +34,8 @@ export default function Home() {
       {/* 1. Hero */}
       <Hero />
 
-      {/* Trust Strip */}
-      <TrustBar />
-
       {/* 3. Opportunity */}
       <Opportunity />
-
-      {/* 2. Aspiration & Scam Prevention Barriers */}
-      <AspirationProblem />
 
       {/* 5. Celebrity Patron */}
       <CelebrityPatron />
@@ -53,35 +43,37 @@ export default function Home() {
       {/* 8. Reel Video Showcase ("The DPM Experience") */}
       <VideoShowcase />
 
-      {/* 4. Grand Jury */}
-      <Jury />
-
-      {/* 6. Organization Authority & Credibility */}
-      <Authority />
-
       {/* 7. Transformation Journey */}
       <TransformationExperience />
 
       {/* 9. Prizes */}
       <Prizes />
 
-      {/* 10. Success Stories & Testimonials */}
-      <SocialProof />
+      {/* 11. How to Apply Timeline */}
+      <HowToApply />
 
-      {/* 13. Past Event Gallery */}
-      <PastEventGallery />
-
-      {/* 14. Founder with Celebrities Grid */}
-      <FounderCelebrities />
+      {/* 4. Grand Jury */}
+      <Jury />
 
       {/* 12. Entry Categories Selector */}
       <CategorySelector />
 
-      {/* 11. How to Apply Timeline */}
-      <HowToApply />
+      {/* 13. Past Event Gallery */}
+      <PastEventGallery />
 
-      {/* Lead Capture Entry Point (Quiz) */}
-      <LeadCapture />
+      {/* 6. Organization Authority & Credibility */}
+      <Authority />
+
+      {/* Standalone Promoter Gallery Section */}
+      <PromoterGallery />
+
+      {/* 2. Aspiration & Scam Prevention Barriers */}
+      <AspirationProblem />
+
+      {/* 10. Success Stories & Testimonials */}
+      <SocialProof />
+
+
 
       {/* 15. Your Moment Transitional Hook */}
       <YourMoment />
@@ -97,3 +89,4 @@ export default function Home() {
     </div>
   );
 }
+

@@ -56,7 +56,7 @@ export default function AspirationProblem() {
             </li>
             <li className="flex items-start gap-1.5">
               <span className="text-luxury-gold-dark font-bold">✓</span>
-              <span><strong>Transparent Fees:</strong> A nominal ₹999 entry fee, inclusive of GST, with no hidden pre-finale costs.</span>
+              <span><strong>Transparent Fees:</strong> A nominal ₹{siteData.registrationFee.current} entry fee, inclusive of GST, with no hidden pre-finale costs.</span>
             </li>
           </ul>
         </div>
