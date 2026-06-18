@@ -106,7 +106,7 @@ export default function FinalCTA() {
     // Using direct pages.razorpay.com URL (not short rzp.io link) so
     // query params are NOT dropped during redirect
     // Field names match the UDF schema: name, email, phone
-    const paymentUrl = `https://pages.razorpay.com/pl_Stw67RqFlyqASX?name=${encodeURIComponent(
+    const paymentUrl = `https://pages.razorpay.com/pl_Stw67RqFlyqASX/view?name=${encodeURIComponent(
       name
     )}&email=${encodeURIComponent(email)}&phone=${encodeURIComponent(phone)}`;
 
