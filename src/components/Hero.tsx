@@ -23,8 +23,6 @@ export default function Hero() {
   };
 
   const [timeLeft, setTimeLeft] = useState({ days: 0, hours: 0, minutes: 0, seconds: 0 });
-  const [isSticky, setIsSticky] = useState(false);
-
   useEffect(() => {
     const timerId = setTimeout(() => {
       setMounted(true);
@@ -34,21 +32,9 @@ export default function Hero() {
       setTimeLeft(calculateTimeLeft());
     }, 1000);
 
-    const handleScroll = () => {
-      if (window.innerWidth < 1024 && window.scrollY > 380) {
-        setIsSticky(true);
-      } else {
-        setIsSticky(false);
-      }
-    };
-    window.addEventListener("scroll", handleScroll);
-    window.addEventListener("resize", handleScroll);
-
     return () => {
       clearTimeout(timerId);
       clearInterval(timer);
-      window.removeEventListener("scroll", handleScroll);
-      window.removeEventListener("resize", handleScroll);
     };
   }, []);
 
@@ -155,11 +141,7 @@ export default function Hero() {
             {/* Unified Countdown Timer Placeholder Wrapper */}
             <div className="w-full max-w-[480px] min-h-[110px] lg:min-h-[120px] relative">
               {mounted && (
-                <div className={`transition-all duration-300 w-full ${
-                  isSticky 
-                    ? "fixed top-[70px] left-[50%] -translate-x-[50%] w-[92%] max-w-[480px] z-45 bg-[#0D0915]/95 backdrop-blur-[12px] border border-[#D4AF55]/40 rounded-[16px] p-3 shadow-[0_15px_35px_rgba(0,0,0,0.8)] lg:relative lg:top-0 lg:left-0 lg:translate-x-0 lg:w-full lg:max-w-none lg:border-white/10 lg:bg-[#0D0915]/55 lg:p-[13px_14px] lg:shadow-none" 
-                    : "relative bg-[#0D0915]/55 backdrop-blur-[12px] border border-white/10 rounded-[16px] p-[13px_14px]"
-                }`}>
+                <div className="transition-all duration-300 w-full relative bg-[#0D0915]/55 backdrop-blur-[12px] border border-white/10 rounded-[16px] p-[13px_14px]">
                   <div className="flex justify-between items-center mb-1.5">
                     <span className="flex items-center gap-1.5 font-bold text-[8.5px] lg:text-[9px] tracking-[0.12em] lg:tracking-[0.14em] uppercase text-[#E7C877]">
                       <span className="relative flex h-1.5 w-1.5">

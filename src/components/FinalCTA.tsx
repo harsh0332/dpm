@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState, useEffect, useRef } from "react";
+import React, { useState, useEffect } from "react";
 import { motion, useReducedMotion, Variants } from "framer-motion";
 import { siteData } from "@/content/site-data";
 
@@ -19,11 +19,7 @@ export default function FinalCTA() {
   const [errors, setErrors] = useState<{ [key: string]: string }>({});
   const [success, setSuccess] = useState(false);
   const [isProcessing, setIsProcessing] = useState(false);
-  const [showFallbackBtn, setShowFallbackBtn] = useState(false);
   const [refNum] = useState(() => `DPM-${Math.floor(100000 + Math.random() * 900000)}`);
-
-  const rzpFormContainerRef = useRef<HTMLFormElement>(null);
-  const fallbackContainerRef = useRef<HTMLDivElement>(null);
 
   const revealVariants: Variants = {
     hidden: shouldReduceMotion ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 },
@@ -44,28 +40,6 @@ export default function FinalCTA() {
     };
     window.addEventListener("select-category", handleSelectEvent);
     return () => window.removeEventListener("select-category", handleSelectEvent);
-  }, []);
-
-  // Mount the hosted payment button inside the container
-  useEffect(() => {
-    const container = rzpFormContainerRef.current;
-    if (!container) return;
-
-    // Clean up container
-    container.innerHTML = "";
-
-    const script = document.createElement("script");
-    script.src = "https://checkout.razorpay.com/v1/payment-button.js";
-    script.async = true;
-    script.setAttribute("data-payment_button_id", "pl_T31OG3R1jueUAB");
-
-    container.appendChild(script);
-
-    return () => {
-      if (container) {
-        container.innerHTML = "";
-      }
-    };
   }, []);
 
   const handleCheckout = async () => {
@@ -100,48 +74,30 @@ export default function FinalCTA() {
     try {
       const webhookUrl = process.env.NEXT_PUBLIC_SHEETS_WEBHOOK_URL;
       if (webhookUrl) {
+        const controller = new AbortController();
+        const timeoutId = setTimeout(() => controller.abort(), 1200);
+
         await fetch(webhookUrl, {
           method: "POST",
           headers: { "Content-Type": "text/plain;charset=utf-8" },
           body: JSON.stringify({ name, email, whatsapp: phone, category: selectedCategory }),
-        });
+          signal: controller.signal,
+        }).catch((err) => console.warn("Fetch failed, continuing redirect:", err));
+
+        clearTimeout(timeoutId);
       }
     } catch (error) {
       console.error("Failed to capture lead to Google Sheets:", error);
     }
 
-    // Programmatically find the Razorpay button and click it
-    let button: HTMLButtonElement | null = null;
-    const maxPolls = 30; // Wait up to 3 seconds for button to render
-    for (let i = 0; i < maxPolls; i++) {
-      button = rzpFormContainerRef.current?.querySelector("button") || null;
-      if (button) break;
-      await new Promise((resolve) => setTimeout(resolve, 100));
-    }
+    // Direct redirect to Razorpay hosted Payment Page with pre-filled details
+    const paymentUrl = `https://pages.razorpay.com/pl_T31OG3R1jueUAB?name=${encodeURIComponent(
+      name
+    )}&email=${encodeURIComponent(email)}&contact=${encodeURIComponent(
+      phone
+    )}&phone=${encodeURIComponent(phone)}`;
 
-    if (button) {
-      try {
-        button.click();
-        // Reset processing state after a delay of 5 seconds so user can try again if they cancel
-        setTimeout(() => {
-          setIsProcessing(false);
-        }, 5000);
-      } catch (err) {
-        console.error("Failed to click Razorpay button programmatically:", err);
-        setIsProcessing(false);
-        setShowFallbackBtn(true);
-        setTimeout(() => {
-          fallbackContainerRef.current?.scrollIntoView({ behavior: "smooth" });
-        }, 100);
-      }
-    } else {
-      console.warn("Razorpay hosted button not found. Revealing fallback.");
-      setIsProcessing(false);
-      setShowFallbackBtn(true);
-      setTimeout(() => {
-        fallbackContainerRef.current?.scrollIntoView({ behavior: "smooth" });
-      }, 100);
-    }
+    window.location.href = paymentUrl;
   };
 
   if (success) {
@@ -237,22 +193,7 @@ export default function FinalCTA() {
         </motion.div>
       </form>
 
-      {/* Hidden/Fallback Razorpay Form Container */}
-      <div 
-        ref={fallbackContainerRef}
-        className={showFallbackBtn 
-          ? "mt-6 p-6 border border-emerald-500/30 bg-luxury-onyx rounded-[1.5rem] text-center space-y-4 max-w-md mx-auto relative z-10 animate-fade-in"
-          : "absolute opacity-0 pointer-events-none w-px h-px overflow-hidden select-none"
-        }
-      >
-        <p className="font-sans text-xs text-emerald-400 font-bold uppercase tracking-wider">Payment Action Required</p>
-        <p className="font-sans text-xs text-gray-300">
-          If the payment window did not open automatically, please click the button below to complete your registration:
-        </p>
-        <div className="flex justify-center py-2">
-          <form ref={rzpFormContainerRef} className="inline-block" />
-        </div>
-      </div>
+
 
       <div className="mt-8 pt-6 border-t border-luxury-border/30 text-center space-y-2 relative z-10">
         <span className="font-sans text-[9px] tracking-widest uppercase text-emerald-400 block flex items-center justify-center gap-1.5 font-bold">Secure 256-Bit SSL Payment via Razorpay</span>
