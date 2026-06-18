@@ -153,7 +153,7 @@ export default function Hero() {
               </div>
               <div className="flex-1 flex items-center justify-center gap-1.5 py-2 px-1 rounded-[11px] bg-white/4 border border-white/7">
                 <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="#D4AF55" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="m8.4 12 2.3 2.3L15.7 9.6"/></svg>
-                <span className="font-bold text-[8px] tracking-[0.04em] uppercase text-[#C9C4D2]">Verified Patron</span>
+                <span className="font-bold text-[8px] tracking-[0.04em] uppercase text-[#C9C4D2]">Celebrity Patron</span>
               </div>
               <div className="flex-1 flex items-center justify-center gap-1.5 py-2 px-1 rounded-[11px] bg-white/4 border border-white/7">
                 <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="#D4AF55" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2 4 5v6c0 5 3.5 8.4 8 9.9 4.5-1.5 8-4.9 8-9.9V5l-8-3Z"/><path d="m8.8 12 2.1 2.1 4.3-4.3"/></svg>
@@ -169,7 +169,7 @@ export default function Hero() {
               </div>
               <div className="flex items-center gap-2">
                 <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#D4AF55" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="m8.4 12 2.3 2.3L15.7 9.6"/></svg>
-                <span>Verified Winners</span>
+                <span>Past Winners</span>
               </div>
               <div className="flex items-center gap-2">
                 <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#D4AF55" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><rect x="5" y="11" width="14" height="9.5" rx="2"/><path d="M8 11V8a4 4 0 0 1 8 0v3"/></svg>

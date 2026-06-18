@@ -14,7 +14,7 @@ export default function TransformationExperience() {
     },
     {
       title: "1-on-1 Training",
-      description: "Receive personalized coaching in posture, diction, ramp walk, styling, and public speaking directly from verified industry titleholders.",
+      description: "Receive personalized coaching in posture, diction, ramp walk, styling, and public speaking directly from industry titleholders.",
       icon: "✨"
     },
     {
