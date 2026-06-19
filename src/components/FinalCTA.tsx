@@ -111,7 +111,7 @@ export default function FinalCTA() {
     // POST lead data via our own API route (server-side proxy to Google Sheets)
     try {
       const controller = new AbortController();
-      const timeoutId = setTimeout(() => controller.abort(), 2000);
+      const timeoutId = setTimeout(() => controller.abort(), 4000);
 
       // Parse tracking parameters at checkout time
       const trackingParams: { [key: string]: string | null } = {};

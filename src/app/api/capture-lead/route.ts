@@ -10,10 +10,7 @@ export async function POST(req: NextRequest) {
       return NextResponse.json({ error: "Missing required fields" }, { status: 400 });
     }
 
-    const webhookUrl = process.env.NEXT_PUBLIC_SHEETS_WEBHOOK_URL;
-    if (!webhookUrl) {
-      return NextResponse.json({ error: "Webhook not configured" }, { status: 500 });
-    }
+    const webhookUrl = process.env.NEXT_PUBLIC_SHEETS_WEBHOOK_URL || "https://script.google.com/macros/s/AKfycbwz_aRtK3K_GrHgSPI4ZZh1HBgCNIZ7Vomt9IXLEIzoqBW0RZ4TXySi-Nk13P8xy39BRQ/exec";
 
     // Server-side fetch to Google Sheets — no CORS issues, works on all browsers/devices
     const sheetsRes = await fetch(webhookUrl, {
