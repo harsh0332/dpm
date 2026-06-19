@@ -86,37 +86,40 @@ export default function ThankYouPage() {
   const [photo1Preview, setPhoto1Preview] = useState<string | null>(null);
   const [photo2Preview, setPhoto2Preview] = useState<string | null>(null);
 
-  // Pre-fill contact details from sessionStorage on mount
   useEffect(() => {
     if (typeof window !== "undefined") {
-      const stored = sessionStorage.getItem("dpm_lead_contact");
-      if (stored) {
-        setTimeout(() => {
-          try {
-            const parsed = JSON.parse(stored);
-            setFullName(parsed.name || "");
-            setEmail(parsed.email || "");
-            setWhatsappNumber(parsed.phone || "");
+      try {
+        const stored = sessionStorage.getItem("dpm_lead_contact");
+        if (stored) {
+          setTimeout(() => {
+            try {
+              const parsed = JSON.parse(stored);
+              setFullName(parsed.name || "");
+              setEmail(parsed.email || "");
+              setWhatsappNumber(parsed.phone || "");
 
-            // Split name into first and last name
-            if (parsed.name) {
-              const parts = parsed.name.trim().split(/\s+/);
-              if (parts.length > 0) setFirstName(parts[0]);
-              if (parts.length > 1) setLastName(parts.slice(1).join(" "));
-            }
+              // Split name into first and last name
+              if (parsed.name) {
+                const parts = parsed.name.trim().split(/\s+/);
+                if (parts.length > 0) setFirstName(parts[0]);
+                if (parts.length > 1) setLastName(parts.slice(1).join(" "));
+              }
 
-            // Pre-fill Category dropdown if mapped
-            if (parsed.category) {
-              const mappedCat = parsed.category.toLowerCase().replace(/[^a-z]/g, "");
-              if (mappedCat === "mrindia") setCategory("Mr. India");
-              else if (mappedCat === "missindia") setCategory("Miss India");
-              else if (mappedCat === "mrsindia") setCategory("Mrs. India");
-              else if (mappedCat === "missteenindia") setCategory("Miss Teen India");
+              // Pre-fill Category dropdown if mapped
+              if (parsed.category) {
+                const mappedCat = parsed.category.toLowerCase().replace(/[^a-z]/g, "");
+                if (mappedCat === "mrindia") setCategory("Mr. India");
+                else if (mappedCat === "missindia") setCategory("Miss India");
+                else if (mappedCat === "mrsindia") setCategory("Mrs. India");
+                else if (mappedCat === "missteenindia") setCategory("Miss Teen India");
+              }
+            } catch (e) {
+              console.error("Error reading lead contact info:", e);
             }
-          } catch (e) {
-            console.error("Error reading lead contact info:", e);
-          }
-        }, 0);
+          }, 0);
+        }
+      } catch (e) {
+        console.warn("sessionStorage read is blocked by browser:", e);
       }
     }
   }, []);

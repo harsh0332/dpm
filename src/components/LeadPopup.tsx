@@ -19,17 +19,25 @@ export default function LeadPopup() {
     if (!siteData.config.showLeadPopup) return;
 
     // Check if user has already dismissed the popup in the current session
-    const dismissed = sessionStorage.getItem("dpm-lead-dismissed");
-    if (!dismissed) {
-      const timer = setTimeout(() => {
-        setIsOpen(true);
-      }, 1500); // 1.5 seconds delay on mount
-      return () => clearTimeout(timer);
+    try {
+      const dismissed = sessionStorage.getItem("dpm-lead-dismissed");
+      if (!dismissed) {
+        const timer = setTimeout(() => {
+          setIsOpen(true);
+        }, 1500); // 1.5 seconds delay on mount
+        return () => clearTimeout(timer);
+      }
+    } catch (e) {
+      console.warn("sessionStorage is blocked:", e);
     }
   }, []);
 
   const handleClose = () => {
-    sessionStorage.setItem("dpm-lead-dismissed", "true");
+    try {
+      sessionStorage.setItem("dpm-lead-dismissed", "true");
+    } catch (e) {
+      console.warn("sessionStorage write is blocked:", e);
+    }
     setIsOpen(false);
   };
 

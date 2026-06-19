@@ -73,7 +73,11 @@ export default function FinalCTA() {
       }
 
       if (hasParams) {
-        sessionStorage.setItem("dpm_utm_params", JSON.stringify(result));
+        try {
+          sessionStorage.setItem("dpm_utm_params", JSON.stringify(result));
+        } catch (e) {
+          console.warn("sessionStorage is blocked:", e);
+        }
       }
     }
 
@@ -115,7 +119,11 @@ export default function FinalCTA() {
 
       // Save contact details for pre-filling the profile form on /thankyou
       if (typeof window !== "undefined") {
-        sessionStorage.setItem("dpm_lead_contact", JSON.stringify({ name, email, phone, category: selectedCategory }));
+        try {
+          sessionStorage.setItem("dpm_lead_contact", JSON.stringify({ name, email, phone, category: selectedCategory }));
+        } catch (e) {
+          console.warn("sessionStorage write is blocked:", e);
+        }
       }
 
       // Parse tracking parameters at checkout time
@@ -152,14 +160,14 @@ export default function FinalCTA() {
         
         // Load from sessionStorage if URL has none
         if (!hasParams) {
-          const stored = sessionStorage.getItem("dpm_utm_params");
-          if (stored) {
-            try {
+          try {
+            const stored = sessionStorage.getItem("dpm_utm_params");
+            if (stored) {
               const parsed = JSON.parse(stored);
               Object.assign(trackingParams, parsed);
-            } catch (e) {
-              console.error("Error parsing stored UTM params:", e);
             }
+          } catch (e) {
+            console.warn("sessionStorage read is blocked:", e);
           }
         }
         
