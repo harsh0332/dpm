@@ -3,10 +3,10 @@ import { NextRequest, NextResponse } from "next/server";
 export async function POST(req: NextRequest) {
   try {
     const body = await req.json();
-    const { name, email, whatsapp, category } = body;
+    const { full_name, email, whatsapp_number } = body;
 
     // Basic validation
-    if (!name || !email || !whatsapp) {
+    if (!full_name || !email || !whatsapp_number) {
       return NextResponse.json({ error: "Missing required fields" }, { status: 400 });
     }
 
@@ -19,7 +19,7 @@ export async function POST(req: NextRequest) {
     const sheetsRes = await fetch(webhookUrl, {
       method: "POST",
       headers: { "Content-Type": "text/plain;charset=utf-8" },
-      body: JSON.stringify({ name, email, whatsapp, category }),
+      body: JSON.stringify(body),
       // No CORS mode needed — this is server-to-server
       redirect: "follow",
     });

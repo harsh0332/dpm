@@ -20,7 +20,6 @@ export default function FinalCTA() {
   const [success, setSuccess] = useState(false);
   const [isProcessing, setIsProcessing] = useState(false);
   const [refNum] = useState(() => `DPM-${Math.floor(100000 + Math.random() * 900000)}`);
-
   const revealVariants: Variants = {
     hidden: shouldReduceMotion ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 },
     visible: {
@@ -39,6 +38,45 @@ export default function FinalCTA() {
       setSelectedCategory(customEvent.detail);
     };
     window.addEventListener("select-category", handleSelectEvent);
+
+    // Save UTM/tracking parameters to sessionStorage if present in URL
+    if (typeof window !== "undefined") {
+      const params = new URLSearchParams(window.location.search);
+      const keys = [
+        "utm_source",
+        "utm_medium",
+        "utm_campaign",
+        "utm_term",
+        "utm_content",
+        "utm_id",
+        "placement",
+        "site_source",
+        "fbclid",
+        "gclid"
+      ];
+
+      const result: { [key: string]: string | null } = {};
+      let hasParams = false;
+
+      keys.forEach(key => {
+        const val = params.get(key);
+        if (val) {
+          result[key] = val;
+          hasParams = true;
+        }
+      });
+
+      // Capture referrer
+      const referrer = document.referrer;
+      if (referrer) {
+        result["ref"] = referrer;
+      }
+
+      if (hasParams) {
+        sessionStorage.setItem("dpm_utm_params", JSON.stringify(result));
+      }
+    }
+
     return () => window.removeEventListener("select-category", handleSelectEvent);
   }, []);
 
@@ -71,16 +109,86 @@ export default function FinalCTA() {
     setIsProcessing(true);
 
     // POST lead data via our own API route (server-side proxy to Google Sheets)
-    // We AWAIT this so the request fully completes before page navigates away.
-    // Without await, mobile browsers cancel the in-flight request on redirect.
-    // 2s timeout ensures user is never stuck if our API is slow.
     try {
       const controller = new AbortController();
       const timeoutId = setTimeout(() => controller.abort(), 2000);
+
+      // Parse tracking parameters at checkout time
+      const trackingParams: { [key: string]: string | null } = {};
+      
+      if (typeof window !== "undefined") {
+        const keys = [
+          "utm_source",
+          "utm_medium",
+          "utm_campaign",
+          "utm_term",
+          "utm_content",
+          "utm_id",
+          "placement",
+          "site_source",
+          "fbclid",
+          "gclid"
+        ];
+        
+        // Start with a clean template
+        keys.forEach(k => { trackingParams[k] = null; });
+        trackingParams["ref"] = document.referrer || null;
+        
+        const params = new URLSearchParams(window.location.search);
+        let hasParams = false;
+        
+        keys.forEach(key => {
+          const val = params.get(key);
+          if (val) {
+            trackingParams[key] = val;
+            hasParams = true;
+          }
+        });
+        
+        // Load from sessionStorage if URL has none
+        if (!hasParams) {
+          const stored = sessionStorage.getItem("dpm_utm_params");
+          if (stored) {
+            try {
+              const parsed = JSON.parse(stored);
+              Object.assign(trackingParams, parsed);
+            } catch (e) {
+              console.error("Error parsing stored UTM params:", e);
+            }
+          }
+        }
+        
+        // Determine source
+        let sourceVal = trackingParams["utm_source"];
+        if (!sourceVal) {
+          const referrer = document.referrer;
+          if (referrer && (referrer.includes("instagram.com") || referrer.includes("ig"))) {
+            sourceVal = "instagram";
+          } else if (referrer && (referrer.includes("facebook.com") || referrer.includes("fb"))) {
+            sourceVal = "facebook";
+          } else {
+            sourceVal = "organic";
+          }
+        }
+        trackingParams["source"] = sourceVal;
+      }
+      
+      const payload = {
+        lead_id: `LEAD${Date.now()}`,
+        full_name: name,
+        email: email,
+        whatsapp_number: phone,
+        registration_time: new Date().toLocaleString("en-US", { timeZone: "Asia/Kolkata" }),
+        payment_status: "Pending",
+        follow_up_stage: "Pending",
+        notes: `Category: ${selectedCategory}`,
+        ...trackingParams
+      };
+
       await fetch("/api/capture-lead", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ name, email, whatsapp: phone, category: selectedCategory }),
+        body: JSON.stringify(payload),
         signal: controller.signal,
       });
       clearTimeout(timeoutId);
@@ -90,9 +198,6 @@ export default function FinalCTA() {
     }
 
     // Redirect to Razorpay hosted Payment Page with pre-filled details
-    // Using direct pages.razorpay.com URL (not short rzp.io link) so
-    // query params are NOT dropped during redirect
-    // Field names match the UDF schema: name, email, phone
     const paymentUrl = `https://pages.razorpay.com/pl_Stw67RqFlyqASX/view?name=${encodeURIComponent(
       name
     )}&email=${encodeURIComponent(email)}&phone=${encodeURIComponent(phone)}`;
