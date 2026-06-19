@@ -4,53 +4,81 @@ import React, { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import Link from "next/link";
 
+// Dropdown Constants
+const CATEGORIES = ["Mr. India", "Miss India", "Mrs. India", "Miss Teen India"];
+const MARITAL_STATUSES = ["Single", "Married", "Divorced", "Widowed"];
+const STATES = [
+  "Andhra Pradesh", "Arunachal Pradesh", "Assam", "Bihar", "Chhattisgarh", 
+  "Delhi", "Goa", "Gujarat", "Haryana", "Himachal Pradesh", "Jharkhand", 
+  "Karnataka", "Kerala", "Madhya Pradesh", "Maharashtra", "Manipur", 
+  "Meghalaya", "Mizoram", "Nagaland", "Odisha", "Punjab", "Rajasthan", 
+  "Sikkim", "Tamil Nadu", "Telangana", "Tripura", "Uttar Pradesh", 
+  "Uttarakhand", "West Bengal"
+];
+const HEIGHTS = [
+  "4'0\"", "4'1\"", "4'2\"", "4'3\"", "4'4\"", "4'5\"", "4'6\"", "4'7\"", "4'8\"", "4'9\"", "4'10\"", "4'11\"",
+  "5'0\"", "5'1\"", "5'2\"", "5'3\"", "5'4\"", "5'5\"", "5'6\"", "5'7\"", "5'8\"", "5'9\"", "5'10\"", "5'11\"",
+  "6'0\"", "6'1\"", "6'2\"", "6'3\"", "6'4\"", "6'5\"", "6'6\""
+];
+const HAIR_COLORS = ["Black", "Brown", "Ombre", "Balayage", "Blond", "Rarely Red"];
+const SKIN_TONES = ["Pale White", "White", "Light Beige", "Olive", "Light Brown"];
+const EYE_COLORS = ["Black", "Blue", "Green", "Hazel", "Amber", "Brown"];
+const BODY_SHAPES = [
+  "Hour Glass", "Pear", "Apple", "Inverted Triangle", "Ruler", 
+  "Muscular", "V-Shape", "Trapezoid", "Ectomorphic", "Mesomorphic", "Endomorphic"
+];
+
 export default function ThankYouPage() {
   const [step, setStep] = useState(1);
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [submitSuccess, setSubmitSuccess] = useState(false);
   const [errorMsg, setErrorMsg] = useState("");
 
-  // Step 1: Contact (prefilled if available)
+  // Step 1: Contact
   const [fullName, setFullName] = useState("");
   const [email, setEmail] = useState("");
   const [whatsappNumber, setWhatsappNumber] = useState("");
 
-  // Step 2: Measurements & Personal Details
+  // Step 2: Personal Information
   const [firstName, setFirstName] = useState("");
   const [lastName, setLastName] = useState("");
   const [dob, setDob] = useState("");
   const [age, setAge] = useState("");
+  const [category, setCategory] = useState("Miss India");
   const [maritalStatus, setMaritalStatus] = useState("Single");
-  const [altPhone, setAltPhone] = useState("");
-  const [heightCm, setHeightCm] = useState("");
-  const [weightKg, setWeightKg] = useState("");
-  const [bust, setBust] = useState("");
-  const [waist, setWaist] = useState("");
-  const [hips, setHips] = useState("");
-  
-  // Step 3: Address & Appearance
+
+  // Step 3: Address & Communication
   const [addressLine1, setAddressLine1] = useState("");
   const [addressLine2, setAddressLine2] = useState("");
   const [city, setCity] = useState("");
-  const [state, setState] = useState("");
+  const [state, setState] = useState("Delhi");
   const [postalCode, setPostalCode] = useState("");
-  const [hairColor, setHairColor] = useState("");
-  const [skinTone, setSkinTone] = useState("");
-  const [eyeColor, setEyeColor] = useState("");
-  const [bodyShape, setBodyShape] = useState("");
+  const [altPhone, setAltPhone] = useState("");
 
-  // Step 4: Socials & Questionnaire
+  // Step 4: Physical Attributes & Appearance (Dropdowns + Type Fields)
+  const [height, setHeight] = useState("5'5\"");
+  const [weightKg, setWeightKg] = useState("");
+  const [waist, setWaist] = useState("");
+  const [hips, setHips] = useState("");
+  const [bust, setBust] = useState(""); // Chest Size (inches)
+  const [hairColor, setHairColor] = useState("Black");
+  const [skinTone, setSkinTone] = useState("Light Beige");
+  const [eyeColor, setEyeColor] = useState("Black");
+  const [bodyShape, setBodyShape] = useState("Hour Glass");
+
+  // Step 5: Social Media, Qualifications & Q&A
   const [instagramUrl, setInstagramUrl] = useState("");
   const [facebookUrl, setFacebookUrl] = useState("");
   const [qualification, setQualification] = useState("");
   const [professionalDetail, setProfessionalDetail] = useState("");
+
   const [qaWhyModel, setQaWhyModel] = useState("");
   const [qaStrengths, setQaStrengths] = useState("");
   const [qaRoleModel, setQaRoleModel] = useState("");
   const [qaAdventure, setQaAdventure] = useState("");
   const [qaIfWin, setQaIfWin] = useState("");
 
-  // Step 5: Photo Base64
+  // Step 6: Photos
   const [photo1Base64, setPhoto1Base64] = useState<string | null>(null);
   const [photo2Base64, setPhoto2Base64] = useState<string | null>(null);
   const [photo1Mime, setPhoto1Mime] = useState<string | null>(null);
@@ -70,11 +98,20 @@ export default function ThankYouPage() {
             setEmail(parsed.email || "");
             setWhatsappNumber(parsed.phone || "");
 
-            // Split name into first and last name if possible
+            // Split name into first and last name
             if (parsed.name) {
               const parts = parsed.name.trim().split(/\s+/);
               if (parts.length > 0) setFirstName(parts[0]);
               if (parts.length > 1) setLastName(parts.slice(1).join(" "));
+            }
+
+            // Pre-fill Category dropdown if mapped
+            if (parsed.category) {
+              const mappedCat = parsed.category.toLowerCase().replace(/[^a-z]/g, "");
+              if (mappedCat === "mrindia") setCategory("Mr. India");
+              else if (mappedCat === "missindia") setCategory("Miss India");
+              else if (mappedCat === "mrsindia") setCategory("Mrs. India");
+              else if (mappedCat === "missteenindia") setCategory("Miss Teen India");
             }
           } catch (e) {
             console.error("Error reading lead contact info:", e);
@@ -126,20 +163,35 @@ export default function ThankYouPage() {
   };
 
   const handleNextStep = () => {
-    // Basic step validation
+    // Step Validations
     if (step === 1) {
       if (!fullName.trim() || !email.trim() || !whatsappNumber.trim()) {
-        alert("Please fill in your name, email, and WhatsApp number.");
+        alert("Please fill in your Full Name, Email, and WhatsApp number.");
         return;
       }
     } else if (step === 2) {
-      if (!firstName.trim() || !lastName.trim() || !dob || !heightCm || !weightKg) {
-        alert("Please fill in Name, DOB, Height, and Weight.");
+      if (!firstName.trim() || !dob || !age || !category || !maritalStatus) {
+        alert("Please fill in all mandatory Personal Information fields.");
         return;
       }
     } else if (step === 3) {
-      if (!addressLine1.trim() || !city.trim() || !state.trim() || !postalCode.trim()) {
-        alert("Please fill in your address, city, state, and postal code.");
+      if (!addressLine1.trim() || !city.trim() || !state || !postalCode.trim()) {
+        alert("Please fill in all mandatory Communication Address fields.");
+        return;
+      }
+    } else if (step === 4) {
+      if (!height || !weightKg.trim() || !waist.trim() || !hips.trim() || !bust.trim() || 
+          !hairColor || !skinTone || !eyeColor || !bodyShape) {
+        alert("Please fill in all mandatory Physical Attributes & Appearance fields.");
+        return;
+      }
+    } else if (step === 5) {
+      if (!instagramUrl.trim() || !facebookUrl.trim() || !qualification.trim() || !professionalDetail.trim()) {
+        alert("Please fill in your Social Media URLs and Qualification details.");
+        return;
+      }
+      if (!qaWhyModel.trim() || !qaStrengths.trim() || !qaRoleModel.trim() || !qaAdventure.trim() || !qaIfWin.trim()) {
+        alert("Please answer all 5 Audition Questions.");
         return;
       }
     }
@@ -156,6 +208,12 @@ export default function ThankYouPage() {
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setErrorMsg("");
+
+    if (!photo1Base64 || !photo2Base64) {
+      alert("Please upload both Photo 1 and Photo 2.");
+      return;
+    }
+
     setIsSubmitting(true);
 
     const payload = {
@@ -167,20 +225,21 @@ export default function ThankYouPage() {
       last_name: lastName,
       dob: dob,
       age: age,
+      category: category,
       marital_status: maritalStatus,
-      alt_phone: altPhone,
-      height_cm: heightCm,
-      weight_kg: weightKg,
-      bust: bust,
-      chest: bust, // Fill both columns for compatibility
-      waist: waist,
-      hips: hips,
-      hip: hips, // Fill both columns for compatibility
       address_line1: addressLine1,
       address_line2: addressLine2,
       city: city,
       state: state,
       postal_code: postalCode,
+      alt_phone: altPhone,
+      height_cm: height, // Height string (e.g. 5'5") saved directly to height_cm column
+      weight_kg: weightKg,
+      waist: waist,
+      hips: hips,
+      hip: hips,
+      bust: bust,
+      chest: bust,
       hair_color: hairColor,
       skin_tone: skinTone,
       eye_color: eyeColor,
@@ -222,12 +281,12 @@ export default function ThankYouPage() {
     }
   };
 
-  const stepsCount = 5;
+  const stepsCount = 6;
 
   return (
     <div className="min-h-screen bg-luxury-onyx py-12 px-4 md:px-8 text-luxury-alabaster relative overflow-hidden">
       {/* Background radial gradient */}
-      <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,rgba(16,185,129,0.04)_0%,rgba(201,162,75,0.02)_60%,transparent_100%)] pointer-events-none" />
+      <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,rgba(212,175,85,0.04)_0%,rgba(16,185,129,0.02)_60%,transparent_100%)] pointer-events-none" />
 
       <div className="max-w-3xl mx-auto relative z-10">
         
@@ -239,14 +298,13 @@ export default function ThankYouPage() {
           <h1 className="font-serif text-3xl md:text-4xl text-white font-light tracking-wide">
             Registration <span className="crown-gradient-text font-bold">Confirmed!</span>
           </h1>
-          <p className="font-sans text-xs md:text-sm text-gray-400 mt-2 max-w-lg mx-auto leading-relaxed">
-            Thank you! Your payment was processed successfully. 
-            Please complete your audition profile below so our casting coordinators can prepare your preparatory materials.
+          <p className="font-sans text-xs md:text-sm text-gray-300 mt-2 max-w-lg mx-auto leading-relaxed">
+            Your fee payment was recorded successfully. Please complete the audition registration profile form below.
           </p>
         </div>
 
-        {/* Multi-step Profile Card */}
-        <div className="border border-luxury-border bg-luxury-darkcard rounded-[2.5rem] p-6 md:p-12 shadow-2xl relative">
+        {/* Form Outer Shell */}
+        <div className="bg-luxury-darkcard border border-luxury-border/60 p-6 md:p-12 shadow-[0_15px_50px_rgba(0,0,0,0.6)] relative overflow-hidden rounded-[2.5rem]">
           <div className="absolute top-0 left-0 w-full h-1 bg-luxury-gold" />
           
           {/* Progress Tracker */}
@@ -281,12 +339,12 @@ export default function ThankYouPage() {
                 <h2 className="font-serif text-3xl text-white font-light">Profile Submitted!</h2>
                 <p className="font-sans text-sm text-gray-300 max-w-md mx-auto leading-relaxed">
                   Your pageant audition portfolio is complete. 
-                  A pageant coordinator will contact you at <strong className="text-white">{whatsappNumber}</strong> within the next 24 hours to schedule your Zoom audition slot.
+                  A coordinator will contact you at <strong className="text-white">{whatsappNumber}</strong> within the next 24 hours to schedule your Zoom audition slot.
                 </p>
                 <div className="pt-4">
                   <Link 
                     href="/" 
-                    className="inline-flex items-center justify-center font-sans text-xs tracking-widest uppercase border border-luxury-gold text-luxury-gold hover:bg-luxury-gold hover:text-luxury-onyx px-8 py-3 rounded-full transition-all duration-300 font-bold"
+                    className="inline-flex items-center justify-center font-sans text-xs tracking-widest uppercase border border-luxury-gold text-luxury-gold hover:bg-luxury-gold hover:text-luxury-onyx px-8 py-3 rounded-full transition-all duration-300 font-bold text-decoration-none"
                   >
                     Back to Home Page
                   </Link>
@@ -295,7 +353,7 @@ export default function ThankYouPage() {
             ) : (
               <form onSubmit={e => e.preventDefault()} className="space-y-6">
                 
-                {/* STEP 1: CONTACT INFO */}
+                {/* STEP 1: CONTACT VERIFICATION */}
                 {step === 1 && (
                   <motion.div 
                     key="step1"
@@ -305,46 +363,46 @@ export default function ThankYouPage() {
                     className="space-y-5"
                   >
                     <div className="border-b border-luxury-border/30 pb-3 mb-4">
-                      <h3 className="font-serif text-xl text-white font-light">Step 1: Verify Contact Information</h3>
-                      <p className="font-sans text-[11px] text-gray-400 mt-1">Please confirm these match the details used during payment.</p>
+                      <h3 className="font-serif text-xl text-white font-light">Step 1: Verify Registration Contact Details</h3>
+                      <p className="font-sans text-[11px] text-gray-400 mt-1">Verify these match the name, email, and phone used during payment.</p>
                     </div>
 
                     <div className="space-y-1">
-                      <label className="font-sans text-[10px] tracking-wider uppercase text-gray-300 block font-semibold">Full Name</label>
+                      <label className="font-sans text-[10px] tracking-wider uppercase text-gray-300 block font-semibold">Full Name *</label>
                       <input 
                         type="text" 
                         value={fullName} 
                         onChange={e => setFullName(e.target.value)} 
                         className="w-full font-sans text-sm tracking-wider px-4 py-3 bg-luxury-onyx border border-luxury-border focus:border-luxury-gold outline-none text-white rounded-xl transition-colors" 
-                        placeholder="Candidate full name"
+                        placeholder="Full Name"
                       />
                     </div>
 
                     <div className="space-y-1">
-                      <label className="font-sans text-[10px] tracking-wider uppercase text-gray-300 block font-semibold">Email Address</label>
+                      <label className="font-sans text-[10px] tracking-wider uppercase text-gray-300 block font-semibold">Email Address *</label>
                       <input 
                         type="email" 
                         value={email} 
                         onChange={e => setEmail(e.target.value)} 
                         className="w-full font-sans text-sm tracking-wider px-4 py-3 bg-luxury-onyx border border-luxury-border focus:border-luxury-gold outline-none text-white rounded-xl transition-colors" 
-                        placeholder="candidate@example.com"
+                        placeholder="email@example.com"
                       />
                     </div>
 
                     <div className="space-y-1">
-                      <label className="font-sans text-[10px] tracking-wider uppercase text-gray-300 block font-semibold">WhatsApp Number</label>
+                      <label className="font-sans text-[10px] tracking-wider uppercase text-gray-300 block font-semibold">WhatsApp Number *</label>
                       <input 
                         type="tel" 
                         value={whatsappNumber} 
                         onChange={e => setWhatsappNumber(e.target.value)} 
                         className="w-full font-sans text-sm tracking-wider px-4 py-3 bg-luxury-onyx border border-luxury-border focus:border-luxury-gold outline-none text-white rounded-xl transition-colors" 
-                        placeholder="10-digit mobile number"
+                        placeholder="+91 WhatsApp Number"
                       />
                     </div>
                   </motion.div>
                 )}
 
-                {/* STEP 2: MEASUREMENTS & BIO */}
+                {/* STEP 2: PERSONAL INFORMATION */}
                 {step === 2 && (
                   <motion.div 
                     key="step2"
@@ -354,13 +412,13 @@ export default function ThankYouPage() {
                     className="space-y-5"
                   >
                     <div className="border-b border-luxury-border/30 pb-3 mb-4">
-                      <h3 className="font-serif text-xl text-white font-light">Step 2: Name & Physical Measurements</h3>
-                      <p className="font-sans text-[11px] text-gray-400 mt-1">Provide your measurements for designer costume fittings.</p>
+                      <h3 className="font-serif text-xl text-white font-light">Step 2: Personal Information</h3>
+                      <p className="font-sans text-[11px] text-gray-400 mt-1">Please enter your basic personal details.</p>
                     </div>
 
                     <div className="grid grid-cols-2 gap-4">
                       <div className="space-y-1">
-                        <label className="font-sans text-[10px] tracking-wider uppercase text-gray-300 block font-semibold">First Name</label>
+                        <label className="font-sans text-[10px] tracking-wider uppercase text-gray-300 block font-semibold">First Name *</label>
                         <input 
                           type="text" 
                           value={firstName} 
@@ -379,9 +437,9 @@ export default function ThankYouPage() {
                       </div>
                     </div>
 
-                    <div className="grid grid-cols-3 gap-4">
+                    <div className="grid grid-cols-2 gap-4">
                       <div className="space-y-1">
-                        <label className="font-sans text-[10px] tracking-wider uppercase text-gray-300 block font-semibold">Date of Birth</label>
+                        <label className="font-sans text-[10px] tracking-wider uppercase text-gray-300 block font-semibold">Date of Birth *</label>
                         <input 
                           type="date" 
                           value={dob} 
@@ -390,7 +448,7 @@ export default function ThankYouPage() {
                         />
                       </div>
                       <div className="space-y-1">
-                        <label className="font-sans text-[10px] tracking-wider uppercase text-gray-300 block font-semibold">Age</label>
+                        <label className="font-sans text-[10px] tracking-wider uppercase text-gray-300 block font-semibold">Age *</label>
                         <input 
                           type="number" 
                           value={age} 
@@ -399,39 +457,153 @@ export default function ThankYouPage() {
                           placeholder="Years"
                         />
                       </div>
+                    </div>
+
+                    <div className="grid grid-cols-2 gap-4">
                       <div className="space-y-1">
-                        <label className="font-sans text-[10px] tracking-wider uppercase text-gray-300 block font-semibold">Marital Status</label>
+                        <label className="font-sans text-[10px] tracking-wider uppercase text-gray-300 block font-semibold">Audition Category *</label>
+                        <select 
+                          value={category} 
+                          onChange={e => setCategory(e.target.value)} 
+                          className="w-full font-sans text-sm tracking-wider px-4 py-3 bg-luxury-onyx border border-luxury-border focus:border-luxury-gold outline-none text-white rounded-xl transition-colors"
+                        >
+                          {CATEGORIES.map(c => (
+                            <option key={c} value={c}>{c}</option>
+                          ))}
+                        </select>
+                      </div>
+                      <div className="space-y-1">
+                        <label className="font-sans text-[10px] tracking-wider uppercase text-gray-300 block font-semibold">Marital Status *</label>
                         <select 
                           value={maritalStatus} 
                           onChange={e => setMaritalStatus(e.target.value)} 
                           className="w-full font-sans text-sm tracking-wider px-4 py-3 bg-luxury-onyx border border-luxury-border focus:border-luxury-gold outline-none text-white rounded-xl transition-colors"
                         >
-                          <option value="Single">Single</option>
-                          <option value="Married">Married</option>
-                          <option value="Divorced">Divorced</option>
-                          <option value="Widowed">Widowed</option>
+                          {MARITAL_STATUSES.map(m => (
+                            <option key={m} value={m}>{m}</option>
+                          ))}
                         </select>
                       </div>
                     </div>
+                  </motion.div>
+                )}
 
-                    <div className="grid grid-cols-2 gap-4">
+                {/* STEP 3: ADDRESS & COMMUNICATION */}
+                {step === 3 && (
+                  <motion.div 
+                    key="step3"
+                    initial={{ opacity: 0, x: 20 }}
+                    animate={{ opacity: 1, x: 0 }}
+                    exit={{ opacity: 0, x: -20 }}
+                    className="space-y-5"
+                  >
+                    <div className="border-b border-luxury-border/30 pb-3 mb-4">
+                      <h3 className="font-serif text-xl text-white font-light">Step 3: Communication Address</h3>
+                      <p className="font-sans text-[11px] text-gray-400 mt-1">Specify your current residency and alternate contact.</p>
+                    </div>
+
+                    <div className="space-y-1">
+                      <label className="font-sans text-[10px] tracking-wider uppercase text-gray-300 block font-semibold">Full Address *</label>
+                      <input 
+                        type="text" 
+                        value={addressLine1} 
+                        onChange={e => setAddressLine1(e.target.value)} 
+                        placeholder="House no, Street name, Area"
+                        className="w-full font-sans text-sm tracking-wider px-4 py-3 bg-luxury-onyx border border-luxury-border focus:border-luxury-gold outline-none text-white rounded-xl transition-colors" 
+                      />
+                    </div>
+
+                    <div className="space-y-1">
+                      <label className="font-sans text-[10px] tracking-wider uppercase text-gray-300 block font-semibold">Address Line 2 (Optional)</label>
+                      <input 
+                        type="text" 
+                        value={addressLine2} 
+                        onChange={e => setAddressLine2(e.target.value)} 
+                        placeholder="Apartment, Landmark, etc."
+                        className="w-full font-sans text-sm tracking-wider px-4 py-3 bg-luxury-onyx border border-luxury-border focus:border-luxury-gold outline-none text-white rounded-xl transition-colors" 
+                      />
+                    </div>
+
+                    <div className="grid grid-cols-3 gap-4">
                       <div className="space-y-1">
-                        <label className="font-sans text-[10px] tracking-wider uppercase text-gray-300 block font-semibold">Height (in cm)</label>
+                        <label className="font-sans text-[10px] tracking-wider uppercase text-gray-300 block font-semibold">City *</label>
                         <input 
-                          type="number" 
-                          value={heightCm} 
-                          onChange={e => setHeightCm(e.target.value)} 
-                          placeholder="e.g. 172"
+                          type="text" 
+                          value={city} 
+                          onChange={e => setCity(e.target.value)} 
                           className="w-full font-sans text-sm tracking-wider px-4 py-3 bg-luxury-onyx border border-luxury-border focus:border-luxury-gold outline-none text-white rounded-xl transition-colors" 
                         />
                       </div>
                       <div className="space-y-1">
-                        <label className="font-sans text-[10px] tracking-wider uppercase text-gray-300 block font-semibold">Weight (in kg)</label>
+                        <label className="font-sans text-[10px] tracking-wider uppercase text-gray-300 block font-semibold">State *</label>
+                        <select 
+                          value={state} 
+                          onChange={e => setState(e.target.value)} 
+                          className="w-full font-sans text-sm tracking-wider px-4 py-3 bg-luxury-onyx border border-luxury-border focus:border-luxury-gold outline-none text-white rounded-xl transition-colors"
+                        >
+                          {STATES.map(s => (
+                            <option key={s} value={s}>{s}</option>
+                          ))}
+                        </select>
+                      </div>
+                      <div className="space-y-1">
+                        <label className="font-sans text-[10px] tracking-wider uppercase text-gray-300 block font-semibold">Postal / PIN Code *</label>
+                        <input 
+                          type="text" 
+                          value={postalCode} 
+                          onChange={e => setPostalCode(e.target.value)} 
+                          className="w-full font-sans text-sm tracking-wider px-4 py-3 bg-luxury-onyx border border-luxury-border focus:border-luxury-gold outline-none text-white rounded-xl transition-colors" 
+                        />
+                      </div>
+                    </div>
+
+                    <div className="space-y-1">
+                      <label className="font-sans text-[10px] tracking-wider uppercase text-gray-300 block font-semibold">Alternative No. / Guardian Phone</label>
+                      <input 
+                        type="tel" 
+                        value={altPhone} 
+                        onChange={e => setAltPhone(e.target.value)} 
+                        className="w-full font-sans text-sm tracking-wider px-4 py-3 bg-luxury-onyx border border-luxury-border focus:border-luxury-gold outline-none text-white rounded-xl transition-colors" 
+                        placeholder="Alternative phone number"
+                      />
+                    </div>
+                  </motion.div>
+                )}
+
+                {/* STEP 4: PHYSICAL ATTRIBUTES & APPEARANCE */}
+                {step === 4 && (
+                  <motion.div 
+                    key="step4"
+                    initial={{ opacity: 0, x: 20 }}
+                    animate={{ opacity: 1, x: 0 }}
+                    exit={{ opacity: 0, x: -20 }}
+                    className="space-y-5"
+                  >
+                    <div className="border-b border-luxury-border/30 pb-3 mb-4">
+                      <h3 className="font-serif text-xl text-white font-light">Step 4: Physical Attributes & Appearance</h3>
+                      <p className="font-sans text-[11px] text-gray-400 mt-1">Please enter your physical measurements and features.</p>
+                    </div>
+
+                    <div className="grid grid-cols-2 gap-4">
+                      <div className="space-y-1">
+                        <label className="font-sans text-[10px] tracking-wider uppercase text-gray-300 block font-semibold">Height *</label>
+                        <select 
+                          value={height} 
+                          onChange={e => setHeight(e.target.value)} 
+                          className="w-full font-sans text-sm tracking-wider px-4 py-3 bg-luxury-onyx border border-luxury-border focus:border-luxury-gold outline-none text-white rounded-xl transition-colors"
+                        >
+                          {HEIGHTS.map(h => (
+                            <option key={h} value={h}>{h}</option>
+                          ))}
+                        </select>
+                      </div>
+                      <div className="space-y-1">
+                        <label className="font-sans text-[10px] tracking-wider uppercase text-gray-300 block font-semibold">Weight (Kgs) *</label>
                         <input 
                           type="number" 
                           value={weightKg} 
                           onChange={e => setWeightKg(e.target.value)} 
-                          placeholder="e.g. 58"
+                          placeholder="e.g. 60"
                           className="w-full font-sans text-sm tracking-wider px-4 py-3 bg-luxury-onyx border border-luxury-border focus:border-luxury-gold outline-none text-white rounded-xl transition-colors" 
                         />
                       </div>
@@ -439,7 +611,7 @@ export default function ThankYouPage() {
 
                     <div className="grid grid-cols-3 gap-4">
                       <div className="space-y-1">
-                        <label className="font-sans text-[10px] tracking-wider uppercase text-gray-300 block font-semibold">Chest / Bust (inches)</label>
+                        <label className="font-sans text-[10px] tracking-wider uppercase text-gray-300 block font-semibold">Chest / Bust Size (Inches) *</label>
                         <input 
                           type="number" 
                           value={bust} 
@@ -449,17 +621,17 @@ export default function ThankYouPage() {
                         />
                       </div>
                       <div className="space-y-1">
-                        <label className="font-sans text-[10px] tracking-wider uppercase text-gray-300 block font-semibold">Waist (inches)</label>
+                        <label className="font-sans text-[10px] tracking-wider uppercase text-gray-300 block font-semibold">Waist (Inches) *</label>
                         <input 
                           type="number" 
                           value={waist} 
                           onChange={e => setWaist(e.target.value)} 
-                          placeholder="e.g. 26"
+                          placeholder="e.g. 28"
                           className="w-full font-sans text-sm tracking-wider px-4 py-3 bg-luxury-onyx border border-luxury-border focus:border-luxury-gold outline-none text-white rounded-xl transition-colors" 
                         />
                       </div>
                       <div className="space-y-1">
-                        <label className="font-sans text-[10px] tracking-wider uppercase text-gray-300 block font-semibold">Hips (inches)</label>
+                        <label className="font-sans text-[10px] tracking-wider uppercase text-gray-300 block font-semibold">Hip (Inches) *</label>
                         <input 
                           type="number" 
                           value={hips} 
@@ -470,150 +642,79 @@ export default function ThankYouPage() {
                       </div>
                     </div>
 
-                    <div className="space-y-1">
-                      <label className="font-sans text-[10px] tracking-wider uppercase text-gray-300 block font-semibold">Alternate Phone / Guardian Phone</label>
-                      <input 
-                        type="tel" 
-                        value={altPhone} 
-                        onChange={e => setAltPhone(e.target.value)} 
-                        className="w-full font-sans text-sm tracking-wider px-4 py-3 bg-luxury-onyx border border-luxury-border focus:border-luxury-gold outline-none text-white rounded-xl transition-colors" 
-                        placeholder="Alternate mobile number"
-                      />
-                    </div>
-                  </motion.div>
-                )}
-
-                {/* STEP 3: ADDRESS & APPEARANCE */}
-                {step === 3 && (
-                  <motion.div 
-                    key="step3"
-                    initial={{ opacity: 0, x: 20 }}
-                    animate={{ opacity: 1, x: 0 }}
-                    exit={{ opacity: 0, x: -20 }}
-                    className="space-y-5"
-                  >
-                    <div className="border-b border-luxury-border/30 pb-3 mb-4">
-                      <h3 className="font-serif text-xl text-white font-light">Step 3: Address & Appearance</h3>
-                      <p className="font-sans text-[11px] text-gray-400 mt-1">Specify your location and physical features.</p>
-                    </div>
-
-                    <div className="space-y-1">
-                      <label className="font-sans text-[10px] tracking-wider uppercase text-gray-300 block font-semibold">Address Line 1</label>
-                      <input 
-                        type="text" 
-                        value={addressLine1} 
-                        onChange={e => setAddressLine1(e.target.value)} 
-                        placeholder="House no, Street name"
-                        className="w-full font-sans text-sm tracking-wider px-4 py-3 bg-luxury-onyx border border-luxury-border focus:border-luxury-gold outline-none text-white rounded-xl transition-colors" 
-                      />
-                    </div>
-
-                    <div className="space-y-1">
-                      <label className="font-sans text-[10px] tracking-wider uppercase text-gray-300 block font-semibold">Address Line 2</label>
-                      <input 
-                        type="text" 
-                        value={addressLine2} 
-                        onChange={e => setAddressLine2(e.target.value)} 
-                        placeholder="Apartment, Area, Landmark (Optional)"
-                        className="w-full font-sans text-sm tracking-wider px-4 py-3 bg-luxury-onyx border border-luxury-border focus:border-luxury-gold outline-none text-white rounded-xl transition-colors" 
-                      />
-                    </div>
-
-                    <div className="grid grid-cols-3 gap-4">
-                      <div className="space-y-1">
-                        <label className="font-sans text-[10px] tracking-wider uppercase text-gray-300 block font-semibold">City</label>
-                        <input 
-                          type="text" 
-                          value={city} 
-                          onChange={e => setCity(e.target.value)} 
-                          className="w-full font-sans text-sm tracking-wider px-4 py-3 bg-luxury-onyx border border-luxury-border focus:border-luxury-gold outline-none text-white rounded-xl transition-colors" 
-                        />
-                      </div>
-                      <div className="space-y-1">
-                        <label className="font-sans text-[10px] tracking-wider uppercase text-gray-300 block font-semibold">State</label>
-                        <input 
-                          type="text" 
-                          value={state} 
-                          onChange={e => setState(e.target.value)} 
-                          className="w-full font-sans text-sm tracking-wider px-4 py-3 bg-luxury-onyx border border-luxury-border focus:border-luxury-gold outline-none text-white rounded-xl transition-colors" 
-                        />
-                      </div>
-                      <div className="space-y-1">
-                        <label className="font-sans text-[10px] tracking-wider uppercase text-gray-300 block font-semibold">Postal / PIN Code</label>
-                        <input 
-                          type="text" 
-                          value={postalCode} 
-                          onChange={e => setPostalCode(e.target.value)} 
-                          className="w-full font-sans text-sm tracking-wider px-4 py-3 bg-luxury-onyx border border-luxury-border focus:border-luxury-gold outline-none text-white rounded-xl transition-colors" 
-                        />
-                      </div>
-                    </div>
-
                     <div className="grid grid-cols-2 gap-4">
                       <div className="space-y-1">
-                        <label className="font-sans text-[10px] tracking-wider uppercase text-gray-300 block font-semibold">Hair Color</label>
-                        <input 
-                          type="text" 
+                        <label className="font-sans text-[10px] tracking-wider uppercase text-gray-300 block font-semibold">Hair Color *</label>
+                        <select 
                           value={hairColor} 
                           onChange={e => setHairColor(e.target.value)} 
-                          placeholder="e.g. Black / Brown"
-                          className="w-full font-sans text-sm tracking-wider px-4 py-3 bg-luxury-onyx border border-luxury-border focus:border-luxury-gold outline-none text-white rounded-xl transition-colors" 
-                        />
+                          className="w-full font-sans text-sm tracking-wider px-4 py-3 bg-luxury-onyx border border-luxury-border focus:border-luxury-gold outline-none text-white rounded-xl transition-colors"
+                        >
+                          {HAIR_COLORS.map(hc => (
+                            <option key={hc} value={hc}>{hc}</option>
+                          ))}
+                        </select>
                       </div>
                       <div className="space-y-1">
-                        <label className="font-sans text-[10px] tracking-wider uppercase text-gray-300 block font-semibold">Skin Tone</label>
-                        <input 
-                          type="text" 
+                        <label className="font-sans text-[10px] tracking-wider uppercase text-gray-300 block font-semibold">Skin Tone *</label>
+                        <select 
                           value={skinTone} 
                           onChange={e => setSkinTone(e.target.value)} 
-                          placeholder="e.g. Fair / Wheatish / Dusky"
-                          className="w-full font-sans text-sm tracking-wider px-4 py-3 bg-luxury-onyx border border-luxury-border focus:border-luxury-gold outline-none text-white rounded-xl transition-colors" 
-                        />
+                          className="w-full font-sans text-sm tracking-wider px-4 py-3 bg-luxury-onyx border border-luxury-border focus:border-luxury-gold outline-none text-white rounded-xl transition-colors"
+                        >
+                          {SKIN_TONES.map(st => (
+                            <option key={st} value={st}>{st}</option>
+                          ))}
+                        </select>
                       </div>
                     </div>
 
                     <div className="grid grid-cols-2 gap-4">
                       <div className="space-y-1">
-                        <label className="font-sans text-[10px] tracking-wider uppercase text-gray-300 block font-semibold">Eye Color</label>
-                        <input 
-                          type="text" 
+                        <label className="font-sans text-[10px] tracking-wider uppercase text-gray-300 block font-semibold">Eye Color *</label>
+                        <select 
                           value={eyeColor} 
                           onChange={e => setEyeColor(e.target.value)} 
-                          placeholder="e.g. Black / Brown / Hazel"
-                          className="w-full font-sans text-sm tracking-wider px-4 py-3 bg-luxury-onyx border border-luxury-border focus:border-luxury-gold outline-none text-white rounded-xl transition-colors" 
-                        />
+                          className="w-full font-sans text-sm tracking-wider px-4 py-3 bg-luxury-onyx border border-luxury-border focus:border-luxury-gold outline-none text-white rounded-xl transition-colors"
+                        >
+                          {EYE_COLORS.map(ec => (
+                            <option key={ec} value={ec}>{ec}</option>
+                          ))}
+                        </select>
                       </div>
                       <div className="space-y-1">
-                        <label className="font-sans text-[10px] tracking-wider uppercase text-gray-300 block font-semibold">Body Shape / Type</label>
-                        <input 
-                          type="text" 
+                        <label className="font-sans text-[10px] tracking-wider uppercase text-gray-300 block font-semibold">Body Shape *</label>
+                        <select 
                           value={bodyShape} 
                           onChange={e => setBodyShape(e.target.value)} 
-                          placeholder="e.g. Slim / Athletic / Hourglass"
-                          className="w-full font-sans text-sm tracking-wider px-4 py-3 bg-luxury-onyx border border-luxury-border focus:border-luxury-gold outline-none text-white rounded-xl transition-colors" 
-                        />
+                          className="w-full font-sans text-sm tracking-wider px-4 py-3 bg-luxury-onyx border border-luxury-border focus:border-luxury-gold outline-none text-white rounded-xl transition-colors"
+                        >
+                          {BODY_SHAPES.map(bs => (
+                            <option key={bs} value={bs}>{bs}</option>
+                          ))}
+                        </select>
                       </div>
                     </div>
                   </motion.div>
                 )}
 
-                {/* STEP 4: SOCIALS & AUDITION QUESTIONS */}
-                {step === 4 && (
+                {/* STEP 5: SOCIALS & AUDITION QUESTIONNAIRE */}
+                {step === 5 && (
                   <motion.div 
-                    key="step4"
+                    key="step5"
                     initial={{ opacity: 0, x: 20 }}
                     animate={{ opacity: 1, x: 0 }}
                     exit={{ opacity: 0, x: -20 }}
                     className="space-y-5"
                   >
                     <div className="border-b border-luxury-border/30 pb-3 mb-4">
-                      <h3 className="font-serif text-xl text-white font-light">Step 4: Socials & Background</h3>
-                      <p className="font-sans text-[11px] text-gray-400 mt-1">Briefly tell us about your background and motivation.</p>
+                      <h3 className="font-serif text-xl text-white font-light">Step 5: Background, Socials & Audition Questions</h3>
+                      <p className="font-sans text-[11px] text-gray-400 mt-1">Provide your qualifications and details about yourself.</p>
                     </div>
 
                     <div className="grid grid-cols-2 gap-4">
                       <div className="space-y-1">
-                        <label className="font-sans text-[10px] tracking-wider uppercase text-gray-300 block font-semibold">Instagram Profile URL</label>
+                        <label className="font-sans text-[10px] tracking-wider uppercase text-gray-300 block font-semibold">Instagram Profile URL *</label>
                         <input 
                           type="url" 
                           value={instagramUrl} 
@@ -623,7 +724,7 @@ export default function ThankYouPage() {
                         />
                       </div>
                       <div className="space-y-1">
-                        <label className="font-sans text-[10px] tracking-wider uppercase text-gray-300 block font-semibold">Facebook Profile URL</label>
+                        <label className="font-sans text-[10px] tracking-wider uppercase text-gray-300 block font-semibold">Facebook Profile URL *</label>
                         <input 
                           type="url" 
                           value={facebookUrl} 
@@ -636,29 +737,29 @@ export default function ThankYouPage() {
 
                     <div className="grid grid-cols-2 gap-4">
                       <div className="space-y-1">
-                        <label className="font-sans text-[10px] tracking-wider uppercase text-gray-300 block font-semibold">Highest Qualification</label>
+                        <label className="font-sans text-[10px] tracking-wider uppercase text-gray-300 block font-semibold">Qualification Details *</label>
                         <input 
                           type="text" 
                           value={qualification} 
                           onChange={e => setQualification(e.target.value)} 
-                          placeholder="e.g. Graduate / Student"
+                          placeholder="e.g. Graduate, Student"
                           className="w-full font-sans text-sm tracking-wider px-4 py-3 bg-luxury-onyx border border-luxury-border focus:border-luxury-gold outline-none text-white rounded-xl transition-colors" 
                         />
                       </div>
                       <div className="space-y-1">
-                        <label className="font-sans text-[10px] tracking-wider uppercase text-gray-300 block font-semibold">Profession / Job Details</label>
+                        <label className="font-sans text-[10px] tracking-wider uppercase text-gray-300 block font-semibold">Professional Detail *</label>
                         <input 
                           type="text" 
                           value={professionalDetail} 
                           onChange={e => setProfessionalDetail(e.target.value)} 
-                          placeholder="e.g. Model / IT Professional"
+                          placeholder="e.g. Model, IT Professional"
                           className="w-full font-sans text-sm tracking-wider px-4 py-3 bg-luxury-onyx border border-luxury-border focus:border-luxury-gold outline-none text-white rounded-xl transition-colors" 
                         />
                       </div>
                     </div>
 
                     <div className="space-y-1">
-                      <label className="font-sans text-[10px] tracking-wider uppercase text-gray-300 block font-semibold">Why do you want to be a Model / Pageant Candidate?</label>
+                      <label className="font-sans text-[10px] tracking-wider uppercase text-gray-300 block font-semibold">Why do you want to be a model? Why do you want to participate in this show? *</label>
                       <textarea 
                         rows={2}
                         value={qaWhyModel} 
@@ -667,69 +768,67 @@ export default function ThankYouPage() {
                       />
                     </div>
 
-                    <div className="grid grid-cols-2 gap-4">
-                      <div className="space-y-1">
-                        <label className="font-sans text-[10px] tracking-wider uppercase text-gray-300 block font-semibold">Your major strengths?</label>
-                        <input 
-                          type="text" 
-                          value={qaStrengths} 
-                          onChange={e => setQaStrengths(e.target.value)} 
-                          className="w-full font-sans text-sm tracking-wider px-4 py-3 bg-luxury-onyx border border-luxury-border focus:border-luxury-gold outline-none text-white rounded-xl transition-colors" 
-                        />
-                      </div>
-                      <div className="space-y-1">
-                        <label className="font-sans text-[10px] tracking-wider uppercase text-gray-300 block font-semibold">Who is your role model?</label>
-                        <input 
-                          type="text" 
-                          value={qaRoleModel} 
-                          onChange={e => setQaRoleModel(e.target.value)} 
-                          className="w-full font-sans text-sm tracking-wider px-4 py-3 bg-luxury-onyx border border-luxury-border focus:border-luxury-gold outline-none text-white rounded-xl transition-colors" 
-                        />
-                      </div>
+                    <div className="space-y-1">
+                      <label className="font-sans text-[10px] tracking-wider uppercase text-gray-300 block font-semibold">What are your strengths & weaknesses? *</label>
+                      <textarea 
+                        rows={2}
+                        value={qaStrengths} 
+                        onChange={e => setQaStrengths(e.target.value)} 
+                        className="w-full font-sans text-sm tracking-wider px-4 py-3 bg-luxury-onyx border border-luxury-border focus:border-luxury-gold outline-none text-white rounded-xl transition-colors resize-none" 
+                      />
                     </div>
 
-                    <div className="grid grid-cols-2 gap-4">
-                      <div className="space-y-1">
-                        <label className="font-sans text-[10px] tracking-wider uppercase text-gray-300 block font-semibold">Describe a major adventure you did?</label>
-                        <input 
-                          type="text" 
-                          value={qaAdventure} 
-                          onChange={e => setQaAdventure(e.target.value)} 
-                          className="w-full font-sans text-sm tracking-wider px-4 py-3 bg-luxury-onyx border border-luxury-border focus:border-luxury-gold outline-none text-white rounded-xl transition-colors" 
-                        />
-                      </div>
-                      <div className="space-y-1">
-                        <label className="font-sans text-[10px] tracking-wider uppercase text-gray-300 block font-semibold">What will you do if you win?</label>
-                        <input 
-                          type="text" 
-                          value={qaIfWin} 
-                          onChange={e => setQaIfWin(e.target.value)} 
-                          className="w-full font-sans text-sm tracking-wider px-4 py-3 bg-luxury-onyx border border-luxury-border focus:border-luxury-gold outline-none text-white rounded-xl transition-colors" 
-                        />
-                      </div>
+                    <div className="space-y-1">
+                      <label className="font-sans text-[10px] tracking-wider uppercase text-gray-300 block font-semibold">Who is your role model & why? *</label>
+                      <textarea 
+                        rows={2}
+                        value={qaRoleModel} 
+                        onChange={e => setQaRoleModel(e.target.value)} 
+                        className="w-full font-sans text-sm tracking-wider px-4 py-3 bg-luxury-onyx border border-luxury-border focus:border-luxury-gold outline-none text-white rounded-xl transition-colors resize-none" 
+                      />
+                    </div>
+
+                    <div className="space-y-1">
+                      <label className="font-sans text-[10px] tracking-wider uppercase text-gray-300 block font-semibold">Which is the most adventurous incident in your life? *</label>
+                      <textarea 
+                        rows={2}
+                        value={qaAdventure} 
+                        onChange={e => setQaAdventure(e.target.value)} 
+                        className="w-full font-sans text-sm tracking-wider px-4 py-3 bg-luxury-onyx border border-luxury-border focus:border-luxury-gold outline-none text-white rounded-xl transition-colors resize-none" 
+                      />
+                    </div>
+
+                    <div className="space-y-1">
+                      <label className="font-sans text-[10px] tracking-wider uppercase text-gray-300 block font-semibold">What will you do if you win the pageant? *</label>
+                      <textarea 
+                        rows={2}
+                        value={qaIfWin} 
+                        onChange={e => setQaIfWin(e.target.value)} 
+                        className="w-full font-sans text-sm tracking-wider px-4 py-3 bg-luxury-onyx border border-luxury-border focus:border-luxury-gold outline-none text-white rounded-xl transition-colors resize-none" 
+                      />
                     </div>
                   </motion.div>
                 )}
 
-                {/* STEP 5: PORTFOLIO PHOTOS UPLOAD */}
-                {step === 5 && (
+                {/* STEP 6: UPLOAD PHOTOS */}
+                {step === 6 && (
                   <motion.div 
-                    key="step5"
+                    key="step6"
                     initial={{ opacity: 0, x: 20 }}
                     animate={{ opacity: 1, x: 0 }}
                     exit={{ opacity: 0, x: -20 }}
                     className="space-y-6"
                   >
                     <div className="border-b border-luxury-border/30 pb-3 mb-4">
-                      <h3 className="font-serif text-xl text-white font-light">Step 5: Portfolio Photos</h3>
-                      <p className="font-sans text-[11px] text-gray-400 mt-1">Upload 2 clear, professional photos (Close-up and Full-length). Max 3MB each.</p>
+                      <h3 className="font-serif text-xl text-white font-light">Step 6: Upload Photos</h3>
+                      <p className="font-sans text-[11px] text-gray-400 mt-1">Upload 2 clear, recent professional photographs. Max 3MB each.</p>
                     </div>
 
                     <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                       
                       {/* Photo 1 Upload Box */}
                       <div className="space-y-2">
-                        <label className="font-sans text-[10px] tracking-wider uppercase text-gray-300 block font-semibold text-center">Photo 1 (Close-up / Portrait)</label>
+                        <label className="font-sans text-[10px] tracking-wider uppercase text-gray-300 block font-semibold text-center">Photo 1 * (Close-up / Portrait)</label>
                         <div className="border-2 border-dashed border-luxury-border/40 hover:border-luxury-gold/50 bg-luxury-onyx rounded-2xl h-56 flex flex-col items-center justify-center overflow-hidden relative group transition-colors cursor-pointer">
                           {photo1Preview ? (
                             <>
@@ -741,7 +840,7 @@ export default function ThankYouPage() {
                           ) : (
                             <div className="text-center p-4">
                               <span className="text-3xl block mb-2">📸</span>
-                              <span className="font-sans text-[11px] text-gray-400 block font-medium">Click to select image</span>
+                              <span className="font-sans text-[11px] text-gray-400 block font-medium">Click to upload Photo 1</span>
                               <span className="font-sans text-[9px] text-gray-500 block mt-1">JPEG or PNG under 3MB</span>
                             </div>
                           )}
@@ -756,7 +855,7 @@ export default function ThankYouPage() {
 
                       {/* Photo 2 Upload Box */}
                       <div className="space-y-2">
-                        <label className="font-sans text-[10px] tracking-wider uppercase text-gray-300 block font-semibold text-center">Photo 2 (Full-length / Runway)</label>
+                        <label className="font-sans text-[10px] tracking-wider uppercase text-gray-300 block font-semibold text-center">Photo 2 * (Full-length / Runway)</label>
                         <div className="border-2 border-dashed border-luxury-border/40 hover:border-luxury-gold/50 bg-luxury-onyx rounded-2xl h-56 flex flex-col items-center justify-center overflow-hidden relative group transition-colors cursor-pointer">
                           {photo2Preview ? (
                             <>
@@ -767,8 +866,8 @@ export default function ThankYouPage() {
                             </>
                           ) : (
                             <div className="text-center p-4">
-                              <span className="text-3xl block mb-2">💃</span>
-                              <span className="font-sans text-[11px] text-gray-400 block font-medium">Click to select image</span>
+                              <span className="text-3xl block mb-2">📸</span>
+                              <span className="font-sans text-[11px] text-gray-400 block font-medium">Click to upload Photo 2</span>
                               <span className="font-sans text-[9px] text-gray-500 block mt-1">JPEG or PNG under 3MB</span>
                             </div>
                           )}
@@ -810,7 +909,7 @@ export default function ThankYouPage() {
                     <button 
                       type="button" 
                       onClick={handleNextStep}
-                      className="font-sans text-xs tracking-widest uppercase gold-gradient-bg text-luxury-onyx hover:brightness-110 px-8 py-3 rounded-full transition-all font-bold"
+                      className="font-sans text-xs tracking-widest uppercase gold-gradient-bg text-luxury-onyx hover:brightness-110 px-8 py-3 rounded-full transition-all font-bold font-semibold"
                     >
                       Continue
                     </button>

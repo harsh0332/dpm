@@ -115,7 +115,7 @@ export default function FinalCTA() {
 
       // Save contact details for pre-filling the profile form on /thankyou
       if (typeof window !== "undefined") {
-        sessionStorage.setItem("dpm_lead_contact", JSON.stringify({ name, email, phone }));
+        sessionStorage.setItem("dpm_lead_contact", JSON.stringify({ name, email, phone, category: selectedCategory }));
       }
 
       // Parse tracking parameters at checkout time
