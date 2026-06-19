@@ -113,6 +113,11 @@ export default function FinalCTA() {
       const controller = new AbortController();
       const timeoutId = setTimeout(() => controller.abort(), 4000);
 
+      // Save contact details for pre-filling the profile form on /thankyou
+      if (typeof window !== "undefined") {
+        sessionStorage.setItem("dpm_lead_contact", JSON.stringify({ name, email, phone }));
+      }
+
       // Parse tracking parameters at checkout time
       const trackingParams: { [key: string]: string | null } = {};
       
