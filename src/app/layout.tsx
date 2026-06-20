@@ -1,34 +1,27 @@
 import type { Metadata } from "next";
-import { Cormorant_Garamond, Inter, Playfair_Display, Hanken_Grotesk } from "next/font/google";
+// Only load the 2 fonts that are actually rendered:
+// Playfair Display → --font-playfair → used as --font-serif across all headings
+// Hanken Grotesk   → --font-hanken   → used as --font-sans across all body text
+// Cormorant Garamond and Inter were loaded but overridden in globals.css (removed).
+import { Playfair_Display, Hanken_Grotesk } from "next/font/google";
 import Script from "next/script";
 import "./globals.css";
 import Navbar from "@/components/Navbar";
 import { siteData } from "@/content/site-data";
 
-const cormorantGaramond = Cormorant_Garamond({
-  variable: "--font-serif",
-  subsets: ["latin"],
-  weight: ["300", "400", "500", "600", "700"],
-  style: ["normal", "italic"],
-});
-
-const inter = Inter({
-  variable: "--font-sans",
-  subsets: ["latin"],
-  weight: ["300", "400", "500", "600", "700"],
-});
-
 const playfair = Playfair_Display({
   variable: "--font-playfair",
   subsets: ["latin"],
-  weight: ["500", "600", "700"],
+  weight: ["400", "500", "600", "700"],
   style: ["normal", "italic"],
+  display: "swap",
 });
 
 const hanken = Hanken_Grotesk({
   variable: "--font-hanken",
   subsets: ["latin"],
-  weight: ["400", "500", "600", "700"],
+  weight: ["400", "600", "700"],
+  display: "swap",
 });
 
 export const metadata: Metadata = {
@@ -65,7 +58,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" className={`${cormorantGaramond.variable} ${inter.variable} ${playfair.variable} ${hanken.variable}`}>
+    <html lang="en" className={`${playfair.variable} ${hanken.variable}`}>
       <body className="bg-luxury-onyx text-luxury-alabaster font-sans antialiased min-h-screen flex flex-col overflow-x-hidden">
         {/* Meta Pixel Code */}
         <Script id="fb-pixel" strategy="afterInteractive">

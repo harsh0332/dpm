@@ -1,6 +1,7 @@
 "use client";
 
 import React, { useState, useRef } from "react";
+import Image from "next/image";
 import { motion, useReducedMotion, Variants } from "framer-motion";
 import { siteData } from "@/content/site-data";
 
@@ -123,11 +124,13 @@ export default function CategorySelector() {
               <div className="space-y-3">
                 {/* Real Photo Slot */}
                 <div className="aspect-[3/4] bg-luxury-onyx border border-luxury-border/30 flex items-center justify-center relative overflow-hidden rounded-xl">
-                  <img 
-                    src={cat.image} 
-                    alt={`${cat.name} Category Cover`} 
-                    className="w-full h-full object-cover object-top filter grayscale-0 md:grayscale md:hover:grayscale-0 transition-all duration-500 rounded-lg"
+                  <Image
+                    src={cat.image}
+                    alt={`${cat.name} Category Cover`}
+                    fill
                     loading="lazy"
+                    sizes="(max-width: 768px) 85vw, (max-width: 1280px) 25vw, 300px"
+                    className="object-cover object-top rounded-lg"
                   />
                 </div>
 
@@ -198,11 +201,13 @@ export default function CategorySelector() {
                 <div className="space-y-3">
                   {/* Real Photo Slot */}
                   <div className="aspect-[3/4] bg-luxury-onyx border border-luxury-border/30 flex items-center justify-center relative overflow-hidden rounded-xl">
-                    <img 
-                      src={cat.image} 
-                      alt={`${cat.name} Category Cover`} 
-                      className="w-full h-full object-cover object-top rounded-lg"
+                    <Image
+                      src={cat.image}
+                      alt={`${cat.name} Category Cover`}
+                      fill
                       loading="lazy"
+                      sizes="85vw"
+                      className="object-cover object-top rounded-lg"
                     />
                   </div>
 

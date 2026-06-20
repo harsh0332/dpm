@@ -1,6 +1,7 @@
 "use client";
  
 import React, { useState, useRef } from "react";
+import Image from "next/image";
 import { motion, useReducedMotion, Variants } from "framer-motion";
 import { siteData } from "@/content/site-data";
  
@@ -89,11 +90,13 @@ export default function Jury() {
           >
             {/* Circular Portrait Image */}
             <div className="w-20 h-20 sm:w-24 sm:h-24 rounded-full border-2 border-jewel-sapphire/50 overflow-hidden relative flex-shrink-0 bg-luxury-onyx shadow-lg">
-              <img 
-                src={member.image} 
-                alt={`Jury Member ${member.name}`} 
-                className="w-full h-full object-cover object-top filter grayscale-0 md:grayscale md:hover:grayscale-0 transition-all duration-500"
+              <Image
+                src={member.image}
+                alt={`Jury Member ${member.name}`}
+                fill
                 loading="lazy"
+                sizes="96px"
+                className="object-cover object-top filter grayscale-0 md:grayscale md:hover:grayscale-0 transition-all duration-500"
               />
             </div>
  
@@ -171,11 +174,13 @@ export default function Jury() {
             >
               {/* Circular Portrait Image */}
               <div className="w-20 h-20 rounded-full border-2 border-jewel-sapphire/50 overflow-hidden relative flex-shrink-0 bg-luxury-onyx shadow-lg">
-                <img 
-                  src={member.image} 
-                  alt={`Jury Member ${member.name}`} 
-                  className="w-full h-full object-cover object-top"
+                <Image
+                  src={member.image}
+                  alt={`Jury Member ${member.name}`}
+                  fill
                   loading="lazy"
+                  sizes="80px"
+                  className="object-cover object-top"
                 />
               </div>
  

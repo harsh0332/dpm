@@ -1,6 +1,7 @@
 "use client";
 
 import React, { useState, useEffect } from "react";
+import Image from "next/image";
 import { siteData } from "@/content/site-data";
 
 export default function Hero() {
@@ -90,8 +91,17 @@ export default function Hero() {
                   <div className="absolute top-10 left-1/2 -translate-x-1/2 w-[220px] h-[220px] rounded-full bg-[radial-gradient(circle,rgba(84,112,217,0.32),transparent_68%)] filter blur-[10px] animate-drift-a pointer-events-none" />
                   <div className="absolute bottom-[40px] left-[20px] w-[200px] h-[200px] rounded-full bg-[radial-gradient(circle,rgba(199,69,138,0.28),transparent_68%)] filter blur-[10px] animate-drift-b pointer-events-none" />
                   
-                  {/* Image */}
-                  <img src={siteData.celebrityPatron.image} alt={siteData.celebrityPatron.name} className="absolute left-0 bottom-0 w-full h-full object-cover object-top pointer-events-none z-10" />
+                  {/* Image — LCP element on mobile: eager load + preload */}
+                  <Image
+                    src={siteData.celebrityPatron.image}
+                    alt={siteData.celebrityPatron.name}
+                    fill
+                    loading="eager"
+                    fetchPriority="high"
+                    preload={true}
+                    sizes="(max-width: 1024px) 100vw, 0vw"
+                    className="object-cover object-top pointer-events-none z-10"
+                  />
                   
                   {/* Overlays */}
                   <div className="absolute inset-0 bg-gradient-to-t from-[#0B0811]/94 via-[#0B0811]/40 to-transparent pointer-events-none z-15" />
@@ -273,11 +283,16 @@ export default function Hero() {
                 <div className="absolute top-10 left-1/2 -translate-x-1/2 w-[340px] h-[340px] rounded-full bg-[radial-gradient(circle,rgba(84,112,217,0.32),transparent_68%)] filter blur-[14px] animate-drift-a pointer-events-none" />
                 <div className="absolute bottom-[60px] left-[30px] w-[300px] h-[300px] rounded-full bg-[radial-gradient(circle,rgba(199,69,138,0.28),transparent_68%)] filter blur-[14px] animate-drift-b pointer-events-none" />
                 
-                {/* Chief Guest Image */}
-                <img 
-                  src={siteData.celebrityPatron.image} 
-                  alt={siteData.celebrityPatron.name} 
-                  className="absolute left-0 bottom-0 w-full h-full object-cover object-top filter grayscale contrast-[1.02] hover:grayscale-0 hover:scale-[1.03] transition-all duration-700 pointer-events-none z-10" 
+                {/* Chief Guest Image — LCP element on desktop: eager load + preload */}
+                <Image
+                  src={siteData.celebrityPatron.image}
+                  alt={siteData.celebrityPatron.name}
+                  fill
+                  loading="eager"
+                  fetchPriority="high"
+                  preload={true}
+                  sizes="(max-width: 1024px) 0vw, 42vw"
+                  className="object-cover object-top filter grayscale contrast-[1.02] hover:grayscale-0 hover:scale-[1.03] transition-all duration-700 pointer-events-none z-10"
                 />
                 
                 {/* Gradients */}

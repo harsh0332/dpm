@@ -1,6 +1,7 @@
 "use client";
 
 import React from "react";
+import Image from "next/image";
 import { motion, useReducedMotion, Variants } from "framer-motion";
 import { siteData } from "@/content/site-data";
 
@@ -50,11 +51,14 @@ export default function CelebrityPatron() {
           className="relative flex items-center justify-center w-full mb-8"
         >
           <div className="border border-luxury-gold/30 p-2 bg-luxury-onyx/50 w-full max-w-xs md:max-w-sm rounded-[2rem] overflow-hidden transition-all duration-500 hover:border-luxury-gold/70 shadow-lg">
-            <img 
-              src={patron.image} 
-              alt="Urvashi Rautela Chief Guest Portrait" 
-              className="w-full h-auto object-contain filter grayscale-0 md:grayscale md:hover:grayscale-0 transition-all duration-500 rounded-[1.75rem]"
+            <Image
+              src={patron.image}
+              alt="Urvashi Rautela Chief Guest Portrait"
+              width={400}
+              height={500}
               loading="lazy"
+              sizes="(max-width: 768px) 80vw, 384px"
+              className="w-full h-auto object-contain filter grayscale-0 md:grayscale md:hover:grayscale-0 transition-all duration-500 rounded-[1.75rem]"
             />
           </div>
         </motion.div>

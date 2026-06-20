@@ -1,4 +1,5 @@
 import React from "react";
+import Image from "next/image";
 import Link from "next/link";
 import { siteData } from "@/content/site-data";
 
@@ -13,9 +14,13 @@ export default function Footer() {
         {/* Left Side: Brand Logo, Organization Info */}
         <div className="md:col-span-7 space-y-4">
           <div className="flex items-center gap-3">
-            <img 
-              src={siteData.logo} 
-              alt={`${siteData.brandName} Logo`} 
+            <Image
+              src={siteData.logo}
+              alt={`${siteData.brandName} Logo`}
+              width={32}
+              height={32}
+              loading="lazy"
+              sizes="32px"
               className="w-8 h-8 object-contain border border-luxury-gold/40 rounded-full bg-white/5 p-0.5"
             />
             <span className="font-serif tracking-widest text-lg font-bold text-white">
