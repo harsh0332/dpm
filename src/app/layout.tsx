@@ -3,24 +3,34 @@ import type { Metadata } from "next";
 // Playfair Display → --font-playfair → used as --font-serif across all headings
 // Hanken Grotesk   → --font-hanken   → used as --font-sans across all body text
 // Cormorant Garamond and Inter were loaded but overridden in globals.css (removed).
-import { Playfair_Display, Hanken_Grotesk } from "next/font/google";
+import localFont from "next/font/local";
 import Script from "next/script";
 import "./globals.css";
 import Navbar from "@/components/Navbar";
 import { siteData } from "@/content/site-data";
 
-const playfair = Playfair_Display({
+const playfair = localFont({
+  src: [
+    { path: "../../public/fonts/playfair-display-400-normal.woff2", weight: "400", style: "normal" },
+    { path: "../../public/fonts/playfair-display-400-italic.woff2", weight: "400", style: "italic" },
+    { path: "../../public/fonts/playfair-display-500-normal.woff2", weight: "500", style: "normal" },
+    { path: "../../public/fonts/playfair-display-500-italic.woff2", weight: "500", style: "italic" },
+    { path: "../../public/fonts/playfair-display-600-normal.woff2", weight: "600", style: "normal" },
+    { path: "../../public/fonts/playfair-display-600-italic.woff2", weight: "600", style: "italic" },
+    { path: "../../public/fonts/playfair-display-700-normal.woff2", weight: "700", style: "normal" },
+    { path: "../../public/fonts/playfair-display-700-italic.woff2", weight: "700", style: "italic" },
+  ],
   variable: "--font-playfair",
-  subsets: ["latin"],
-  weight: ["400", "500", "600", "700"],
-  style: ["normal", "italic"],
   display: "swap",
 });
 
-const hanken = Hanken_Grotesk({
+const hanken = localFont({
+  src: [
+    { path: "../../public/fonts/hanken-grotesk-400-normal.woff2", weight: "400", style: "normal" },
+    { path: "../../public/fonts/hanken-grotesk-600-normal.woff2", weight: "600", style: "normal" },
+    { path: "../../public/fonts/hanken-grotesk-700-normal.woff2", weight: "700", style: "normal" },
+  ],
   variable: "--font-hanken",
-  subsets: ["latin"],
-  weight: ["400", "600", "700"],
   display: "swap",
 });
 
