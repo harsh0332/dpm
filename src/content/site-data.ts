@@ -156,7 +156,7 @@ export const siteData: SiteData = {
       name: "Dinesh Sudarshan Soi",
       role: "Director & Producer",
       instagram: "@dineshsoiofficial",
-      image: "/Jury Image/Dinesh Sudarshan Soi.png",
+      image: "/jury-images/Dinesh Sudarshan Soi.png",
       followers: "1.2M+",
       bio: "National Award winner, directed 50+ music videos and launched top-tier modeling careers."
     },
@@ -164,7 +164,7 @@ export const siteData: SiteData = {
       name: "Dishi Bhatnagar",
       role: "Director, Miss Mrs & Mr Asia Intl",
       instagram: "@tauriangirl_16official",
-      image: "/Jury Image/Dishi Bhatnagar.png",
+      image: "/jury-images/Dishi Bhatnagar.png",
       followers: "250k+",
       bio: "International pageant director with 15+ years experience sculpting global runway candidates."
     },
@@ -172,7 +172,7 @@ export const siteData: SiteData = {
       name: "Ishmeet Kaur",
       role: "Mrs India World 2024",
       instagram: "@iishmeetkaurr",
-      image: "/Jury Image/Ishmeet Kaur.png",
+      image: "/jury-images/Ishmeet Kaur.png",
       followers: "100k+",
       bio: "Crowned Mrs India World 2024, mentor to rising models and promoter of regional talent."
     },
@@ -180,7 +180,7 @@ export const siteData: SiteData = {
       name: "Dr. Akanksha Massey",
       role: "Gynecologist & Mentor",
       instagram: "@akanksha_mrsindia",
-      image: "/Jury Image/Dr. Akansha Massey.png",
+      image: "/jury-images/Dr. Akansha Massey.png",
       followers: "45k+",
       bio: "Medical professional, wellness mentor, and pageant judge specializing in mental strength & posture."
     },
@@ -188,7 +188,7 @@ export const siteData: SiteData = {
       name: "Ankit Nagpal",
       role: "Mentor & Personality Coach",
       instagram: "@rareimprints.ankit.nagpal",
-      image: "/Jury Image/Ankit Nagpal.png",
+      image: "/jury-images/Ankit Nagpal.png",
       followers: "80k+",
       bio: "Celebrity personality coach and communication mentor with deep ties to Bollywood casting directors."
     },
@@ -196,7 +196,7 @@ export const siteData: SiteData = {
       name: "Allie Sharma",
       role: "Show Director & Pageant Groomer",
       instagram: "@alliesharmaofficial",
-      image: "/Jury Image/Allie Sharma.png",
+      image: "/jury-images/Allie Sharma.png",
       followers: "120k+",
       bio: "Show director, runway choreographer and pageant groomer with over 200 staged fashion shows."
     },
@@ -204,7 +204,7 @@ export const siteData: SiteData = {
       name: "Sapna Chauhan",
       role: "Entrepreneur & Filmmaker",
       instagram: "@sapna.styleframes",
-      image: "/Jury Image/Sapna Chauhan.png",
+      image: "/jury-images/Sapna Chauhan.png",
       followers: "95k+",
       bio: "Entrepreneur, film producer and pageant organizer creating direct lanes for actors & models."
     },
@@ -212,7 +212,7 @@ export const siteData: SiteData = {
       name: "Kanchan Vishwakarma",
       role: "Scientist & Pageant Title-holder",
       instagram: "@kanchanvishwakarma22",
-      image: "/Jury Image/Kanchan Vishwarkarma.png",
+      image: "/jury-images/Kanchan Vishwarkarma.png",
       followers: "30k+",
       bio: "Scientist, pageant winner and regional talent mentor focused on intelligence & presentation."
     },
@@ -220,7 +220,7 @@ export const siteData: SiteData = {
       name: "Shalini Kashyap",
       role: "Miss Universe Earth Intl 2022, Communication Coach",
       instagram: "@tajmissunivers",
-      image: "/Jury Image/Shalini Kashyap.png",
+      image: "/jury-images/Shalini Kashyap.png",
       followers: "150k+",
       bio: "Crowned Miss Universe Earth Intl 2022, communication coach, and runway presentation expert."
     }

@@ -2,6 +2,7 @@ import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
   images: {
+    unoptimized: true,
     // Serve AVIF first (smallest), fall back to WebP — both are served by the next/image optimizer
     formats: ["image/avif", "image/webp"],
     // Cache optimized images for 1 year (they are content-hashed)
