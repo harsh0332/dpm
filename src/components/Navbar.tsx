@@ -37,7 +37,7 @@ export default function Navbar() {
             alt={`${siteData.brandName} Logo`}
             width={40}
             height={40}
-            loading="eager"
+            loading="lazy"
             sizes="40px"
             className="w-10 h-10 object-contain border border-luxury-gold/30 rounded-full bg-white/5 p-0.5 transition-transform duration-500 group-hover:rotate-[360deg]"
           />

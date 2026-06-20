@@ -1,6 +1,7 @@
 "use client";
 
 import React, { useState, useRef } from "react";
+import Image from "next/image";
 import { motion, AnimatePresence, useReducedMotion, Variants } from "framer-motion";
 import { siteData } from "@/content/site-data";
 
@@ -116,11 +117,12 @@ export default function PastEventGallery() {
                 }`}
               >
                 <div className="relative aspect-[3/2] bg-luxury-onyx overflow-hidden group rounded-2xl">
-                  <img
+                  <Image
                     src={img.src}
                     alt={`DPM Past Event Highlights ${i + 1}`}
-                    className="w-full h-full object-cover object-center filter grayscale-0 md:grayscale md:hover:grayscale-0 transition-all duration-500 transform group-hover:scale-105 rounded-2xl"
-                    loading="lazy"
+                    fill
+                    sizes="(max-width: 768px) 75vw, 320px"
+                    className="object-cover object-center filter grayscale-0 md:grayscale md:hover:grayscale-0 transition-all duration-500 transform group-hover:scale-105 rounded-2xl"
                   />
                   <div className="absolute inset-0 bg-gradient-to-t from-luxury-onyx/75 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end p-3 pointer-events-none">
                     <span className="font-sans text-[9px] tracking-wider uppercase text-luxury-gold font-semibold">
@@ -159,11 +161,12 @@ export default function PastEventGallery() {
                 }`}
               >
                 <div className="relative aspect-[3/2] bg-luxury-onyx overflow-hidden group rounded-2xl">
-                  <img
+                  <Image
                     src={img.src}
                     alt={`DPM Past Event Highlights ${i + 1}`}
-                    className="w-full h-full object-cover object-center rounded-2xl"
-                    loading="lazy"
+                    fill
+                    sizes="(max-width: 768px) 75vw, 320px"
+                    className="object-cover object-center rounded-2xl"
                   />
                   <div className="absolute inset-0 bg-gradient-to-t from-luxury-onyx/75 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end p-3 pointer-events-none">
                     <span className="font-sans text-[9px] tracking-wider uppercase text-luxury-gold font-semibold">

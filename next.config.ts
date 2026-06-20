@@ -23,6 +23,26 @@ const nextConfig: NextConfig = {
           },
         ],
       },
+      {
+        // Cache custom static public assets
+        source: "/new-images/:path*",
+        headers: [
+          {
+            key: "Cache-Control",
+            value: "public, max-age=31536000, immutable",
+          },
+        ],
+      },
+      {
+        // Cache optimized video assets
+        source: "/dpm-experience-compressed.mp4",
+        headers: [
+          {
+            key: "Cache-Control",
+            value: "public, max-age=31536000, immutable",
+          },
+        ],
+      },
     ];
   },
 };

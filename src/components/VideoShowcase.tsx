@@ -1,25 +1,80 @@
 "use client";
 
-import React, { useState, useRef } from "react";
+import React, { useState, useRef, useEffect } from "react";
+import Image from "next/image";
 import { motion, useReducedMotion, Variants } from "framer-motion";
 
 export default function VideoShowcase() {
   const [isPlaying, setIsPlaying] = useState(false);
+  const [isMobile, setIsMobile] = useState(false);
+  const [inView, setInView] = useState(false);
+  const [isPlayClicked, setIsPlayClicked] = useState(false);
+
+  const containerRef = useRef<HTMLDivElement>(null);
   const videoRef = useRef<HTMLVideoElement>(null);
   const shouldReduceMotion = useReducedMotion();
 
+  // Detect mobile and IntersectionObserver for lazy mounting
+  useEffect(() => {
+    setIsMobile(window.innerWidth < 768);
+
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          setInView(true);
+          observer.disconnect(); // Trigger once
+        }
+      },
+      { threshold: 0.1, rootMargin: "100px" }
+    );
+
+    if (containerRef.current) {
+      observer.observe(containerRef.current);
+    }
+
+    return () => {
+      observer.disconnect();
+    };
+  }, []);
+
+  // When play is clicked on mobile, load and play the video
+  useEffect(() => {
+    if (isPlayClicked && isMobile && videoRef.current) {
+      videoRef.current.play().catch((err) => {
+        console.error("Autoplay failed:", err);
+      });
+    }
+  }, [isPlayClicked, isMobile]);
+
   const handleTogglePlay = () => {
-    if (videoRef.current) {
-      if (!isPlaying) {
-        videoRef.current.muted = false;
-        videoRef.current.controls = true;
-        videoRef.current.play();
+    if (isMobile) {
+      if (!isPlayClicked) {
+        setIsPlayClicked(true);
         setIsPlaying(true);
       } else {
-        videoRef.current.muted = true;
-        videoRef.current.controls = false;
-        videoRef.current.pause();
-        setIsPlaying(false);
+        if (videoRef.current) {
+          if (isPlaying) {
+            videoRef.current.pause();
+            setIsPlaying(false);
+          } else {
+            videoRef.current.play();
+            setIsPlaying(true);
+          }
+        }
+      }
+    } else {
+      if (videoRef.current) {
+        if (!isPlaying) {
+          videoRef.current.muted = false;
+          videoRef.current.controls = true;
+          videoRef.current.play();
+          setIsPlaying(true);
+        } else {
+          videoRef.current.muted = true;
+          videoRef.current.controls = false;
+          videoRef.current.pause();
+          setIsPlaying(false);
+        }
       }
     }
   };
@@ -36,8 +91,13 @@ export default function VideoShowcase() {
     },
   };
 
+  const shouldShowVideo = !isMobile ? inView : isPlayClicked;
+
   return (
-    <section className="relative py-8 md:py-16 my-6 md:my-12 bg-luxury-darkcard border border-luxury-border/30 max-w-5xl mx-auto px-6 overflow-hidden rounded-[2rem] shadow-xl">
+    <section 
+      ref={containerRef}
+      className="relative py-8 md:py-16 my-6 md:my-12 bg-luxury-darkcard border border-luxury-border/30 max-w-5xl mx-auto px-6 overflow-hidden rounded-[2rem] shadow-xl"
+    >
       
       {/* Deep Royal Sapphire Backdrop Glow */}
       <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_50%,rgba(15,58,95,0.15)_0%,transparent_60%)] pointer-events-none" />
@@ -71,16 +131,31 @@ export default function VideoShowcase() {
             onClick={handleTogglePlay}
             className="w-full max-w-[260px] aspect-[9/16] rounded-[2.5rem] border-[10px] border-[#242424] shadow-[0_20px_50px_rgba(0,0,0,0.8)] overflow-hidden relative bg-black group ring-1 ring-white/10 cursor-pointer sapphire-glow-hover"
           >
-            {/* Ambient muted loop preview video inside the phone frame */}
-            <video
-               ref={videoRef}
-               src="/dpm-experience.mp4"
-               autoPlay
-               muted
-               loop
-               playsInline
-               className="w-full h-full object-cover"
-            />
+            {shouldShowVideo ? (
+              <video
+                 ref={videoRef}
+                 poster="/new-images/video-poster.jpg"
+                 preload="none"
+                 autoPlay={!isMobile}
+                 muted={!isMobile || !isPlayClicked}
+                 loop={!isMobile}
+                 playsInline
+                 controls={(!isMobile && isPlaying) || (isMobile && isPlayClicked)}
+                 className="w-full h-full object-cover"
+              >
+                <source src="/dpm-experience-compressed.mp4" type="video/mp4" />
+                <source src="/dpm-experience.mp4" type="video/mp4" />
+              </video>
+            ) : (
+              <Image
+                src="/new-images/video-poster.jpg"
+                alt="DPM Experience Video Poster"
+                fill
+                sizes="(max-width: 768px) 100vw, 260px"
+                className="object-cover"
+                loading="lazy"
+              />
+            )}
 
             {/* Play Button Overlay (fades out when playing) */}
             {!isPlaying && (

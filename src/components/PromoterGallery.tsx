@@ -1,6 +1,7 @@
 "use client";
 
 import React, { useState, useRef } from "react";
+import Image from "next/image";
 import { motion, useReducedMotion, Variants } from "framer-motion";
 import { siteData } from "@/content/site-data";
 
@@ -77,11 +78,12 @@ export default function PromoterGallery() {
               className="border border-luxury-border/30 bg-luxury-darkcard p-1.5 rounded-2xl luxury-glow-hover transition-all duration-300"
             >
               <div className="relative aspect-[3/4] bg-luxury-onyx overflow-hidden group rounded-xl">
-                <img
+                <Image
                   src={imgSrc}
                   alt={`Founder Shivanshu Mishra with Celebrity ${i + 1}`}
-                  className="w-full h-full object-cover object-top filter grayscale-0 md:grayscale md:hover:grayscale-0 transition-all duration-500 transform group-hover:scale-105 rounded-xl"
-                  loading="lazy"
+                  fill
+                  sizes="(max-width: 768px) 60vw, 300px"
+                  className="object-cover object-top filter grayscale-0 md:grayscale md:hover:grayscale-0 transition-all duration-500 transform group-hover:scale-105 rounded-xl"
                 />
               </div>
             </motion.div>
@@ -111,11 +113,12 @@ export default function PromoterGallery() {
               className="border border-luxury-border/30 bg-luxury-darkcard p-1.5 rounded-2xl w-[60vw] max-w-[240px] luxury-glow-hover transition-all duration-300 flex-shrink-0 snap-center"
             >
               <div className="relative aspect-[3/4] bg-luxury-onyx overflow-hidden group rounded-xl">
-                <img
+                <Image
                   src={imgSrc}
                   alt={`Founder Shivanshu Mishra with Celebrity ${i + 1}`}
-                  className="w-full h-full object-cover object-top rounded-xl"
-                  loading="lazy"
+                  fill
+                  sizes="(max-width: 768px) 60vw, 300px"
+                  className="object-cover object-top rounded-xl"
                 />
               </div>
             </motion.div>
