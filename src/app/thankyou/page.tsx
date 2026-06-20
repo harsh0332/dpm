@@ -1,5 +1,7 @@
 "use client";
 
+export const dynamic = "force-dynamic";
+
 import React, { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import Link from "next/link";
@@ -29,6 +31,7 @@ const BODY_SHAPES = [
 ];
 
 export default function ThankYouPage() {
+  const [mounted, setMounted] = useState(false);
   const [step, setStep] = useState(1);
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [submitSuccess, setSubmitSuccess] = useState(false);
@@ -87,42 +90,55 @@ export default function ThankYouPage() {
   const [photo2Preview, setPhoto2Preview] = useState<string | null>(null);
 
   useEffect(() => {
+    // Mark component as mounted to trigger client-side rendering
+    setMounted(true);
+
     if (typeof window !== "undefined") {
       try {
         const stored = sessionStorage.getItem("dpm_lead_contact");
         if (stored) {
-          setTimeout(() => {
-            try {
-              const parsed = JSON.parse(stored);
-              setFullName(parsed.name || "");
-              setEmail(parsed.email || "");
-              setWhatsappNumber(parsed.phone || "");
+          try {
+            const parsed = JSON.parse(stored);
+            setFullName(parsed.name || "");
+            setEmail(parsed.email || "");
+            setWhatsappNumber(parsed.phone || "");
 
-              // Split name into first and last name
-              if (parsed.name) {
-                const parts = parsed.name.trim().split(/\s+/);
-                if (parts.length > 0) setFirstName(parts[0]);
-                if (parts.length > 1) setLastName(parts.slice(1).join(" "));
-              }
-
-              // Pre-fill Category dropdown if mapped
-              if (parsed.category) {
-                const mappedCat = parsed.category.toLowerCase().replace(/[^a-z]/g, "");
-                if (mappedCat === "mrindia") setCategory("Mr. India");
-                else if (mappedCat === "missindia") setCategory("Miss India");
-                else if (mappedCat === "mrsindia") setCategory("Mrs. India");
-                else if (mappedCat === "missteenindia") setCategory("Miss Teen India");
-              }
-            } catch (e) {
-              console.error("Error reading lead contact info:", e);
+            // Split name into first and last name
+            if (parsed.name) {
+              const parts = parsed.name.trim().split(/\s+/);
+              if (parts.length > 0) setFirstName(parts[0]);
+              if (parts.length > 1) setLastName(parts.slice(1).join(" "));
             }
-          }, 0);
+
+            // Pre-fill Category dropdown if mapped
+            if (parsed.category) {
+              const mappedCat = parsed.category.toLowerCase().replace(/[^a-z]/g, "");
+              if (mappedCat === "mrindia") setCategory("Mr. India");
+              else if (mappedCat === "missindia") setCategory("Miss India");
+              else if (mappedCat === "mrsindia") setCategory("Mrs. India");
+              else if (mappedCat === "missteenindia") setCategory("Miss Teen India");
+            }
+          } catch (e) {
+            console.error("Error reading lead contact info:", e);
+          }
         }
       } catch (e) {
         console.warn("sessionStorage read is blocked by browser:", e);
       }
     }
   }, []);
+
+  // Show loading spinner until client-side JS is ready — prevents blank page on first load
+  if (!mounted) {
+    return (
+      <div className="min-h-screen bg-luxury-onyx flex items-center justify-center">
+        <div className="text-center space-y-4">
+          <div className="w-12 h-12 border-2 border-luxury-gold border-t-transparent rounded-full animate-spin mx-auto" />
+          <p className="font-sans text-sm text-gray-400 tracking-widest uppercase">Loading your profile form...</p>
+        </div>
+      </div>
+    );
+  }
 
   // Helper to convert File to Base64
   const handleFileChange = async (e: React.ChangeEvent<HTMLInputElement>, photoNum: 1 | 2) => {
