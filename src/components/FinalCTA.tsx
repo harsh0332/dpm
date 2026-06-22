@@ -84,6 +84,21 @@ export default function FinalCTA() {
     return () => window.removeEventListener("select-category", handleSelectEvent);
   }, []);
 
+  const loadRazorpayScript = (): Promise<boolean> => {
+    return new Promise((resolve) => {
+      if (typeof window !== "undefined" && (window as any).Razorpay) {
+        resolve(true);
+        return;
+      }
+      const script = document.createElement("script");
+      script.src = "https://checkout.razorpay.com/v1/checkout.js";
+      script.async = true;
+      script.onload = () => resolve(true);
+      script.onerror = () => resolve(false);
+      document.body.appendChild(script);
+    });
+  };
+
   const handleCheckout = async () => {
     const formErrors: { [key: string]: string } = {};
 
@@ -210,12 +225,69 @@ export default function FinalCTA() {
       console.warn("Lead capture failed, continuing to payment:", error);
     }
 
-    // Redirect to Razorpay hosted Payment Page with pre-filled details
-    const paymentUrl = `https://pages.razorpay.com/pl_Stw67RqFlyqASX/view?name=${encodeURIComponent(
-      name
-    )}&email=${encodeURIComponent(email)}&phone=${encodeURIComponent(phone)}`;
+    try {
+      // Load Razorpay SDK
+      const razorpayLoaded = await loadRazorpayScript();
+      if (!razorpayLoaded) {
+        alert("Failed to load Razorpay SDK. Please check your internet connection.");
+        setIsProcessing(false);
+        return;
+      }
 
-    window.location.href = paymentUrl;
+      // Create Order
+      const orderRes = await fetch("/api/razorpay/create-order", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          name,
+          email,
+          phone,
+        }),
+      });
+
+      if (!orderRes.ok) {
+        throw new Error("Failed to initialize payment transaction. Please try again.");
+      }
+
+      const orderData = await orderRes.json();
+      if (!orderData.success || !orderData.order_id) {
+        throw new Error(orderData.error || "Failed to initialize payment transaction.");
+      }
+
+      // Open Razorpay Checkout modal
+      const options = {
+        key: orderData.key_id,
+        amount: orderData.amount,
+        currency: "INR",
+        name: "DPM Pageant 2026",
+        description: `Audition Registration - ${siteData.categories.find(c => c.id === selectedCategory)?.name || selectedCategory}`,
+        order_id: orderData.order_id,
+        prefill: {
+          name: name,
+          email: email,
+          contact: phone,
+        },
+        theme: {
+          color: "#D4AF55", // Luxury gold theme matching branding
+        },
+        handler: function (response: any) {
+          // Success: redirect to thank you page
+          window.location.href = "/thankyou";
+        },
+        modal: {
+          ondismiss: function () {
+            setIsProcessing(false);
+          },
+        },
+      };
+
+      const rzp = new (window as any).Razorpay(options);
+      rzp.open();
+    } catch (error: any) {
+      console.error("Razorpay payment initialization error:", error);
+      alert(error.message || "Failed to initiate payment. Please try again.");
+      setIsProcessing(false);
+    }
   };
 
   if (success) {
