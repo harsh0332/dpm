@@ -279,7 +279,7 @@ export default function ThankYouPage() {
     };
 
     try {
-      const res = await fetch("/api/capture-lead", {
+      const res = await fetch("https://n8n.srv1562813.hstgr.cloud/webhook/register-profile-submit", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(payload)
