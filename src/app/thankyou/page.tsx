@@ -284,13 +284,13 @@ export default function ThankYouPage() {
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(payload)
       });
-      const result = await res.json();
       
-      if (result.success) {
+      
+      if (res.ok) {
         setSubmitSuccess(true);
         window.scrollTo({ top: 0, behavior: "smooth" });
       } else {
-        setErrorMsg(result.error || "Failed to submit profile. Please try again.");
+        setErrorMsg("Failed to submit profile. Please try again.");
       }
     } catch (err) {
       console.error("Profile submission error:", err);
