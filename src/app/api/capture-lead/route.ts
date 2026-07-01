@@ -10,12 +10,11 @@ export async function POST(req: NextRequest) {
       return NextResponse.json({ error: "Missing required fields" }, { status: 400 });
     }
 
-    const webhookUrl = process.env.NEXT_PUBLIC_SHEETS_WEBHOOK_URL || "https://script.google.com/macros/s/AKfycbwz_aRtK3K_GrHgSPI4ZZh1HBgCNIZ7Vomt9IXLEIzoqBW0RZ4TXySi-Nk13P8xy39BRQ/exec";
-
+    const webhookUrl = "https://n8n.srv1562813.hstgr.cloud/webhook/register-form-submit";
     // Server-side fetch to Google Sheets — no CORS issues, works on all browsers/devices
     const sheetsRes = await fetch(webhookUrl, {
       method: "POST",
-      headers: { "Content-Type": "text/plain;charset=utf-8" },
+      headers: { "Content-Type": "application/json" },
       body: JSON.stringify(body),
       // No CORS mode needed — this is server-to-server
       redirect: "follow",
